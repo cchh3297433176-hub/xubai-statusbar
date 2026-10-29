@@ -20,9 +20,10 @@
         const revisionPrompt = panel.querySelector('#ab-revise')?.value.trim();
         const forceImage = panel.querySelector('#ab-force-image').checked;
         const refImageFiles = [...(panel.querySelector('#ab-ref-image')?.files || [])];
-        const charInfo = panel.querySelector('#ab-char-info')?.value.trim();
-        const persona = panel.querySelector('#ab-persona')?.value.trim();
-        const checkedWorldEntries = [...panel.querySelectorAll('.world-entry-check:checked')]
+        const includeContext=panel.querySelector('#mint-include-context')?.checked===true;
+        const charInfo = includeContext ? panel.querySelector('#ab-char-info')?.value.trim() : ''; 
+        const persona = includeContext ? panel.querySelector('#ab-persona')?.value.trim() : ''; 
+        const checkedWorldEntries = [...(includeContext ? panel.querySelectorAll('.world-entry-check:checked') : [])]
             .map(cb => cb.dataset.content).filter(Boolean);
         const existingSnapshot = session ? { ...session, assignments: { ...session.assignments } } : null;
         const lockFormat = panel.querySelector('#ab-lock-format')?.checked;
