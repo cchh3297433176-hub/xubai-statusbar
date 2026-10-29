@@ -8,6 +8,7 @@
         primePanelTheme(panel);restoreModelControls(panel,startupSelection);
         targetDoc.body.appendChild(panel);
         await initializeMintPanel(panel);
+        installMaterialLibrary(panel);
         bindOtomePanel(panel);
         await refreshFontSelect(panel);
 

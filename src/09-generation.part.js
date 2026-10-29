@@ -8,7 +8,10 @@
     }
 
     // ================= 调用模型生成 =================
+    let mintLastRequest = null;
     async function callGenerateRaw(systemPrompt, userMessage, sourceInfo, refImageDataUris) {
+        mintLastRequest={input:systemPrompt+'\n\n'+userMessage,output:'',imageCount:refImageDataUris?.length||0};
+        const recordOutput = text => { if(mintLastRequest)mintLastRequest.output=String(text??''); return text; };
         const images = refImageDataUris && refImageDataUris.length ? refImageDataUris : null;
         const userContent = images
             ? [...images.map(img => ({ type: 'image_url', image_url: { url: img } })), { type: 'text', text: userMessage }]
@@ -38,7 +41,7 @@
                 });
                 if (!resp.ok) throw new Error(`自定义端口请求失败: HTTP ${resp.status}`);
                 const data = await resp.json();
-                return (data.content || []).filter(b => b.type === 'text').map(b => b.text).join('\n');
+                return recordOutput((data.content || []).filter(b => b.type === 'text').map(b => b.text).join('\n'));
             }
 
             const resp = await modelFetch(apiEndpoint(baseUrl, 'chat/completions'), {
@@ -51,7 +54,7 @@
             });
             if (!resp.ok) throw new Error(`自定义端口请求失败: HTTP ${resp.status}`);
             const data = await resp.json();
-            return data.choices?.[0]?.message?.content ?? '';
+            return recordOutput(data.choices?.[0]?.message?.content ?? '');
         }
 
         // 走酒馆当前连接：用 TavernHelper.generateRaw，参数是 ordered_prompts，图片直接嵌进消息内容数组
@@ -76,10 +79,10 @@
         try {
             if (typeof parseReasoningFromString === 'function') {
                 const parsed = parseReasoningFromString(raw, { strict: false });
-                return parsed?.content ?? raw;
+                return recordOutput(parsed?.content ?? raw);
             }
         } catch (e) { /* 忽略，走下面兜底 */ }
-        return raw;
+        return recordOutput(raw);
     }
 
     const SYSTEM_PROMPT = `不要输出任何 data: 或 base64 内嵌素材。需要图片时只输出 {{IMG:标识名}} 占位符。
