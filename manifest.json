@@ -1,0 +1,12 @@
+{
+  "display_name": "序白 · 状态栏生成器",
+  "loading_order": 100,
+  "requires": [
+    "JS-Slash-Runner"
+  ],
+  "optional": [],
+  "js": "index.js",
+  "author": "Xubai",
+  "version": "3.7.1",
+  "homePage": "https://github.com/cchh3297433176-hub/xubai-statusbar"
+}
