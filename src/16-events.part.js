@@ -10,6 +10,7 @@
         await initializeMintPanel(panel);
         installMaterialLibrary(panel);
         bindOtomePanel(panel);
+        installWorldbookBindingControls(panel);
         await refreshFontSelect(panel);
 
         on(panel.querySelector('#ab-close'), 'click', () => hideMintPanel(panel));
@@ -89,6 +90,11 @@
             if (!picked) throw new Error('请先选择正则');
             const scope = panel.querySelector('#ab-scope').value;
             const filter = makeStatusFilter(picked.find, picked.name, panel.querySelector('#ab-keep-floors').value, scope);
+            if (scope === 'worldbook') {
+                const name = await bindRegexesToSelectedWorldbook(panel, [filter]);
+                toast('已绑定配套发送过滤正则：' + name, 'success');
+                return;
+            }
             if (typeof updateTavernRegexesWith !== 'function') throw new Error('当前酒馆助手缺少正则保存接口');
             await updateTavernRegexesWith(list => [...list, filter], { type: scope });
             toast('已保存配套发送过滤正则', 'success');
@@ -229,6 +235,7 @@
         async function saveRegexResult(overwrite) {
             if (!session) return;
             if (overwrite && !session.referenceRegex?.id) throw new Error('找不到原正则，请重新载入');
+            if (overwrite && session.referenceRegex.id.startsWith('kelaode-wbr:')) throw new Error('这是世界书运行副本，请选择世界书另存，或在世界书管理器内编辑原件');
             if (!(await mintConfirm(overwrite ? '更新原正则？原来的内容会被替换。' : '保存为新的正则脚本吗？'))) return;
             try {
                 let text = session.replaceStringRaw;
@@ -249,7 +256,7 @@
                 }
                 if (/data:[^\s"'<>)]*;base64,/i.test(text)) throw new Error('检测到内嵌 base64 素材，已阻止保存，避免总结插件再次过载。请改成图片或字体链接');
                 const scope = overwrite ? session.referenceRegex.scope : panel.querySelector('#ab-scope').value;
-                if (!['global','character','preset'].includes(scope)) throw new Error('无法确定原正则的保存范围');
+                if (!['global','character','preset','worldbook'].includes(scope)) throw new Error('无法确定原正则的保存范围');
                 const newEntry = {
                     ...(session.referenceRegex || {}),
                     source: { user_input: false, ai_output: true, slash_command: false, world_info: false, reasoning: false },
@@ -280,6 +287,11 @@
                 }
                 const filter = !session.isPlainRegex && panel.querySelector('#ab-add-filter').checked
                     ? makeStatusFilter(session.findRegex, session.scriptName, panel.querySelector('#ab-keep-floors').value, scope) : null;
+                if (scope === 'worldbook') {
+                    const name = await bindRegexesToSelectedWorldbook(panel, [newEntry, ...(filter ? [filter] : [])]);
+                    toast('已绑定世界书：' + name, 'success');
+                    return;
+                }
                 if (typeof updateTavernRegexesWith !== 'function') throw new Error('当前酒馆助手缺少 updateTavernRegexesWith，请更新酒馆助手后保存');
                 await updateTavernRegexesWith(list => {
                     if (!overwrite) return [...list, newEntry, ...(filter ? [filter] : [])];

@@ -103,6 +103,7 @@
                         <option value="character">角色卡正则</option>
                         <option value="global">全局正则</option>
                         <option value="preset">预设正则</option>
+                        <option value="worldbook">世界书</option>
                     </select>
                 </div>
                 <button id="ab-generate" style="width:100%;padding:8px;background:#5a3a7a;color:#fff;border-radius:6px;">生成状态栏</button>

@@ -977,7 +977,7 @@
             </section>
             <section id="mint-page-gallery" data-mint-page="gallery" role="tabpanel" aria-labelledby="mint-tab-gallery" hidden><div class="mint-page-heading"><div><div class="mint-eyebrow">YOUR LITTLE COLLECTION</div><h2>图片收藏室</h2><p>把喜欢的图片，留给下一次灵感。</p></div><img class="mint-decoration mint-heading-mascot" src="${MINT_DECORATIONS.gallery}" alt=""></div><div class="mint-card"><div id="mint-upload-slot"></div><p class="mint-muted">上传到服务器；状态栏只保存链接。</p><div class="mint-row"><button data-go="settings" class="mint-secondary">配置图库</button><button id="mint-gallery-refresh" class="mint-secondary">刷新图片</button></div></div><label class="mint-form-label" for="mint-gallery-search">查找图片</label><input id="mint-gallery-search" placeholder="按图片名称查找" style="width:100%"><p id="mint-gallery-count" class="mint-muted"></p><div id="mint-gallery-slot"></div><p class="mint-footnote">解绑会保留图片。删除服务器文件会让旧状态栏里的图片失效。</p></section>
             <section id="mint-page-history" data-mint-page="history" role="tabpanel" aria-labelledby="mint-tab-history" hidden><div class="mint-page-heading"><div><div class="mint-eyebrow">LITTLE MOMENTS</div><h2>灵感存档</h2><p>每一个版本，都可以再回来看看。</p></div><img class="mint-decoration mint-heading-mascot" src="${MINT_DECORATIONS.history}" alt=""></div><div class="mint-card mint-compact" id="mint-history-controls"></div><div id="mint-history-slot"></div></section>
-            <section id="mint-page-settings" data-mint-page="settings" role="tabpanel" aria-labelledby="mint-tab-settings" hidden><div class="mint-page-heading"><div><div class="mint-eyebrow">MAKE YOURSELF AT HOME</div><h2>设置</h2><p>连接、字体和偏好，都在这里。</p></div><img class="mint-decoration mint-heading-mascot" src="${MINT_DECORATIONS.settings}" alt=""></div><details class="mint-settings-block" open><summary>模型与 API 连接</summary><div id="mint-api-slot" class="mint-settings-body"></div></details><div id="mint-server-slot"></div><div id="mint-font-manager-slot"></div><details class="mint-settings-block"><summary>外观与小序</summary><div class="mint-settings-body"><label class="mint-theme-switch"><span><b>按时段自动切换</b><small>关闭后保持手动选择的主题</small></span><input id="mint-theme-auto" type="checkbox" role="switch" aria-label="按时段自动切换"></label><div class="mint-theme-times"><label for="mint-theme-start">日间开始<input id="mint-theme-start" type="time" required></label><label for="mint-theme-end">日间结束<input id="mint-theme-end" type="time" required></label></div><p class="mint-muted">结束时间选 00:00 表示晚上 24:00；也支持跨午夜的时段。使用手机本地时间。</p><button id="mint-theme-save" style="width:100%">保存切换时段</button><p id="mint-theme-status" class="mint-muted" role="status"></p><p class="mint-muted">顶部头像左边的太阳 / 月亮图标可随时切换；手动切换后自动模式会关闭，直到你重新开启。</p><div class="mint-row"><button id="mint-demo-success">看看成功提示</button><button id="mint-demo-error">看看哭哭提示</button></div></div></details><details class="mint-settings-block"><summary>提示与小装饰</summary><div class="mint-settings-body"><label class="mint-theme-switch"><span><b>页面切换提示</b><small>切换底栏页面时显示文字气泡</small></span><input id="mint-page-notices" type="checkbox" role="switch" aria-label="页面切换提示"></label><label class="mint-theme-switch"><span><b>普通点击提示</b><small>基础点击与展开气泡；关闭后仍有按压反馈</small></span><input id="mint-click-notices" type="checkbox" role="switch" aria-label="普通点击提示"></label><label class="mint-theme-switch"><span><b>人物与角落装饰</b><small>让工作台多一点小序的陪伴</small></span><input id="mint-decoration-toggle" type="checkbox" role="switch" aria-label="人物与角落装饰"></label><p class="mint-muted">生成中、成功和报错提示始终保留。提示窗位于底栏上方，可手动关闭。</p></div></details><details class="mint-settings-block"><summary>关于序白工坊</summary><div class="mint-settings-body"><div class="mint-decoration mint-settings-companion"><img src="${MINT_DECORATIONS.settings}" alt=""><p>工具已经摆好了。<br>你负责灵感，我负责把它们接起来。</p></div><p>原作：Claude<br>界面与功能改造：序白（ChatGPT）<br>与你一起制作。</p><p class="mint-muted">银白头发不是加班造成的，原装就是这样。</p><small>v3.8.3 · 薄荷手账与月光 · 手机优先</small></div></details></section>
+            <section id="mint-page-settings" data-mint-page="settings" role="tabpanel" aria-labelledby="mint-tab-settings" hidden><div class="mint-page-heading"><div><div class="mint-eyebrow">MAKE YOURSELF AT HOME</div><h2>设置</h2><p>连接、字体和偏好，都在这里。</p></div><img class="mint-decoration mint-heading-mascot" src="${MINT_DECORATIONS.settings}" alt=""></div><details class="mint-settings-block" open><summary>模型与 API 连接</summary><div id="mint-api-slot" class="mint-settings-body"></div></details><div id="mint-server-slot"></div><div id="mint-font-manager-slot"></div><details class="mint-settings-block"><summary>外观与小序</summary><div class="mint-settings-body"><label class="mint-theme-switch"><span><b>按时段自动切换</b><small>关闭后保持手动选择的主题</small></span><input id="mint-theme-auto" type="checkbox" role="switch" aria-label="按时段自动切换"></label><div class="mint-theme-times"><label for="mint-theme-start">日间开始<input id="mint-theme-start" type="time" required></label><label for="mint-theme-end">日间结束<input id="mint-theme-end" type="time" required></label></div><p class="mint-muted">结束时间选 00:00 表示晚上 24:00；也支持跨午夜的时段。使用手机本地时间。</p><button id="mint-theme-save" style="width:100%">保存切换时段</button><p id="mint-theme-status" class="mint-muted" role="status"></p><p class="mint-muted">顶部头像左边的太阳 / 月亮图标可随时切换；手动切换后自动模式会关闭，直到你重新开启。</p><div class="mint-row"><button id="mint-demo-success">看看成功提示</button><button id="mint-demo-error">看看哭哭提示</button></div></div></details><details class="mint-settings-block"><summary>提示与小装饰</summary><div class="mint-settings-body"><label class="mint-theme-switch"><span><b>页面切换提示</b><small>切换底栏页面时显示文字气泡</small></span><input id="mint-page-notices" type="checkbox" role="switch" aria-label="页面切换提示"></label><label class="mint-theme-switch"><span><b>普通点击提示</b><small>基础点击与展开气泡；关闭后仍有按压反馈</small></span><input id="mint-click-notices" type="checkbox" role="switch" aria-label="普通点击提示"></label><label class="mint-theme-switch"><span><b>人物与角落装饰</b><small>让工作台多一点小序的陪伴</small></span><input id="mint-decoration-toggle" type="checkbox" role="switch" aria-label="人物与角落装饰"></label><p class="mint-muted">生成中、成功和报错提示始终保留。提示窗位于底栏上方，可手动关闭。</p></div></details><details class="mint-settings-block"><summary>关于序白工坊</summary><div class="mint-settings-body"><div class="mint-decoration mint-settings-companion"><img src="${MINT_DECORATIONS.settings}" alt=""><p>工具已经摆好了。<br>你负责灵感，我负责把它们接起来。</p></div><p>原作：Claude<br>界面与功能改造：序白（ChatGPT）<br>与你一起制作。</p><p class="mint-muted">银白头发不是加班造成的，原装就是这样。</p><small>v3.8.4 · 薄荷手账与月光 · 手机优先</small></div></details></section>
           </main>
           <nav id="mint-tabs" role="tablist" aria-label="工作台页面">${[['create','创作'],['gallery','图库'],['history','历史'],['settings','设置']].map(([key,label])=>`<button id="mint-tab-${key}" role="tab" aria-controls="mint-page-${key}" data-page="${key}" aria-selected="${key === currentPage}">${mintIcon(key)}<span>${label}</span></button>`).join('')}</nav>`;
         const put = (id, ...nodes) => panel.querySelector('#' + id).append(...nodes);
@@ -1741,6 +1741,84 @@ ${body}</html>`;
     let session = null;
     let fetchedModels = [];
 
+    // Destination selection is local metadata only; it does not add worldbook contents to AI requests.
+    function worldbookBindingTargets(snapshot, onlyGlobal, keyword = '') {
+        const global = new Set(snapshot.global || []);
+        const term = String(keyword).trim().toLocaleLowerCase();
+        return [...new Set(snapshot.all || [])]
+            .filter(name => name !== snapshot.primary && (!onlyGlobal || global.has(name)) && name.toLocaleLowerCase().includes(term))
+            .sort((a, b) => a.localeCompare(b));
+    }
+    function worldbookBindingBridge() {
+        const bridge = targetWindow.KelaodeWorldbookRegex;
+        if (!bridge || bridge.version < 1 || typeof bridge.listTargets !== 'function' || typeof bridge.bind !== 'function') {
+            throw new Error('请先更新并启用世界书管理器，再绑定世界书正则');
+        }
+        return bridge;
+    }
+    async function bindRegexesToSelectedWorldbook(panel, scripts) {
+        const name = panel.querySelector('#ab-bind-worldbook').value;
+        if (!name) throw new Error('请先选择目标世界书');
+        const bridge = worldbookBindingBridge();
+        const snapshot = await bridge.listTargets();
+        const allowed = worldbookBindingTargets(snapshot, panel.querySelector('#ab-bind-global-only').checked,
+            panel.querySelector('#ab-bind-keyword').value);
+        if (!allowed.includes(name)) throw new Error('目标世界书的绑定状态已变化，请重新选择');
+        await bridge.bind(name, scripts);
+        return name;
+    }
+    function installWorldbookBindingControls(panel) {
+        const scope = panel.querySelector('#ab-scope');
+        const wrap = targetDoc.createElement('div');
+        wrap.id = 'ab-worldbook-binding';
+        wrap.hidden = true;
+        wrap.style.cssText = 'min-width:0;margin:0 0 12px;';
+        wrap.innerHTML = `<label style="display:flex;align-items:center;gap:8px;margin:6px 0"><input id="ab-bind-global-only" type="checkbox" checked>仅全局已开启</label>
+            <input id="ab-bind-keyword" type="search" placeholder="搜索世界书…" aria-label="搜索绑定目标世界书" style="width:100%;min-width:0;box-sizing:border-box;margin:6px 0">
+            <select id="ab-bind-worldbook" aria-label="绑定目标世界书" size="5" style="width:100%;max-width:100%;min-width:0;box-sizing:border-box"></select>
+            <div id="ab-bind-status" role="status" style="font-size:12px;margin-top:6px"></div>`;
+        scope.parentElement.after(wrap);
+        const select = wrap.querySelector('#ab-bind-worldbook');
+        const status = wrap.querySelector('#ab-bind-status');
+        const keyword = wrap.querySelector('#ab-bind-keyword');
+        const onlyGlobal = wrap.querySelector('#ab-bind-global-only');
+        let snapshot = null;
+        let revision = 0;
+        function filter() {
+            const selected = select.value;
+            select.replaceChildren();
+            const names = snapshot ? worldbookBindingTargets(snapshot, onlyGlobal.checked, keyword.value) : [];
+            const empty = targetDoc.createElement('option');
+            empty.value = ''; empty.textContent = names.length ? '选择世界书' : '没有符合条件的世界书';
+            empty.disabled = true; empty.selected = true; select.append(empty);
+            for (const name of names) {
+                const option = targetDoc.createElement('option'); option.value = name; option.textContent = name; option.title = name;
+                select.append(option);
+            }
+            select.value = names.includes(selected) ? selected : '';
+        }
+        async function refresh() {
+            const token = ++revision;
+            wrap.hidden = scope.value !== 'worldbook';
+            const save = panel.querySelector('#ab-save');
+            const text = [...(save?.childNodes || [])].find(node => node.nodeType === 3);
+            if (text) text.textContent = scope.value === 'worldbook' ? '绑定世界书' : '保存为新正则';
+            if (wrap.hidden) return;
+            select.disabled = true; status.textContent = '';
+            try {
+                const next = await worldbookBindingBridge().listTargets();
+                if (token !== revision) return;
+                snapshot = next; filter();
+            } catch (error) {
+                if (token !== revision) return;
+                snapshot = null; filter(); status.textContent = error.message;
+            } finally { if (token === revision) select.disabled = false; }
+        }
+        on(scope, 'change', refresh);
+        on(keyword, 'input', filter);
+        on(onlyGlobal, 'change', filter);
+        refresh();
+    }
     async function renderPanel() {
         const configNames = await listConfigNames();
         const panel = targetDoc.createElement('div');
@@ -1846,6 +1924,7 @@ ${body}</html>`;
                         <option value="character">角色卡正则</option>
                         <option value="global">全局正则</option>
                         <option value="preset">预设正则</option>
+                        <option value="worldbook">世界书</option>
                     </select>
                 </div>
                 <button id="ab-generate" style="width:100%;padding:8px;background:#5a3a7a;color:#fff;border-radius:6px;">生成状态栏</button>
@@ -2312,6 +2391,7 @@ ${body}</html>`;
         await initializeMintPanel(panel);
         installMaterialLibrary(panel);
         bindOtomePanel(panel);
+        installWorldbookBindingControls(panel);
         await refreshFontSelect(panel);
 
         on(panel.querySelector('#ab-close'), 'click', () => hideMintPanel(panel));
@@ -2391,6 +2471,11 @@ ${body}</html>`;
             if (!picked) throw new Error('请先选择正则');
             const scope = panel.querySelector('#ab-scope').value;
             const filter = makeStatusFilter(picked.find, picked.name, panel.querySelector('#ab-keep-floors').value, scope);
+            if (scope === 'worldbook') {
+                const name = await bindRegexesToSelectedWorldbook(panel, [filter]);
+                toast('已绑定配套发送过滤正则：' + name, 'success');
+                return;
+            }
             if (typeof updateTavernRegexesWith !== 'function') throw new Error('当前酒馆助手缺少正则保存接口');
             await updateTavernRegexesWith(list => [...list, filter], { type: scope });
             toast('已保存配套发送过滤正则', 'success');
@@ -2531,6 +2616,7 @@ ${body}</html>`;
         async function saveRegexResult(overwrite) {
             if (!session) return;
             if (overwrite && !session.referenceRegex?.id) throw new Error('找不到原正则，请重新载入');
+            if (overwrite && session.referenceRegex.id.startsWith('kelaode-wbr:')) throw new Error('这是世界书运行副本，请选择世界书另存，或在世界书管理器内编辑原件');
             if (!(await mintConfirm(overwrite ? '更新原正则？原来的内容会被替换。' : '保存为新的正则脚本吗？'))) return;
             try {
                 let text = session.replaceStringRaw;
@@ -2551,7 +2637,7 @@ ${body}</html>`;
                 }
                 if (/data:[^\s"'<>)]*;base64,/i.test(text)) throw new Error('检测到内嵌 base64 素材，已阻止保存，避免总结插件再次过载。请改成图片或字体链接');
                 const scope = overwrite ? session.referenceRegex.scope : panel.querySelector('#ab-scope').value;
-                if (!['global','character','preset'].includes(scope)) throw new Error('无法确定原正则的保存范围');
+                if (!['global','character','preset','worldbook'].includes(scope)) throw new Error('无法确定原正则的保存范围');
                 const newEntry = {
                     ...(session.referenceRegex || {}),
                     source: { user_input: false, ai_output: true, slash_command: false, world_info: false, reasoning: false },
@@ -2582,6 +2668,11 @@ ${body}</html>`;
                 }
                 const filter = !session.isPlainRegex && panel.querySelector('#ab-add-filter').checked
                     ? makeStatusFilter(session.findRegex, session.scriptName, panel.querySelector('#ab-keep-floors').value, scope) : null;
+                if (scope === 'worldbook') {
+                    const name = await bindRegexesToSelectedWorldbook(panel, [newEntry, ...(filter ? [filter] : [])]);
+                    toast('已绑定世界书：' + name, 'success');
+                    return;
+                }
                 if (typeof updateTavernRegexesWith !== 'function') throw new Error('当前酒馆助手缺少 updateTavernRegexesWith，请更新酒馆助手后保存');
                 await updateTavernRegexesWith(list => {
                     if (!overwrite) return [...list, newEntry, ...(filter ? [filter] : [])];
