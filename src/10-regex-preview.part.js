@@ -50,16 +50,21 @@ ${body}</html>`;
         const count = Number(keep);
         if (!Number.isInteger(count) || count < 0 || count > 100) throw new Error('保留楼层请输入 0 到 100 的整数');
         const pattern = String(findRegex || '');
+        const parsed = parseRegexString(pattern);
+        // Reuse the exact beauty matcher for the supported 〔...〕 format, without broadening its boundaries.
+        const bracketed = parsed && /^(?:\^)?〔/.test(parsed.source) && /〕(?:\$)?$/.test(parsed.source);
         const match = pattern.match(/^\/\^?<([A-Za-z][\w:-]*)>/);
-        if (!match) throw Object.assign(new Error('未识别到明确的状态栏开始标签，无法安全生成过滤正则'), { code: 'UNSUPPORTED_STATUS_FILTER' });
-        const tag = match[1];
-        if (!String(findRegex).includes('<\\/' + tag + '>')) throw Object.assign(new Error('未识别到对应的状态栏结束标签，无法安全生成过滤正则'), { code: 'UNSUPPORTED_STATUS_FILTER' });
+        if (!bracketed && !match) throw Object.assign(new Error('未识别到明确的状态栏开始标签或〔…〕边界，无法安全生成过滤正则'), { code: 'UNSUPPORTED_STATUS_FILTER' });
+        const tag = match?.[1];
+        if (!bracketed && !pattern.includes('<\\/' + tag + '>')) throw Object.assign(new Error('未识别到对应的状态栏结束标签，无法安全生成过滤正则'), { code: 'UNSUPPORTED_STATUS_FILTER' });
+        const filterRegex = bracketed ? '/' + parsed.source + '/' + parsed.flags
+            : '/<' + tag + '>[\\s\\S]*?<\\/' + tag + '>/g';
         return {
             source: { user_input: false, ai_output: true, slash_command: false, world_info: false, reasoning: false },
             destination: { display: false, prompt: true },
             trim_strings: '', run_on_edit: true, min_depth: count === 0 ? 0 : count * 2 + 1,
             max_depth: null, id: generateUUID(), script_name: name + ' · 状态栏发送过滤',
-            find_regex: '/<' + tag + '>[\\s\\S]*?<\\/' + tag + '>/g',
+            find_regex: filterRegex,
             replace_string: '', ...(scope === 'preset' ? {} : { scope }), enabled: true,
         };
     }

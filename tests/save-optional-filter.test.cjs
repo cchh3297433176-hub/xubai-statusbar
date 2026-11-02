@@ -1,6 +1,6 @@
 const {test}=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');const vm=require('node:vm');const path=require('node:path');
 const read=n=>fs.readFileSync(path.join(__dirname,'../src/'+n),'utf8');
-const preview=read('10-regex-preview.part.js');const filterCode=preview.slice(preview.indexOf('    function makeStatusFilter'),preview.indexOf('    // ================= 读写酒馆正则'));
+const preview=read('10-regex-preview.part.js');const filterCode=preview.slice(preview.indexOf('    function parseRegexString'),preview.indexOf('    // ================= 读写酒馆正则'));
 const events=read('16-events.part.js');const saveCode=events.slice(events.indexOf('        async function saveRegexResult'),events.indexOf("        on(panel.querySelector('#ab-save'),"));
 function setup({scope='character',find='/^\\[([^\\]]+)\\]$/gm',keep=1,checked=true,failWrite=false,overwrite=false}={}){
  const logs=[],writes=[],bound=[];let id=0;
