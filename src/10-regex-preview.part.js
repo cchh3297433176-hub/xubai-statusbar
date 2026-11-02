@@ -51,9 +51,9 @@ ${body}</html>`;
         if (!Number.isInteger(count) || count < 0 || count > 100) throw new Error('保留楼层请输入 0 到 100 的整数');
         const pattern = String(findRegex || '');
         const match = pattern.match(/^\/\^?<([A-Za-z][\w:-]*)>/);
-        if (!match) throw new Error('未识别到明确的状态栏开始标签，无法安全生成过滤正则');
+        if (!match) throw Object.assign(new Error('未识别到明确的状态栏开始标签，无法安全生成过滤正则'), { code: 'UNSUPPORTED_STATUS_FILTER' });
         const tag = match[1];
-        if (!String(findRegex).includes('<\\/' + tag + '>')) throw new Error('未识别到对应的状态栏结束标签，无法安全生成过滤正则');
+        if (!String(findRegex).includes('<\\/' + tag + '>')) throw Object.assign(new Error('未识别到对应的状态栏结束标签，无法安全生成过滤正则'), { code: 'UNSUPPORTED_STATUS_FILTER' });
         return {
             source: { user_input: false, ai_output: true, slash_command: false, world_info: false, reasoning: false },
             destination: { display: false, prompt: true },

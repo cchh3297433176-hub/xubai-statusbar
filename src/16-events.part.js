@@ -286,11 +286,24 @@
                     newEntry.min_depth = n === 0 ? 0 : n * 2 + 1;
                     newEntry.max_depth = null;
                 }
-                const filter = !session.isPlainRegex && panel.querySelector('#ab-add-filter').checked
-                    ? makeStatusFilter(session.findRegex, session.scriptName, panel.querySelector('#ab-keep-floors').value, scope) : null;
+                let filter = null;
+                let filterWarning = '';
+                if (!session.isPlainRegex && panel.querySelector('#ab-add-filter').checked) {
+                    try {
+                        filter = makeStatusFilter(session.findRegex, session.scriptName, panel.querySelector('#ab-keep-floors').value, scope);
+                    } catch (error) {
+                        if (error.code !== 'UNSUPPORTED_STATUS_FILTER') throw error;
+                        filterWarning = '未附带发送过滤：当前匹配格式暂不支持自动过滤，“发送最近几楼”未生效。';
+                    }
+                }
+                function reportSaved(message) {
+                    toast(filterWarning ? message + '。' + filterWarning : message, filterWarning ? 'warning' : 'success');
+                    const status = panel.querySelector('#ab-status');
+                    if (status) status.textContent = filterWarning ? message + '。' + filterWarning : message;
+                }
                 if (scope === 'worldbook') {
                     const name = await bindRegexesToSelectedWorldbook(panel, [newEntry, ...(filter ? [filter] : [])]);
-                    toast('已绑定世界书：' + name, 'success');
+                    reportSaved('已绑定世界书：' + name);
                     return;
                 }
                 if (typeof updateTavernRegexesWith !== 'function') throw new Error('当前酒馆助手缺少 updateTavernRegexesWith，请更新酒馆助手后保存');
@@ -305,7 +318,7 @@
                     return [...next, ...(filter ? [filter] : [])];
                 }, { type: scope });
                 if (overwrite) session.referenceRegex = { ...newEntry, scope };
-                toast((overwrite ? '已更新原正则：' : '已保存为新正则：') + session.scriptName, 'success');
+                reportSaved((overwrite ? '已更新原正则：' : '已保存为新正则：') + session.scriptName);
             } catch (e) {
                 toast('保存失败：' + e.message, 'error');
                 console.error(e);
