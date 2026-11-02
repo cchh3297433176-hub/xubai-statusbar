@@ -127,12 +127,13 @@
             }
             return result.slice(contentStart, endIdx).trim();
         };
-        const scriptName = grab('SCRIPTNAME', ['FINDREGEX', 'REPLACESTRING', 'FORMATGUIDE', 'END']);
-        const findRegex = grab('FINDREGEX', ['REPLACESTRING', 'FORMATGUIDE', 'END']);
-        const replaceString = grab('REPLACESTRING', ['FORMATGUIDE', 'END']);
-        const formatGuide = grab('FORMATGUIDE', ['END']);
+        const scriptName = grab('SCRIPTNAME', ['FINDREGEX', 'REPLACESTRING', 'FORMATGUIDE', 'FILTERCHECK', 'END']);
+        const findRegex = grab('FINDREGEX', ['REPLACESTRING', 'FORMATGUIDE', 'FILTERCHECK', 'END']);
+        const replaceString = grab('REPLACESTRING', ['FORMATGUIDE', 'FILTERCHECK', 'END']);
+        const formatGuide = grab('FORMATGUIDE', ['FILTERCHECK','END']);
+        const filterCheck = grab('FILTERCHECK', ['END']);
         if (!scriptName && !findRegex && !replaceString) return null;
-        return { scriptName, findRegex, replaceString, formatGuide };
+        return { scriptName, findRegex, replaceString, formatGuide, filterCheck };
     }
     function stripCodeFence(text) {
         const raw = String(text ?? '').trim();
@@ -204,8 +205,9 @@
         await createWorldbookEntries(bookName, [newEntry]);
     }
 
-    async function generateBeautify({ interactionFeatures = [], skillPayload = '', plannedImages = [], description, refContent, existing, revisionPrompt, mode, sourceInfo, forceImage, refImageDataUris, extraContext, lockedFindRegex, lockStructure }) {
+    async function generateBeautify({ filterRequested = false, filterKeepFloors = 1, interactionFeatures = [], skillPayload = '', plannedImages = [], description, refContent, existing, revisionPrompt, mode, sourceInfo, forceImage, refImageDataUris, extraContext, lockedFindRegex, lockStructure }) {
         const sections = [`【需求描述】\n${description || '（无）'}`];
+        if(filterRequested) sections.push(GENERATED_FILTER_CHECK_PROMPT);
         const interactionGuide = interactionFeaturePrompt(interactionFeatures);
         if(interactionGuide) sections.push(interactionGuide);
         if(skillPayload)sections.push('【用户勾选的设计 Skill】\n'+skillPayload);
@@ -223,7 +225,8 @@
         if (mode === 'revise' && revisionPrompt) sections.push(`【修改意见】\n${revisionPrompt}`);
         if (mode === 'variant') sections.push('【要求】请生成一版结构或视觉风格明显不同的新方案，不要只改颜色。');
 
-        const raw = await callGenerateRaw(SYSTEM_PROMPT, stripEmbeddedData(sections.join('\n\n')), sourceInfo, refImageDataUris);
+        const system = filterRequested ? SYSTEM_PROMPT.replace('\n===END===', '\n===FILTERCHECK===\n（配套过滤校验样例JSON，遵守用户请求中的字段说明）\n===END===') : SYSTEM_PROMPT;
+        const raw = await callGenerateRaw(system, stripEmbeddedData(sections.join('\n\n')), sourceInfo, refImageDataUris);
         const parsed = parseGenDelimited(raw);
         if (!parsed) throw new Error('AI 没有按格式输出，原始返回：' + raw.slice(0, 300));
         return {
@@ -231,6 +234,8 @@
             findRegex: lockedFindRegex || parsed.findRegex || '', // 锁定了就强制用锁定的，不管AI输出了什么
             replaceStringRaw: stripCodeFence(parsed.replaceString || ''),
             formatGuide: parsed.formatGuide || '',
+            filterRequested, filterKeepFloors,
+            ...(filterRequested ? {filterPlan:generatedFilterPlan(lockedFindRegex || parsed.findRegex || '', parsed.filterCheck)} : {}),
         };
     }
 

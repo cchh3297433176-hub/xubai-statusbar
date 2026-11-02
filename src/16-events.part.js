@@ -290,10 +290,10 @@
                 let filterWarning = '';
                 if (!session.isPlainRegex && panel.querySelector('#ab-add-filter').checked) {
                     try {
-                        filter = makeStatusFilter(session.findRegex, session.scriptName, panel.querySelector('#ab-keep-floors').value, scope);
+                        filter = makeStatusFilter(session.findRegex, session.scriptName, panel.querySelector('#ab-keep-floors').value, scope, session.filterRequested === true ? (session.filterPlan || null) : session.filterRequested === false ? null : undefined);
                     } catch (error) {
                         if (error.code !== 'UNSUPPORTED_STATUS_FILTER') throw error;
-                        filterWarning = '未附带发送过滤：当前匹配格式暂不支持自动过滤，“发送最近几楼”未生效。';
+                        filterWarning = '未附带发送过滤：' + error.message + '。“发送最近几楼”未生效。';
                     }
                 }
                 function reportSaved(message) {

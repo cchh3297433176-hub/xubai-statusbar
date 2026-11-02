@@ -12,6 +12,9 @@
         const variantCount = mode==='create' ? Math.max(1,Math.min(3,Number(panel.querySelector('#mint-variant-count')?.value)||1)) : 1;
         const interactionFeatures=normalizeInteractionFeatures([...panel.querySelectorAll('[data-mint-interaction]:checked')].map(input=>input.value));
         if (mode !== 'create' && session?.isPlainRegex && interactionFeatures.length) throw new Error('交互功能用于状态栏显示正则，请先创建状态栏或载入显示正则');
+        const filterRequested=panel.querySelector('#ab-add-filter')?.checked===true;
+        const filterKeepFloors=Number(panel.querySelector('#ab-keep-floors')?.value ?? 1);
+        if(filterRequested && (!Number.isInteger(filterKeepFloors)||filterKeepFloors<0||filterKeepFloors>100))throw new Error('保留楼层请输入0到100的整数');
         const userDescription=panel.querySelector('#ab-desc').value.trim();
         const layout=panel.querySelector('#mint-design-layout')?.value.trim();
         const fields=panel.querySelector('#mint-design-fields')?.value.trim();
@@ -67,7 +70,7 @@
                     const variantDescription=variantCount>1?description+`\n【方案】第 ${i+1} 个独立方案，请尽量与其他方案在布局和风格上有所不同。`:description;
                     const result=await receiveGeneration(existingSnapshot?.isPlainRegex && mode !== 'create'
                         ? generatePlainRegexRevision(existingSnapshot, revisionPrompt || '根据原规则提供一个变体', resolvedSourceInfo)
-                        : generateBeautify({interactionFeatures,skillPayload,plannedImages,description:variantDescription,refContent,existing:existingSnapshot,revisionPrompt,mode,sourceInfo:resolvedSourceInfo,forceImage,refImageDataUris,extraContext,lockedFindRegex,lockStructure}),taskController.signal);
+                        : generateBeautify({filterRequested,filterKeepFloors,interactionFeatures,skillPayload,plannedImages,description:variantDescription,refContent,existing:existingSnapshot,revisionPrompt,mode,sourceInfo:resolvedSourceInfo,forceImage,refImageDataUris,extraContext,lockedFindRegex,lockStructure}),taskController.signal);
                     if(destroyed||taskEpoch!==generationEpoch)return;
                     if (referenceRegex && lockedFindRegex && !existingSnapshot?.isPlainRegex) {
                         const oldRefs = new Set(String(referenceRegex.replace_string || '').match(/\$(?:[1-9][0-9]?|<[^>]+>)/g) || []);
@@ -80,12 +83,12 @@
                     const histEntry={id:generateUUID(),ts:Date.now(),...result,interactionFeatures,referenceRegex,isPlainRegex: !!(mode !== "create" && existingSnapshot?.isPlainRegex),assignments:{...(mode==='create'?{}:(existingSnapshot?.assignments||{})),...plannedAssignments}};
                     await addHistory(histEntry);variants.push({...histEntry,historyId:histEntry.id,historyTs:histEntry.ts});
                 }
-                session=variants[0];toast(variantCount>1?`已生成 ${variants.length} 个方案`:('"'+session.scriptName+'" 生成完成'),'success');
+                session=variants[0];toast(variantCount>1?`已生成 ${variants.length} 个方案`:('"'+session.scriptName+'" 生成完成'),session.filterRequested && !session.filterPlan?.valid?'warning':'success');
                 const livePanel=targetDoc.getElementById('aibar-panel');
                 if(livePanel){
                     switchMintPage(livePanel,'create',false);await showResult(livePanel,session);await renderHistory(livePanel);
                     const choices=livePanel.querySelector('#mint-variant-picks');if(choices){choices.replaceChildren();if(variants.length>1)variants.forEach((v,i)=>{const b=targetDoc.createElement('button');b.textContent=`方案 ${i+1} · ${v.scriptName}`;b.setAttribute('aria-pressed',String(i===0));b.onclick=async()=>{session=v;await showResult(livePanel,v);choices.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));};choices.append(b);});}
-                    const liveStatus=livePanel.querySelector('#ab-status');if(liveStatus)liveStatus.textContent=variantCount>1?'选择方案查看预览':'生成完成，往下滑看预览。';
+                    const liveStatus=livePanel.querySelector('#ab-status');if(liveStatus)liveStatus.textContent=generatedFilterStatus(session)||(variantCount>1?'选择方案查看预览':'生成完成，往下滑看预览。');
                     const liveBtn=livePanel.querySelector(btnMap[mode]);if(liveBtn)liveBtn.disabled=false;
                 }
             } catch (e) {

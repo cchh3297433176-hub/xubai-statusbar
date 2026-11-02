@@ -97,7 +97,7 @@
                     <summary style="cursor:pointer;font-size:12px;opacity:0.8;">字体管理（添加/预览/删除自定义字体）</summary>
                     <div id="ab-font-manager" style="margin-top:8px;"></div>
                 </details>
-                <label style="display:flex;gap:8px;align-items:center;margin:8px 0">发送最近 <input id="ab-keep-floors" type="number" min="0" max="100" value="1" style="width:60px"> 楼状态栏</label><label style="display:flex;gap:8px;align-items:center;margin:8px 0"><input id="ab-add-filter" type="checkbox"> 保存时附带发送过滤正则</label><div style="display:flex;gap:6px;align-items:center;margin-bottom:10px;">
+                <label style="display:flex;gap:8px;align-items:center;margin:8px 0">发送最近 <input id="ab-keep-floors" type="number" min="0" max="100" value="1" style="width:60px"> 楼状态栏</label><label style="display:flex;gap:8px;align-items:center;margin:8px 0"><input id="ab-add-filter" type="checkbox"> 生成时配套发送过滤（隐藏旧楼状态栏）</label><div style="display:flex;gap:6px;align-items:center;margin-bottom:10px;">
                     <label style="font-size:12px;opacity:0.8;">保存到：</label>
                     <select id="ab-scope" style="flex:1;padding:6px;background:#2a2a2a;color:#eee;border:1px solid #555;border-radius:4px;">
                         <option value="character">角色卡正则</option>

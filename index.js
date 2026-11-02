@@ -977,7 +977,7 @@
             </section>
             <section id="mint-page-gallery" data-mint-page="gallery" role="tabpanel" aria-labelledby="mint-tab-gallery" hidden><div class="mint-page-heading"><div><div class="mint-eyebrow">YOUR LITTLE COLLECTION</div><h2>图片收藏室</h2><p>把喜欢的图片，留给下一次灵感。</p></div><img class="mint-decoration mint-heading-mascot" src="${MINT_DECORATIONS.gallery}" alt=""></div><div class="mint-card"><div id="mint-upload-slot"></div><p class="mint-muted">上传到服务器；状态栏只保存链接。</p><div class="mint-row"><button data-go="settings" class="mint-secondary">配置图库</button><button id="mint-gallery-refresh" class="mint-secondary">刷新图片</button></div></div><label class="mint-form-label" for="mint-gallery-search">查找图片</label><input id="mint-gallery-search" placeholder="按图片名称查找" style="width:100%"><p id="mint-gallery-count" class="mint-muted"></p><div id="mint-gallery-slot"></div><p class="mint-footnote">解绑会保留图片。删除服务器文件会让旧状态栏里的图片失效。</p></section>
             <section id="mint-page-history" data-mint-page="history" role="tabpanel" aria-labelledby="mint-tab-history" hidden><div class="mint-page-heading"><div><div class="mint-eyebrow">LITTLE MOMENTS</div><h2>灵感存档</h2><p>每一个版本，都可以再回来看看。</p></div><img class="mint-decoration mint-heading-mascot" src="${MINT_DECORATIONS.history}" alt=""></div><div class="mint-card mint-compact" id="mint-history-controls"></div><div id="mint-history-slot"></div></section>
-            <section id="mint-page-settings" data-mint-page="settings" role="tabpanel" aria-labelledby="mint-tab-settings" hidden><div class="mint-page-heading"><div><div class="mint-eyebrow">MAKE YOURSELF AT HOME</div><h2>设置</h2><p>连接、字体和偏好，都在这里。</p></div><img class="mint-decoration mint-heading-mascot" src="${MINT_DECORATIONS.settings}" alt=""></div><details class="mint-settings-block" open><summary>模型与 API 连接</summary><div id="mint-api-slot" class="mint-settings-body"></div></details><div id="mint-server-slot"></div><div id="mint-font-manager-slot"></div><details class="mint-settings-block"><summary>外观与小序</summary><div class="mint-settings-body"><label class="mint-theme-switch"><span><b>按时段自动切换</b><small>关闭后保持手动选择的主题</small></span><input id="mint-theme-auto" type="checkbox" role="switch" aria-label="按时段自动切换"></label><div class="mint-theme-times"><label for="mint-theme-start">日间开始<input id="mint-theme-start" type="time" required></label><label for="mint-theme-end">日间结束<input id="mint-theme-end" type="time" required></label></div><p class="mint-muted">结束时间选 00:00 表示晚上 24:00；也支持跨午夜的时段。使用手机本地时间。</p><button id="mint-theme-save" style="width:100%">保存切换时段</button><p id="mint-theme-status" class="mint-muted" role="status"></p><p class="mint-muted">顶部头像左边的太阳 / 月亮图标可随时切换；手动切换后自动模式会关闭，直到你重新开启。</p><div class="mint-row"><button id="mint-demo-success">看看成功提示</button><button id="mint-demo-error">看看哭哭提示</button></div></div></details><details class="mint-settings-block"><summary>提示与小装饰</summary><div class="mint-settings-body"><label class="mint-theme-switch"><span><b>页面切换提示</b><small>切换底栏页面时显示文字气泡</small></span><input id="mint-page-notices" type="checkbox" role="switch" aria-label="页面切换提示"></label><label class="mint-theme-switch"><span><b>普通点击提示</b><small>基础点击与展开气泡；关闭后仍有按压反馈</small></span><input id="mint-click-notices" type="checkbox" role="switch" aria-label="普通点击提示"></label><label class="mint-theme-switch"><span><b>人物与角落装饰</b><small>让工作台多一点小序的陪伴</small></span><input id="mint-decoration-toggle" type="checkbox" role="switch" aria-label="人物与角落装饰"></label><p class="mint-muted">生成中、成功和报错提示始终保留。提示窗位于底栏上方，可手动关闭。</p></div></details><details class="mint-settings-block"><summary>关于序白工坊</summary><div class="mint-settings-body"><div class="mint-decoration mint-settings-companion"><img src="${MINT_DECORATIONS.settings}" alt=""><p>工具已经摆好了。<br>你负责灵感，我负责把它们接起来。</p></div><p>原作：Claude<br>界面与功能改造：序白（ChatGPT）<br>与你一起制作。</p><p class="mint-muted">银白头发不是加班造成的，原装就是这样。</p><small>v3.8.7 · 薄荷手账与月光 · 手机优先</small></div></details></section>
+            <section id="mint-page-settings" data-mint-page="settings" role="tabpanel" aria-labelledby="mint-tab-settings" hidden><div class="mint-page-heading"><div><div class="mint-eyebrow">MAKE YOURSELF AT HOME</div><h2>设置</h2><p>连接、字体和偏好，都在这里。</p></div><img class="mint-decoration mint-heading-mascot" src="${MINT_DECORATIONS.settings}" alt=""></div><details class="mint-settings-block" open><summary>模型与 API 连接</summary><div id="mint-api-slot" class="mint-settings-body"></div></details><div id="mint-server-slot"></div><div id="mint-font-manager-slot"></div><details class="mint-settings-block"><summary>外观与小序</summary><div class="mint-settings-body"><label class="mint-theme-switch"><span><b>按时段自动切换</b><small>关闭后保持手动选择的主题</small></span><input id="mint-theme-auto" type="checkbox" role="switch" aria-label="按时段自动切换"></label><div class="mint-theme-times"><label for="mint-theme-start">日间开始<input id="mint-theme-start" type="time" required></label><label for="mint-theme-end">日间结束<input id="mint-theme-end" type="time" required></label></div><p class="mint-muted">结束时间选 00:00 表示晚上 24:00；也支持跨午夜的时段。使用手机本地时间。</p><button id="mint-theme-save" style="width:100%">保存切换时段</button><p id="mint-theme-status" class="mint-muted" role="status"></p><p class="mint-muted">顶部头像左边的太阳 / 月亮图标可随时切换；手动切换后自动模式会关闭，直到你重新开启。</p><div class="mint-row"><button id="mint-demo-success">看看成功提示</button><button id="mint-demo-error">看看哭哭提示</button></div></div></details><details class="mint-settings-block"><summary>提示与小装饰</summary><div class="mint-settings-body"><label class="mint-theme-switch"><span><b>页面切换提示</b><small>切换底栏页面时显示文字气泡</small></span><input id="mint-page-notices" type="checkbox" role="switch" aria-label="页面切换提示"></label><label class="mint-theme-switch"><span><b>普通点击提示</b><small>基础点击与展开气泡；关闭后仍有按压反馈</small></span><input id="mint-click-notices" type="checkbox" role="switch" aria-label="普通点击提示"></label><label class="mint-theme-switch"><span><b>人物与角落装饰</b><small>让工作台多一点小序的陪伴</small></span><input id="mint-decoration-toggle" type="checkbox" role="switch" aria-label="人物与角落装饰"></label><p class="mint-muted">生成中、成功和报错提示始终保留。提示窗位于底栏上方，可手动关闭。</p></div></details><details class="mint-settings-block"><summary>关于序白工坊</summary><div class="mint-settings-body"><div class="mint-decoration mint-settings-companion"><img src="${MINT_DECORATIONS.settings}" alt=""><p>工具已经摆好了。<br>你负责灵感，我负责把它们接起来。</p></div><p>原作：Claude<br>界面与功能改造：序白（ChatGPT）<br>与你一起制作。</p><p class="mint-muted">银白头发不是加班造成的，原装就是这样。</p><small>v3.8.8 · 薄荷手账与月光 · 手机优先</small></div></details></section>
           </main>
           <nav id="mint-tabs" role="tablist" aria-label="工作台页面">${[['create','创作'],['gallery','图库'],['history','历史'],['settings','设置']].map(([key,label])=>`<button id="mint-tab-${key}" role="tab" aria-controls="mint-page-${key}" data-page="${key}" aria-selected="${key === currentPage}">${mintIcon(key)}<span>${label}</span></button>`).join('')}</nav>`;
         const put = (id, ...nodes) => panel.querySelector('#' + id).append(...nodes);
@@ -1565,6 +1565,45 @@ try{
         }
         panel.querySelector('#mint-request-card').append(box);
     }
+    const GENERATED_FILTER_CHECK_PROMPT = `【配套发送过滤】用户已勾选生成配套发送过滤。美化与过滤必须使用同一条 FINDREGEX，过滤仅将匹配到的完整状态栏替换为空字符串，不得把正文包含在匹配范围内。不能依赖替换成HTML后再识别状态栏。不需要另写一条不同的过滤正则，插件会复用 FINDREGEX 并添加全局匹配。
+在 FORMATGUIDE 后、END 前增加独占一行的 ===FILTERCHECK===，下一行输出JSON对象：{"statusSamples":["完整的状态栏原文样例1","字段内容不同的状态栏原文样例2"],"proseSamples":["不包含状态栏的正常正文1","不包含状态栏的正常正文2"]}。
+statusSamples必须是FINDREGEX能完整匹配的原始文本，不能填HTML成品；至少两条不同的状态栏样例。proseSamples至少两条不同的普通正文。匹配条件必须允许保留状态栏前后相邻的正文，不得使用吞掉整段回复的宽泛匹配。四组样例会由插件实际执行校验。`;
+    function generatedFilterPlan(findRegex, checkText) {
+        const plan={version:1,findRegex:String(findRegex || ''),valid:false,checks:null,error:''};
+        try {
+            const checks=typeof checkText==='string'?JSON.parse(stripCodeFence(checkText)):checkText;
+            const validList=value=>Array.isArray(value)&&value.length>=2&&value.length<=6&&value.every(s=>typeof s==='string'&&s.length>0&&s.length<=4096)&&new Set(value).size>=2;
+            if(!checks || !validList(checks.statusSamples) || !validList(checks.proseSamples)) throw new Error('AI未提供至少两条不同的状态栏样例和两条正文样例');
+            const re=parseRegexString(findRegex);
+            if(!re)throw new Error('美化匹配表达式无效');
+            const replace=text=>{re.lastIndex=0;return text.replace(re,'');};
+            const probe='窗外传来脚步声，屋内的人放下手中的书。\n他走向门口，故事仍在继续。';
+            for(const text of [probe,...checks.proseSamples]){
+                re.lastIndex=0;if(re.test(text))throw new Error('匹配条件会命中普通正文');
+            }
+            for(const sample of checks.statusSamples){
+                re.lastIndex=0;const match=re.exec(sample);
+                if(!match || match.index!==0 || match[0]!==sample || !match[0].length)throw new Error('状态栏样例不能被完整匹配');
+                const before=probe+'\n',after='\n'+probe;
+                // A placement may be excluded by an anchor; every placement that DOES match must preserve prose.
+                let adjacentMatched=false;
+                for(const [input,expected] of [[before+sample,before],[sample+after,after]]){
+                    re.lastIndex=0;
+                    if(re.test(input)){
+                        adjacentMatched=true;
+                        if(replace(input)!==expected)throw new Error('过滤会删除相邻正文');
+                    }
+                }
+                if(!adjacentMatched)throw new Error('无法在保留相邻正文的情况下过滤状态栏');
+            }
+            plan.checks={statusSamples:[...checks.statusSamples],proseSamples:[...checks.proseSamples]};plan.valid=true;
+        }catch(error){plan.error=error.message || String(error);}
+        return plan;
+    }
+    function generatedFilterStatus(result) {
+        if(!result?.filterRequested)return '';
+        return result.filterPlan?.valid?'美化已生成；配套发送过滤已通过样例校验。':'美化已生成；配套发送过滤未就绪：'+(result.filterPlan?.error || '缺少校验资料')+'。可先保存美化。';
+    }
     async function fetchModelList(baseUrl, apiKey) {
         const url = apiEndpoint(baseUrl, 'models');
         const ctl = new AbortController(); const timeout = setTimeout(() => ctl.abort(), 20000);
@@ -1694,12 +1733,13 @@ try{
             }
             return result.slice(contentStart, endIdx).trim();
         };
-        const scriptName = grab('SCRIPTNAME', ['FINDREGEX', 'REPLACESTRING', 'FORMATGUIDE', 'END']);
-        const findRegex = grab('FINDREGEX', ['REPLACESTRING', 'FORMATGUIDE', 'END']);
-        const replaceString = grab('REPLACESTRING', ['FORMATGUIDE', 'END']);
-        const formatGuide = grab('FORMATGUIDE', ['END']);
+        const scriptName = grab('SCRIPTNAME', ['FINDREGEX', 'REPLACESTRING', 'FORMATGUIDE', 'FILTERCHECK', 'END']);
+        const findRegex = grab('FINDREGEX', ['REPLACESTRING', 'FORMATGUIDE', 'FILTERCHECK', 'END']);
+        const replaceString = grab('REPLACESTRING', ['FORMATGUIDE', 'FILTERCHECK', 'END']);
+        const formatGuide = grab('FORMATGUIDE', ['FILTERCHECK','END']);
+        const filterCheck = grab('FILTERCHECK', ['END']);
         if (!scriptName && !findRegex && !replaceString) return null;
-        return { scriptName, findRegex, replaceString, formatGuide };
+        return { scriptName, findRegex, replaceString, formatGuide, filterCheck };
     }
     function stripCodeFence(text) {
         const raw = String(text ?? '').trim();
@@ -1771,8 +1811,9 @@ try{
         await createWorldbookEntries(bookName, [newEntry]);
     }
 
-    async function generateBeautify({ interactionFeatures = [], skillPayload = '', plannedImages = [], description, refContent, existing, revisionPrompt, mode, sourceInfo, forceImage, refImageDataUris, extraContext, lockedFindRegex, lockStructure }) {
+    async function generateBeautify({ filterRequested = false, filterKeepFloors = 1, interactionFeatures = [], skillPayload = '', plannedImages = [], description, refContent, existing, revisionPrompt, mode, sourceInfo, forceImage, refImageDataUris, extraContext, lockedFindRegex, lockStructure }) {
         const sections = [`【需求描述】\n${description || '（无）'}`];
+        if(filterRequested) sections.push(GENERATED_FILTER_CHECK_PROMPT);
         const interactionGuide = interactionFeaturePrompt(interactionFeatures);
         if(interactionGuide) sections.push(interactionGuide);
         if(skillPayload)sections.push('【用户勾选的设计 Skill】\n'+skillPayload);
@@ -1790,7 +1831,8 @@ try{
         if (mode === 'revise' && revisionPrompt) sections.push(`【修改意见】\n${revisionPrompt}`);
         if (mode === 'variant') sections.push('【要求】请生成一版结构或视觉风格明显不同的新方案，不要只改颜色。');
 
-        const raw = await callGenerateRaw(SYSTEM_PROMPT, stripEmbeddedData(sections.join('\n\n')), sourceInfo, refImageDataUris);
+        const system = filterRequested ? SYSTEM_PROMPT.replace('\n===END===', '\n===FILTERCHECK===\n（配套过滤校验样例JSON，遵守用户请求中的字段说明）\n===END===') : SYSTEM_PROMPT;
+        const raw = await callGenerateRaw(system, stripEmbeddedData(sections.join('\n\n')), sourceInfo, refImageDataUris);
         const parsed = parseGenDelimited(raw);
         if (!parsed) throw new Error('AI 没有按格式输出，原始返回：' + raw.slice(0, 300));
         return {
@@ -1798,6 +1840,8 @@ try{
             findRegex: lockedFindRegex || parsed.findRegex || '', // 锁定了就强制用锁定的，不管AI输出了什么
             replaceStringRaw: stripCodeFence(parsed.replaceString || ''),
             formatGuide: parsed.formatGuide || '',
+            filterRequested, filterKeepFloors,
+            ...(filterRequested ? {filterPlan:generatedFilterPlan(lockedFindRegex || parsed.findRegex || '', parsed.filterCheck)} : {}),
         };
     }
 
@@ -1859,19 +1903,26 @@ ${body}</html>`;
         return { matched: true, result };
     }
 
-    function makeStatusFilter(findRegex, name, keep, scope) {
+    function makeStatusFilter(findRegex, name, keep, scope, plan) {
         const count = Number(keep);
         if (!Number.isInteger(count) || count < 0 || count > 100) throw new Error('保留楼层请输入 0 到 100 的整数');
+        let plannedRegex = '';
+        if(plan !== undefined){
+            const checked = plan && plan.findRegex === findRegex && generatedFilterPlan(findRegex,plan.checks);
+            if(!checked?.valid)throw Object.assign(new Error('生成时的配套过滤未通过校验，请勾选配套过滤后重新生成'),{code:'UNSUPPORTED_STATUS_FILTER'});
+            const parsedPlan=parseRegexString(findRegex);
+            plannedRegex='/'+parsedPlan.source+'/'+parsedPlan.flags;
+        }
         const pattern = String(findRegex || '');
         const parsed = parseRegexString(pattern);
         // Reuse the exact beauty matcher for the supported 〔...〕 format, without broadening its boundaries.
         const bracketed = parsed && /^(?:\^)?〔/.test(parsed.source) && /〕(?:\$)?$/.test(parsed.source);
         const match = pattern.match(/^\/\^?<([A-Za-z][\w:-]*)>/);
-        if (!bracketed && !match) throw Object.assign(new Error('未识别到明确的状态栏开始标签或〔…〕边界，无法安全生成过滤正则'), { code: 'UNSUPPORTED_STATUS_FILTER' });
+        if (!plannedRegex && !bracketed && !match) throw Object.assign(new Error('未识别到明确的状态栏开始标签或〔…〕边界，无法安全生成过滤正则'), { code: 'UNSUPPORTED_STATUS_FILTER' });
         const tag = match?.[1];
-        if (!bracketed && !pattern.includes('<\\/' + tag + '>')) throw Object.assign(new Error('未识别到对应的状态栏结束标签，无法安全生成过滤正则'), { code: 'UNSUPPORTED_STATUS_FILTER' });
-        const filterRegex = bracketed ? '/' + parsed.source + '/' + parsed.flags
-            : '/<' + tag + '>[\\s\\S]*?<\\/' + tag + '>/g';
+        if (!plannedRegex && !bracketed && !pattern.includes('<\\/' + tag + '>')) throw Object.assign(new Error('未识别到对应的状态栏结束标签，无法安全生成过滤正则'), { code: 'UNSUPPORTED_STATUS_FILTER' });
+        const filterRegex = plannedRegex || (bracketed ? '/' + parsed.source + '/' + parsed.flags
+            : '/<' + tag + '>[\\s\\S]*?<\\/' + tag + '>/g');
         return {
             source: { user_input: false, ai_output: true, slash_command: false, world_info: false, reasoning: false },
             destination: { display: false, prompt: true },
@@ -2079,7 +2130,7 @@ ${body}</html>`;
                     <summary style="cursor:pointer;font-size:12px;opacity:0.8;">字体管理（添加/预览/删除自定义字体）</summary>
                     <div id="ab-font-manager" style="margin-top:8px;"></div>
                 </details>
-                <label style="display:flex;gap:8px;align-items:center;margin:8px 0">发送最近 <input id="ab-keep-floors" type="number" min="0" max="100" value="1" style="width:60px"> 楼状态栏</label><label style="display:flex;gap:8px;align-items:center;margin:8px 0"><input id="ab-add-filter" type="checkbox"> 保存时附带发送过滤正则</label><div style="display:flex;gap:6px;align-items:center;margin-bottom:10px;">
+                <label style="display:flex;gap:8px;align-items:center;margin:8px 0">发送最近 <input id="ab-keep-floors" type="number" min="0" max="100" value="1" style="width:60px"> 楼状态栏</label><label style="display:flex;gap:8px;align-items:center;margin:8px 0"><input id="ab-add-filter" type="checkbox"> 生成时配套发送过滤（隐藏旧楼状态栏）</label><div style="display:flex;gap:6px;align-items:center;margin-bottom:10px;">
                     <label style="font-size:12px;opacity:0.8;">保存到：</label>
                     <select id="ab-scope" style="flex:1;padding:6px;background:#2a2a2a;color:#eee;border:1px solid #555;border-radius:4px;">
                         <option value="character">角色卡正则</option>
@@ -2304,6 +2355,12 @@ ${body}</html>`;
     async function showResult(panel, result) {
         session = { ...result, assignments: session?.assignments && session.scriptName === result.scriptName ? session.assignments : {} };
         restoreInteractionChoices(panel, result.interactionFeatures || []);
+        if(typeof result.filterRequested==='boolean'){
+            panel.querySelector('#ab-add-filter').checked=result.filterRequested;
+            panel.querySelector('#ab-keep-floors').value=result.filterKeepFloors ?? 1;
+        }
+        const filterStatus=generatedFilterStatus(result);
+        if(filterStatus)panel.querySelector('#ab-status').textContent=filterStatus;
         panel.querySelector('#ab-result').style.display = 'block';
         panel.querySelector('#ab-scriptname').textContent = session.scriptName;
         const fgWrap = panel.querySelector('#ab-formatguide-wrap');
@@ -2366,6 +2423,9 @@ ${body}</html>`;
         const variantCount = mode==='create' ? Math.max(1,Math.min(3,Number(panel.querySelector('#mint-variant-count')?.value)||1)) : 1;
         const interactionFeatures=normalizeInteractionFeatures([...panel.querySelectorAll('[data-mint-interaction]:checked')].map(input=>input.value));
         if (mode !== 'create' && session?.isPlainRegex && interactionFeatures.length) throw new Error('交互功能用于状态栏显示正则，请先创建状态栏或载入显示正则');
+        const filterRequested=panel.querySelector('#ab-add-filter')?.checked===true;
+        const filterKeepFloors=Number(panel.querySelector('#ab-keep-floors')?.value ?? 1);
+        if(filterRequested && (!Number.isInteger(filterKeepFloors)||filterKeepFloors<0||filterKeepFloors>100))throw new Error('保留楼层请输入0到100的整数');
         const userDescription=panel.querySelector('#ab-desc').value.trim();
         const layout=panel.querySelector('#mint-design-layout')?.value.trim();
         const fields=panel.querySelector('#mint-design-fields')?.value.trim();
@@ -2421,7 +2481,7 @@ ${body}</html>`;
                     const variantDescription=variantCount>1?description+`\n【方案】第 ${i+1} 个独立方案，请尽量与其他方案在布局和风格上有所不同。`:description;
                     const result=await receiveGeneration(existingSnapshot?.isPlainRegex && mode !== 'create'
                         ? generatePlainRegexRevision(existingSnapshot, revisionPrompt || '根据原规则提供一个变体', resolvedSourceInfo)
-                        : generateBeautify({interactionFeatures,skillPayload,plannedImages,description:variantDescription,refContent,existing:existingSnapshot,revisionPrompt,mode,sourceInfo:resolvedSourceInfo,forceImage,refImageDataUris,extraContext,lockedFindRegex,lockStructure}),taskController.signal);
+                        : generateBeautify({filterRequested,filterKeepFloors,interactionFeatures,skillPayload,plannedImages,description:variantDescription,refContent,existing:existingSnapshot,revisionPrompt,mode,sourceInfo:resolvedSourceInfo,forceImage,refImageDataUris,extraContext,lockedFindRegex,lockStructure}),taskController.signal);
                     if(destroyed||taskEpoch!==generationEpoch)return;
                     if (referenceRegex && lockedFindRegex && !existingSnapshot?.isPlainRegex) {
                         const oldRefs = new Set(String(referenceRegex.replace_string || '').match(/\$(?:[1-9][0-9]?|<[^>]+>)/g) || []);
@@ -2434,12 +2494,12 @@ ${body}</html>`;
                     const histEntry={id:generateUUID(),ts:Date.now(),...result,interactionFeatures,referenceRegex,isPlainRegex: !!(mode !== "create" && existingSnapshot?.isPlainRegex),assignments:{...(mode==='create'?{}:(existingSnapshot?.assignments||{})),...plannedAssignments}};
                     await addHistory(histEntry);variants.push({...histEntry,historyId:histEntry.id,historyTs:histEntry.ts});
                 }
-                session=variants[0];toast(variantCount>1?`已生成 ${variants.length} 个方案`:('"'+session.scriptName+'" 生成完成'),'success');
+                session=variants[0];toast(variantCount>1?`已生成 ${variants.length} 个方案`:('"'+session.scriptName+'" 生成完成'),session.filterRequested && !session.filterPlan?.valid?'warning':'success');
                 const livePanel=targetDoc.getElementById('aibar-panel');
                 if(livePanel){
                     switchMintPage(livePanel,'create',false);await showResult(livePanel,session);await renderHistory(livePanel);
                     const choices=livePanel.querySelector('#mint-variant-picks');if(choices){choices.replaceChildren();if(variants.length>1)variants.forEach((v,i)=>{const b=targetDoc.createElement('button');b.textContent=`方案 ${i+1} · ${v.scriptName}`;b.setAttribute('aria-pressed',String(i===0));b.onclick=async()=>{session=v;await showResult(livePanel,v);choices.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));};choices.append(b);});}
-                    const liveStatus=livePanel.querySelector('#ab-status');if(liveStatus)liveStatus.textContent=variantCount>1?'选择方案查看预览':'生成完成，往下滑看预览。';
+                    const liveStatus=livePanel.querySelector('#ab-status');if(liveStatus)liveStatus.textContent=generatedFilterStatus(session)||(variantCount>1?'选择方案查看预览':'生成完成，往下滑看预览。');
                     const liveBtn=livePanel.querySelector(btnMap[mode]);if(liveBtn)liveBtn.disabled=false;
                 }
             } catch (e) {
@@ -2836,10 +2896,10 @@ ${body}</html>`;
                 let filterWarning = '';
                 if (!session.isPlainRegex && panel.querySelector('#ab-add-filter').checked) {
                     try {
-                        filter = makeStatusFilter(session.findRegex, session.scriptName, panel.querySelector('#ab-keep-floors').value, scope);
+                        filter = makeStatusFilter(session.findRegex, session.scriptName, panel.querySelector('#ab-keep-floors').value, scope, session.filterRequested === true ? (session.filterPlan || null) : session.filterRequested === false ? null : undefined);
                     } catch (error) {
                         if (error.code !== 'UNSUPPORTED_STATUS_FILTER') throw error;
-                        filterWarning = '未附带发送过滤：当前匹配格式暂不支持自动过滤，“发送最近几楼”未生效。';
+                        filterWarning = '未附带发送过滤：' + error.message + '。“发送最近几楼”未生效。';
                     }
                 }
                 function reportSaved(message) {

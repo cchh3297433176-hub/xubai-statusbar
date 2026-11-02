@@ -62,6 +62,12 @@
     async function showResult(panel, result) {
         session = { ...result, assignments: session?.assignments && session.scriptName === result.scriptName ? session.assignments : {} };
         restoreInteractionChoices(panel, result.interactionFeatures || []);
+        if(typeof result.filterRequested==='boolean'){
+            panel.querySelector('#ab-add-filter').checked=result.filterRequested;
+            panel.querySelector('#ab-keep-floors').value=result.filterKeepFloors ?? 1;
+        }
+        const filterStatus=generatedFilterStatus(result);
+        if(filterStatus)panel.querySelector('#ab-status').textContent=filterStatus;
         panel.querySelector('#ab-result').style.display = 'block';
         panel.querySelector('#ab-scriptname').textContent = session.scriptName;
         const fgWrap = panel.querySelector('#ab-formatguide-wrap');

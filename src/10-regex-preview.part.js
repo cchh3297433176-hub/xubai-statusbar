@@ -46,19 +46,26 @@ ${body}</html>`;
         return { matched: true, result };
     }
 
-    function makeStatusFilter(findRegex, name, keep, scope) {
+    function makeStatusFilter(findRegex, name, keep, scope, plan) {
         const count = Number(keep);
         if (!Number.isInteger(count) || count < 0 || count > 100) throw new Error('保留楼层请输入 0 到 100 的整数');
+        let plannedRegex = '';
+        if(plan !== undefined){
+            const checked = plan && plan.findRegex === findRegex && generatedFilterPlan(findRegex,plan.checks);
+            if(!checked?.valid)throw Object.assign(new Error('生成时的配套过滤未通过校验，请勾选配套过滤后重新生成'),{code:'UNSUPPORTED_STATUS_FILTER'});
+            const parsedPlan=parseRegexString(findRegex);
+            plannedRegex='/'+parsedPlan.source+'/'+parsedPlan.flags;
+        }
         const pattern = String(findRegex || '');
         const parsed = parseRegexString(pattern);
         // Reuse the exact beauty matcher for the supported 〔...〕 format, without broadening its boundaries.
         const bracketed = parsed && /^(?:\^)?〔/.test(parsed.source) && /〕(?:\$)?$/.test(parsed.source);
         const match = pattern.match(/^\/\^?<([A-Za-z][\w:-]*)>/);
-        if (!bracketed && !match) throw Object.assign(new Error('未识别到明确的状态栏开始标签或〔…〕边界，无法安全生成过滤正则'), { code: 'UNSUPPORTED_STATUS_FILTER' });
+        if (!plannedRegex && !bracketed && !match) throw Object.assign(new Error('未识别到明确的状态栏开始标签或〔…〕边界，无法安全生成过滤正则'), { code: 'UNSUPPORTED_STATUS_FILTER' });
         const tag = match?.[1];
-        if (!bracketed && !pattern.includes('<\\/' + tag + '>')) throw Object.assign(new Error('未识别到对应的状态栏结束标签，无法安全生成过滤正则'), { code: 'UNSUPPORTED_STATUS_FILTER' });
-        const filterRegex = bracketed ? '/' + parsed.source + '/' + parsed.flags
-            : '/<' + tag + '>[\\s\\S]*?<\\/' + tag + '>/g';
+        if (!plannedRegex && !bracketed && !pattern.includes('<\\/' + tag + '>')) throw Object.assign(new Error('未识别到对应的状态栏结束标签，无法安全生成过滤正则'), { code: 'UNSUPPORTED_STATUS_FILTER' });
+        const filterRegex = plannedRegex || (bracketed ? '/' + parsed.source + '/' + parsed.flags
+            : '/<' + tag + '>[\\s\\S]*?<\\/' + tag + '>/g');
         return {
             source: { user_input: false, ai_output: true, slash_command: false, world_info: false, reasoning: false },
             destination: { display: false, prompt: true },
