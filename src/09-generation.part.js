@@ -213,6 +213,7 @@
         if(plannedImages.length)sections.push(imagePlanPrompt(plannedImages));
         if (forceImage) sections.push('【硬性要求】必须至少设计一处使用图片的元素（背景图或图标均可），一定要用 {{IMG:标识名}} 占位符，不能省略这一步。');
         if (lockedFindRegex) sections.push(`【硬性要求·标签格式锁定】必须原样使用下面这个标签结构，一个标签名、顺序、层级都不能改，只能改视觉样式（颜色/布局/字体/装饰）：\n${lockedFindRegex}\n输出的 FINDREGEX 必须和上面这行一模一样，一个字符都不能变。`);
+        if (lockedFindRegex) sections.push('保留原始输入格式和捕获组含义，正确引用 $1、$2 等。允许根据用户要求重新设计显示布局，不得捏造或丢失字段。');
         if (lockStructure) sections.push('【硬性要求·功能结构锁定】这是"换皮肤不换骨架"的需求：参考正则里的 DOM 结构、CSS 布局方式（比如 flex/grid 这些决定排版逻辑的部分）、如果有 JS 交互逻辑也要原样保留，只能修改颜色、字体、圆角、阴影、装饰性图案、背景图这些纯视觉层面的东西，不能改变原有功能和结构骨架。');
         if (mode !== 'create' && existing) {
             sections.push(`【当前脚本】\n若是"继续修改"请基于它输出完整新版本；若是"换一版"可参考但要有明显不同的布局/风格。\n\`\`\`json\n${JSON.stringify({ scriptName: existing.scriptName, findRegex: existing.findRegex, replaceString: existing.replaceStringRaw }, null, 2)}\n\`\`\``);

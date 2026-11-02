@@ -44,9 +44,10 @@
             try {
                 const all = await getAllRegexesSafe('all');
                 sel.innerHTML = all.map((r, i) => `<option value="${i}">${esc(r.script_name)}　[${esc(scopeLabel(r.scope))}]</option>`).join('') || '<option value="">没有找到正则</option>';
-                sel.dataset.regexes = JSON.stringify(all.map(r => ({ name: r.script_name, replace: r.replace_string, find: r.find_regex })));
+                sel.dataset.regexes = JSON.stringify(all.map(r => ({ name: r.script_name, replace: r.replace_string, find: r.find_regex, original: r })));
                 sel.style.display = 'block';
                 panel.querySelector('#ab-use-existing-regex').style.display = 'block';
+                panel.querySelector('#ab-filter-existing').style.display = 'block';
                 toast(`列出了 ${all.length} 条`, 'success');
             } catch (e) {
                 toast('读取失败：' + e.message, 'error');
@@ -60,7 +61,19 @@
             if (!picked) { toast('先选一条', 'warning'); return; }
             panel.querySelector('#ab-ref').value = `参考下面这条正则的风格，生成一个相似或改良版的：\n【${picked.name}】\n${picked.replace}`;
             panel.querySelector('#ab-ref').dataset.lockedFindRegex = picked.find || '';
+            panel.querySelector('#ab-ref').dataset.referenceRegex = JSON.stringify(picked.original);
+            panel.querySelector('#ab-lock-format').checked = true;
             toast('已填入参考框', 'success');
+        });
+        on(panel.querySelector('#ab-filter-existing'), 'click', async () => {
+            const sel = panel.querySelector('#ab-existing-regex-select');
+            const picked = JSON.parse(sel.dataset.regexes || '[]')[sel.value];
+            if (!picked) throw new Error('请先选择正则');
+            const scope = panel.querySelector('#ab-scope').value;
+            const filter = makeStatusFilter(picked.find, picked.name, panel.querySelector('#ab-keep-floors').value, scope);
+            if (typeof updateTavernRegexesWith !== 'function') throw new Error('当前酒馆助手缺少正则保存接口');
+            await updateTavernRegexesWith(list => [...list, filter], { type: scope });
+            toast('已保存配套发送过滤正则', 'success');
         });
         on(panel.querySelector('#ab-persona-clear'), 'click', () => {
             panel.querySelector('#ab-persona').value = '';
@@ -218,6 +231,7 @@
                 if (/data:[^\s"'<>)]*;base64,/i.test(text)) throw new Error('检测到内嵌 base64 素材，已阻止保存，避免总结插件再次过载。请改成图片或字体链接');
                 const scope = panel.querySelector('#ab-scope').value;
                 const newEntry = {
+                    ...(session.referenceRegex || {}),
                     source: { user_input: false, ai_output: true, slash_command: false, world_info: false, reasoning: false },
                     destination: { display: true, prompt: false },
                     trim_strings: '',
@@ -231,8 +245,16 @@
                     ...(scope === 'preset' ? {} : { scope }),
                     enabled: true,
                 };
+                if (scope === 'preset') delete newEntry.scope;
+                if (session.referenceRegex) {
+                    for (const key of ['source','destination','trim_strings','run_on_edit','min_depth','max_depth','enabled']) {
+                        if (key in session.referenceRegex) newEntry[key] = session.referenceRegex[key];
+                    }
+                }
+                const filter = panel.querySelector('#ab-add-filter').checked
+                    ? makeStatusFilter(session.findRegex, session.scriptName, panel.querySelector('#ab-keep-floors').value, scope) : null;
                 if (typeof updateTavernRegexesWith !== 'function') throw new Error('当前酒馆助手缺少 updateTavernRegexesWith，请更新酒馆助手后保存');
-                await updateTavernRegexesWith(list => [...list, newEntry], { type: scope });
+                await updateTavernRegexesWith(list => [...list, newEntry, ...(filter ? [filter] : [])], { type: scope });
                 toast('已保存为新正则：' + session.scriptName, 'success');
             } catch (e) {
                 toast('保存失败：' + e.message, 'error');

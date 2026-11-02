@@ -363,7 +363,7 @@
             description: take('ab-desc'), force: take('ab-force-image').closest('label'),
             reference: take('ab-ref').closest('details'), refImage: take('ab-ref-image').closest('details'),
             context: take('ab-char-info').closest('details'), font: take('ab-font-select').parentElement,
-            fontManager: take('ab-font-details'), scope: take('ab-scope').parentElement,
+            fontManager: take('ab-font-details'), scope: take('ab-scope').parentElement, keepFloors: take('ab-keep-floors').parentElement, addFilter: take('ab-add-filter').parentElement,
             generate: take('ab-generate'), cancel: take('mint-cancel-generation'), status: take('ab-status'), result: take('ab-result'),
             source: take('ab-source').parentElement, custom: take('ab-custom-wrap'), configs: take('ab-config-panel'),
             server: take('mint-gallery-settings'), upload: take('mint-gallery-upload').closest('label'), gallery: take('mint-gallery-list'),
@@ -388,7 +388,7 @@
         const put = (id, ...nodes) => panel.querySelector('#' + id).append(...nodes);
         put('mint-close-slot', parts.close); put('mint-description-slot', parts.description); put('mint-force-slot', parts.force);
         put('mint-creation-details', parts.reference, parts.refImage, parts.context);
-        put('mint-create-options', parts.font, parts.scope);
+        put('mint-create-options', parts.font, parts.keepFloors, parts.addFilter, parts.scope);
         const fontLink = targetDoc.createElement('button'); fontLink.dataset.go = 'settings'; fontLink.className='mint-link-button'; fontLink.textContent='管理与预览字体 ›'; put('mint-create-options',fontLink);
         put('mint-generate-slot',parts.generate,parts.cancel); put('mint-status-slot',parts.status); put('mint-result-slot',parts.result);
         put('mint-api-slot',parts.source,parts.custom,parts.configs);

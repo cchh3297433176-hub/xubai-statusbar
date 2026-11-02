@@ -958,7 +958,7 @@
             description: take('ab-desc'), force: take('ab-force-image').closest('label'),
             reference: take('ab-ref').closest('details'), refImage: take('ab-ref-image').closest('details'),
             context: take('ab-char-info').closest('details'), font: take('ab-font-select').parentElement,
-            fontManager: take('ab-font-details'), scope: take('ab-scope').parentElement,
+            fontManager: take('ab-font-details'), scope: take('ab-scope').parentElement, keepFloors: take('ab-keep-floors').parentElement, addFilter: take('ab-add-filter').parentElement,
             generate: take('ab-generate'), cancel: take('mint-cancel-generation'), status: take('ab-status'), result: take('ab-result'),
             source: take('ab-source').parentElement, custom: take('ab-custom-wrap'), configs: take('ab-config-panel'),
             server: take('mint-gallery-settings'), upload: take('mint-gallery-upload').closest('label'), gallery: take('mint-gallery-list'),
@@ -983,7 +983,7 @@
         const put = (id, ...nodes) => panel.querySelector('#' + id).append(...nodes);
         put('mint-close-slot', parts.close); put('mint-description-slot', parts.description); put('mint-force-slot', parts.force);
         put('mint-creation-details', parts.reference, parts.refImage, parts.context);
-        put('mint-create-options', parts.font, parts.scope);
+        put('mint-create-options', parts.font, parts.keepFloors, parts.addFilter, parts.scope);
         const fontLink = targetDoc.createElement('button'); fontLink.dataset.go = 'settings'; fontLink.className='mint-link-button'; fontLink.textContent='管理与预览字体 ›'; put('mint-create-options',fontLink);
         put('mint-generate-slot',parts.generate,parts.cancel); put('mint-status-slot',parts.status); put('mint-result-slot',parts.result);
         put('mint-api-slot',parts.source,parts.custom,parts.configs);
@@ -1626,6 +1626,7 @@ try{
         if(plannedImages.length)sections.push(imagePlanPrompt(plannedImages));
         if (forceImage) sections.push('【硬性要求】必须至少设计一处使用图片的元素（背景图或图标均可），一定要用 {{IMG:标识名}} 占位符，不能省略这一步。');
         if (lockedFindRegex) sections.push(`【硬性要求·标签格式锁定】必须原样使用下面这个标签结构，一个标签名、顺序、层级都不能改，只能改视觉样式（颜色/布局/字体/装饰）：\n${lockedFindRegex}\n输出的 FINDREGEX 必须和上面这行一模一样，一个字符都不能变。`);
+        if (lockedFindRegex) sections.push('保留原始输入格式和捕获组含义，正确引用 $1、$2 等。允许根据用户要求重新设计显示布局，不得捏造或丢失字段。');
         if (lockStructure) sections.push('【硬性要求·功能结构锁定】这是"换皮肤不换骨架"的需求：参考正则里的 DOM 结构、CSS 布局方式（比如 flex/grid 这些决定排版逻辑的部分）、如果有 JS 交互逻辑也要原样保留，只能修改颜色、字体、圆角、阴影、装饰性图案、背景图这些纯视觉层面的东西，不能改变原有功能和结构骨架。');
         if (mode !== 'create' && existing) {
             sections.push(`【当前脚本】\n若是"继续修改"请基于它输出完整新版本；若是"换一版"可参考但要有明显不同的布局/风格。\n\`\`\`json\n${JSON.stringify({ scriptName: existing.scriptName, findRegex: existing.findRegex, replaceString: existing.replaceStringRaw }, null, 2)}\n\`\`\``);
@@ -1691,6 +1692,24 @@ ${body}</html>`;
         const resolvedReplace = resolvePlaceholders(session.replaceStringRaw, session.assignments);
         const result = sampleText.replace(re, resolvedReplace);
         return { matched: true, result };
+    }
+
+    function makeStatusFilter(findRegex, name, keep, scope) {
+        const count = Number(keep);
+        if (!Number.isInteger(count) || count < 0 || count > 100) throw new Error('保留楼层请输入 0 到 100 的整数');
+        const pattern = String(findRegex || '');
+        const match = pattern.match(/^\/\^?<([A-Za-z][\w:-]*)>/);
+        if (!match) throw new Error('未识别到明确的状态栏开始标签，无法安全生成过滤正则');
+        const tag = match[1];
+        if (!String(findRegex).includes('<\\/' + tag + '>')) throw new Error('未识别到对应的状态栏结束标签，无法安全生成过滤正则');
+        return {
+            source: { user_input: false, ai_output: true, slash_command: false, world_info: false, reasoning: false },
+            destination: { display: false, prompt: true },
+            trim_strings: '', run_on_edit: true, min_depth: count === 0 ? 0 : count * 2 + 1,
+            max_depth: null, id: generateUUID(), script_name: name + ' · 状态栏发送过滤',
+            find_regex: '/<' + tag + '>[\\s\\S]*?<\\/' + tag + '>/g',
+            replace_string: '', ...(scope === 'preset' ? {} : { scope }), enabled: true,
+        };
     }
 
     // ================= 读写酒馆正则（保存用） =================
@@ -1770,7 +1789,7 @@ ${body}</html>`;
                     <textarea id="ab-ref" rows="3" style="width:100%;box-sizing:border-box;padding:8px;background:#2a2a2a;color:#eee;border:1px solid #555;border-radius:6px;margin-top:6px;"></textarea>
                     <button id="ab-list-existing-regex" style="width:100%;padding:6px;margin-top:6px;">列出酒馆里已有的正则</button>
                     <select id="ab-existing-regex-select" style="width:100%;padding:6px;background:#2a2a2a;color:#eee;border:1px solid #555;border-radius:4px;font-size:12px;margin-top:6px;display:none;"></select>
-                    <button id="ab-use-existing-regex" style="width:100%;padding:6px;margin-top:6px;display:none;">把它的代码填进上面参考框（会覆盖）</button>
+                    <button id="ab-use-existing-regex" style="width:100%;padding:6px;margin-top:6px;display:none;">把它的代码填进上面参考框（会覆盖）</button><button id="ab-filter-existing" type="button" style="width:100%;padding:6px;margin-top:6px;display:none;">为选中正则生成发送过滤</button>
                     <label style="display:flex;align-items:center;gap:6px;font-size:12px;opacity:0.85;margin-top:8px;">
                         <input id="ab-lock-format" type="checkbox"> 锁定这条参考正则的标签格式（只换皮肤，标签结构一个不改）
                     </label>
@@ -1812,7 +1831,7 @@ ${body}</html>`;
                     <summary style="cursor:pointer;font-size:12px;opacity:0.8;">字体管理（添加/预览/删除自定义字体）</summary>
                     <div id="ab-font-manager" style="margin-top:8px;"></div>
                 </details>
-                <div style="display:flex;gap:6px;align-items:center;margin-bottom:10px;">
+                <label style="display:flex;gap:8px;align-items:center;margin:8px 0">发送最近 <input id="ab-keep-floors" type="number" min="0" max="100" value="1" style="width:60px"> 楼状态栏</label><label style="display:flex;gap:8px;align-items:center;margin:8px 0"><input id="ab-add-filter" type="checkbox"> 保存时附带发送过滤正则</label><div style="display:flex;gap:6px;align-items:center;margin-bottom:10px;">
                     <label style="font-size:12px;opacity:0.8;">保存到：</label>
                     <select id="ab-scope" style="flex:1;padding:6px;background:#2a2a2a;color:#eee;border:1px solid #555;border-radius:4px;">
                         <option value="character">角色卡正则</option>
@@ -2067,7 +2086,7 @@ ${body}</html>`;
         }
         wrap.querySelectorAll('.ab-hist-restore').forEach(button=>on(button,'click',async()=>{
             const h=list.find(item=>item.id===button.dataset.id);if(!h)throw new Error('找不到这条历史记录');
-            session={historyId:h.id,historyTs:h.ts,scriptName:h.scriptName,findRegex:h.findRegex,replaceStringRaw:h.replaceStringRaw,formatGuide:h.formatGuide||'',assignments:{...(h.assignments||{})}};
+            session={historyId:h.id,historyTs:h.ts,referenceRegex:h.referenceRegex,scriptName:h.scriptName,findRegex:h.findRegex,replaceStringRaw:h.replaceStringRaw,formatGuide:h.formatGuide||'',assignments:{...(h.assignments||{})}};
             await showResult(panel,session);switchMintPage(panel,'create');toast('已恢复这一版，继续做点喜欢的改动吧','success');
         }));
         wrap.querySelectorAll('.ab-hist-del').forEach(button=>on(button,'click',async()=>{
@@ -2105,7 +2124,9 @@ ${body}</html>`;
             .map(cb => cb.dataset.content).filter(Boolean);
         const existingSnapshot = session ? { ...session, assignments: { ...session.assignments } } : null;
         const lockFormat = panel.querySelector('#ab-lock-format')?.checked;
-        const lockedFindRegex = lockFormat ? (panel.querySelector('#ab-ref')?.dataset.lockedFindRegex || '') : '';
+        const selectedFindRegex = lockFormat ? (panel.querySelector('#ab-ref')?.dataset.lockedFindRegex || '') : '';
+        const referenceRegex = (mode !== 'create' && existingSnapshot?.referenceRegex) || (selectedFindRegex ? JSON.parse(panel.querySelector('#ab-ref').dataset.referenceRegex || 'null') : null);
+        const lockedFindRegex = referenceRegex?.find_regex || selectedFindRegex;
         if (lockFormat && !lockedFindRegex) toast('勾了锁定格式，但还没选参考正则，这次锁定不会生效', 'warning');
         const lockStructure = panel.querySelector('#ab-lock-structure')?.checked;
 
@@ -2140,9 +2161,15 @@ ${body}</html>`;
                     const variantDescription=variantCount>1?description+`\n【方案】第 ${i+1} 个独立方案，请尽量与其他方案在布局和风格上有所不同。`:description;
                     const result=await receiveGeneration(generateBeautify({skillPayload,plannedImages,description:variantDescription,refContent,existing:existingSnapshot,revisionPrompt,mode,sourceInfo:resolvedSourceInfo,forceImage,refImageDataUris,extraContext,lockedFindRegex,lockStructure}),taskController.signal);
                     if(destroyed||taskEpoch!==generationEpoch)return;
+                    if (referenceRegex) {
+                        const oldRefs = new Set(String(referenceRegex.replace_string || '').match(/\$(?:[1-9][0-9]?|<[^>]+>)/g) || []);
+                        const newRefs = new Set(String(result.replaceStringRaw || '').match(/\$(?:[1-9][0-9]?|<[^>]+>)/g) || []);
+                        const missing = [...oldRefs].filter(ref => !newRefs.has(ref));
+                        if (missing.length) throw new Error('新外观遗漏了原正则的数据引用：' + missing.join('、') + '，请重新生成');
+                    }
                     const plannedAssignments=imagePlanAssignments(plannedImages,result.replaceStringRaw);
                     if(plannedImages.some(v=>!plannedAssignments[v.token]))throw new Error('模型遗漏了指定配图占位符，请重新生成；已完成方案保存在历史记录。');
-                    const histEntry={id:generateUUID(),ts:Date.now(),...result,assignments:{...(mode==='create'?{}:(existingSnapshot?.assignments||{})),...plannedAssignments}};
+                    const histEntry={id:generateUUID(),ts:Date.now(),...result,referenceRegex,assignments:{...(mode==='create'?{}:(existingSnapshot?.assignments||{})),...plannedAssignments}};
                     await addHistory(histEntry);variants.push({...histEntry,historyId:histEntry.id,historyTs:histEntry.ts});
                 }
                 session=variants[0];toast(variantCount>1?`已生成 ${variants.length} 个方案`:('"'+session.scriptName+'" 生成完成'),'success');
@@ -2301,9 +2328,10 @@ ${body}</html>`;
             try {
                 const all = await getAllRegexesSafe('all');
                 sel.innerHTML = all.map((r, i) => `<option value="${i}">${esc(r.script_name)}　[${esc(scopeLabel(r.scope))}]</option>`).join('') || '<option value="">没有找到正则</option>';
-                sel.dataset.regexes = JSON.stringify(all.map(r => ({ name: r.script_name, replace: r.replace_string, find: r.find_regex })));
+                sel.dataset.regexes = JSON.stringify(all.map(r => ({ name: r.script_name, replace: r.replace_string, find: r.find_regex, original: r })));
                 sel.style.display = 'block';
                 panel.querySelector('#ab-use-existing-regex').style.display = 'block';
+                panel.querySelector('#ab-filter-existing').style.display = 'block';
                 toast(`列出了 ${all.length} 条`, 'success');
             } catch (e) {
                 toast('读取失败：' + e.message, 'error');
@@ -2317,7 +2345,19 @@ ${body}</html>`;
             if (!picked) { toast('先选一条', 'warning'); return; }
             panel.querySelector('#ab-ref').value = `参考下面这条正则的风格，生成一个相似或改良版的：\n【${picked.name}】\n${picked.replace}`;
             panel.querySelector('#ab-ref').dataset.lockedFindRegex = picked.find || '';
+            panel.querySelector('#ab-ref').dataset.referenceRegex = JSON.stringify(picked.original);
+            panel.querySelector('#ab-lock-format').checked = true;
             toast('已填入参考框', 'success');
+        });
+        on(panel.querySelector('#ab-filter-existing'), 'click', async () => {
+            const sel = panel.querySelector('#ab-existing-regex-select');
+            const picked = JSON.parse(sel.dataset.regexes || '[]')[sel.value];
+            if (!picked) throw new Error('请先选择正则');
+            const scope = panel.querySelector('#ab-scope').value;
+            const filter = makeStatusFilter(picked.find, picked.name, panel.querySelector('#ab-keep-floors').value, scope);
+            if (typeof updateTavernRegexesWith !== 'function') throw new Error('当前酒馆助手缺少正则保存接口');
+            await updateTavernRegexesWith(list => [...list, filter], { type: scope });
+            toast('已保存配套发送过滤正则', 'success');
         });
         on(panel.querySelector('#ab-persona-clear'), 'click', () => {
             panel.querySelector('#ab-persona').value = '';
@@ -2475,6 +2515,7 @@ ${body}</html>`;
                 if (/data:[^\s"'<>)]*;base64,/i.test(text)) throw new Error('检测到内嵌 base64 素材，已阻止保存，避免总结插件再次过载。请改成图片或字体链接');
                 const scope = panel.querySelector('#ab-scope').value;
                 const newEntry = {
+                    ...(session.referenceRegex || {}),
                     source: { user_input: false, ai_output: true, slash_command: false, world_info: false, reasoning: false },
                     destination: { display: true, prompt: false },
                     trim_strings: '',
@@ -2488,8 +2529,16 @@ ${body}</html>`;
                     ...(scope === 'preset' ? {} : { scope }),
                     enabled: true,
                 };
+                if (scope === 'preset') delete newEntry.scope;
+                if (session.referenceRegex) {
+                    for (const key of ['source','destination','trim_strings','run_on_edit','min_depth','max_depth','enabled']) {
+                        if (key in session.referenceRegex) newEntry[key] = session.referenceRegex[key];
+                    }
+                }
+                const filter = panel.querySelector('#ab-add-filter').checked
+                    ? makeStatusFilter(session.findRegex, session.scriptName, panel.querySelector('#ab-keep-floors').value, scope) : null;
                 if (typeof updateTavernRegexesWith !== 'function') throw new Error('当前酒馆助手缺少 updateTavernRegexesWith，请更新酒馆助手后保存');
-                await updateTavernRegexesWith(list => [...list, newEntry], { type: scope });
+                await updateTavernRegexesWith(list => [...list, newEntry, ...(filter ? [filter] : [])], { type: scope });
                 toast('已保存为新正则：' + session.scriptName, 'success');
             } catch (e) {
                 toast('保存失败：' + e.message, 'error');

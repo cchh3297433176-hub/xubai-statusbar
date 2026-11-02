@@ -55,7 +55,7 @@
                     <textarea id="ab-ref" rows="3" style="width:100%;box-sizing:border-box;padding:8px;background:#2a2a2a;color:#eee;border:1px solid #555;border-radius:6px;margin-top:6px;"></textarea>
                     <button id="ab-list-existing-regex" style="width:100%;padding:6px;margin-top:6px;">列出酒馆里已有的正则</button>
                     <select id="ab-existing-regex-select" style="width:100%;padding:6px;background:#2a2a2a;color:#eee;border:1px solid #555;border-radius:4px;font-size:12px;margin-top:6px;display:none;"></select>
-                    <button id="ab-use-existing-regex" style="width:100%;padding:6px;margin-top:6px;display:none;">把它的代码填进上面参考框（会覆盖）</button>
+                    <button id="ab-use-existing-regex" style="width:100%;padding:6px;margin-top:6px;display:none;">把它的代码填进上面参考框（会覆盖）</button><button id="ab-filter-existing" type="button" style="width:100%;padding:6px;margin-top:6px;display:none;">为选中正则生成发送过滤</button>
                     <label style="display:flex;align-items:center;gap:6px;font-size:12px;opacity:0.85;margin-top:8px;">
                         <input id="ab-lock-format" type="checkbox"> 锁定这条参考正则的标签格式（只换皮肤，标签结构一个不改）
                     </label>
@@ -97,7 +97,7 @@
                     <summary style="cursor:pointer;font-size:12px;opacity:0.8;">字体管理（添加/预览/删除自定义字体）</summary>
                     <div id="ab-font-manager" style="margin-top:8px;"></div>
                 </details>
-                <div style="display:flex;gap:6px;align-items:center;margin-bottom:10px;">
+                <label style="display:flex;gap:8px;align-items:center;margin:8px 0">发送最近 <input id="ab-keep-floors" type="number" min="0" max="100" value="1" style="width:60px"> 楼状态栏</label><label style="display:flex;gap:8px;align-items:center;margin:8px 0"><input id="ab-add-filter" type="checkbox"> 保存时附带发送过滤正则</label><div style="display:flex;gap:6px;align-items:center;margin-bottom:10px;">
                     <label style="font-size:12px;opacity:0.8;">保存到：</label>
                     <select id="ab-scope" style="flex:1;padding:6px;background:#2a2a2a;color:#eee;border:1px solid #555;border-radius:4px;">
                         <option value="character">角色卡正则</option>
