@@ -977,7 +977,7 @@
             </section>
             <section id="mint-page-gallery" data-mint-page="gallery" role="tabpanel" aria-labelledby="mint-tab-gallery" hidden><div class="mint-page-heading"><div><div class="mint-eyebrow">YOUR LITTLE COLLECTION</div><h2>图片收藏室</h2><p>把喜欢的图片，留给下一次灵感。</p></div><img class="mint-decoration mint-heading-mascot" src="${MINT_DECORATIONS.gallery}" alt=""></div><div class="mint-card"><div id="mint-upload-slot"></div><p class="mint-muted">上传到服务器；状态栏只保存链接。</p><div class="mint-row"><button data-go="settings" class="mint-secondary">配置图库</button><button id="mint-gallery-refresh" class="mint-secondary">刷新图片</button></div></div><label class="mint-form-label" for="mint-gallery-search">查找图片</label><input id="mint-gallery-search" placeholder="按图片名称查找" style="width:100%"><p id="mint-gallery-count" class="mint-muted"></p><div id="mint-gallery-slot"></div><p class="mint-footnote">解绑会保留图片。删除服务器文件会让旧状态栏里的图片失效。</p></section>
             <section id="mint-page-history" data-mint-page="history" role="tabpanel" aria-labelledby="mint-tab-history" hidden><div class="mint-page-heading"><div><div class="mint-eyebrow">LITTLE MOMENTS</div><h2>灵感存档</h2><p>每一个版本，都可以再回来看看。</p></div><img class="mint-decoration mint-heading-mascot" src="${MINT_DECORATIONS.history}" alt=""></div><div class="mint-card mint-compact" id="mint-history-controls"></div><div id="mint-history-slot"></div></section>
-            <section id="mint-page-settings" data-mint-page="settings" role="tabpanel" aria-labelledby="mint-tab-settings" hidden><div class="mint-page-heading"><div><div class="mint-eyebrow">MAKE YOURSELF AT HOME</div><h2>设置</h2><p>连接、字体和偏好，都在这里。</p></div><img class="mint-decoration mint-heading-mascot" src="${MINT_DECORATIONS.settings}" alt=""></div><details class="mint-settings-block" open><summary>模型与 API 连接</summary><div id="mint-api-slot" class="mint-settings-body"></div></details><div id="mint-server-slot"></div><div id="mint-font-manager-slot"></div><details class="mint-settings-block"><summary>外观与小序</summary><div class="mint-settings-body"><label class="mint-theme-switch"><span><b>按时段自动切换</b><small>关闭后保持手动选择的主题</small></span><input id="mint-theme-auto" type="checkbox" role="switch" aria-label="按时段自动切换"></label><div class="mint-theme-times"><label for="mint-theme-start">日间开始<input id="mint-theme-start" type="time" required></label><label for="mint-theme-end">日间结束<input id="mint-theme-end" type="time" required></label></div><p class="mint-muted">结束时间选 00:00 表示晚上 24:00；也支持跨午夜的时段。使用手机本地时间。</p><button id="mint-theme-save" style="width:100%">保存切换时段</button><p id="mint-theme-status" class="mint-muted" role="status"></p><p class="mint-muted">顶部头像左边的太阳 / 月亮图标可随时切换；手动切换后自动模式会关闭，直到你重新开启。</p><div class="mint-row"><button id="mint-demo-success">看看成功提示</button><button id="mint-demo-error">看看哭哭提示</button></div></div></details><details class="mint-settings-block"><summary>提示与小装饰</summary><div class="mint-settings-body"><label class="mint-theme-switch"><span><b>页面切换提示</b><small>切换底栏页面时显示文字气泡</small></span><input id="mint-page-notices" type="checkbox" role="switch" aria-label="页面切换提示"></label><label class="mint-theme-switch"><span><b>普通点击提示</b><small>基础点击与展开气泡；关闭后仍有按压反馈</small></span><input id="mint-click-notices" type="checkbox" role="switch" aria-label="普通点击提示"></label><label class="mint-theme-switch"><span><b>人物与角落装饰</b><small>让工作台多一点小序的陪伴</small></span><input id="mint-decoration-toggle" type="checkbox" role="switch" aria-label="人物与角落装饰"></label><p class="mint-muted">生成中、成功和报错提示始终保留。提示窗位于底栏上方，可手动关闭。</p></div></details><details class="mint-settings-block"><summary>关于序白工坊</summary><div class="mint-settings-body"><div class="mint-decoration mint-settings-companion"><img src="${MINT_DECORATIONS.settings}" alt=""><p>工具已经摆好了。<br>你负责灵感，我负责把它们接起来。</p></div><p>原作：Claude<br>界面与功能改造：序白（ChatGPT）<br>与你一起制作。</p><p class="mint-muted">银白头发不是加班造成的，原装就是这样。</p><small>v3.8.4 · 薄荷手账与月光 · 手机优先</small></div></details></section>
+            <section id="mint-page-settings" data-mint-page="settings" role="tabpanel" aria-labelledby="mint-tab-settings" hidden><div class="mint-page-heading"><div><div class="mint-eyebrow">MAKE YOURSELF AT HOME</div><h2>设置</h2><p>连接、字体和偏好，都在这里。</p></div><img class="mint-decoration mint-heading-mascot" src="${MINT_DECORATIONS.settings}" alt=""></div><details class="mint-settings-block" open><summary>模型与 API 连接</summary><div id="mint-api-slot" class="mint-settings-body"></div></details><div id="mint-server-slot"></div><div id="mint-font-manager-slot"></div><details class="mint-settings-block"><summary>外观与小序</summary><div class="mint-settings-body"><label class="mint-theme-switch"><span><b>按时段自动切换</b><small>关闭后保持手动选择的主题</small></span><input id="mint-theme-auto" type="checkbox" role="switch" aria-label="按时段自动切换"></label><div class="mint-theme-times"><label for="mint-theme-start">日间开始<input id="mint-theme-start" type="time" required></label><label for="mint-theme-end">日间结束<input id="mint-theme-end" type="time" required></label></div><p class="mint-muted">结束时间选 00:00 表示晚上 24:00；也支持跨午夜的时段。使用手机本地时间。</p><button id="mint-theme-save" style="width:100%">保存切换时段</button><p id="mint-theme-status" class="mint-muted" role="status"></p><p class="mint-muted">顶部头像左边的太阳 / 月亮图标可随时切换；手动切换后自动模式会关闭，直到你重新开启。</p><div class="mint-row"><button id="mint-demo-success">看看成功提示</button><button id="mint-demo-error">看看哭哭提示</button></div></div></details><details class="mint-settings-block"><summary>提示与小装饰</summary><div class="mint-settings-body"><label class="mint-theme-switch"><span><b>页面切换提示</b><small>切换底栏页面时显示文字气泡</small></span><input id="mint-page-notices" type="checkbox" role="switch" aria-label="页面切换提示"></label><label class="mint-theme-switch"><span><b>普通点击提示</b><small>基础点击与展开气泡；关闭后仍有按压反馈</small></span><input id="mint-click-notices" type="checkbox" role="switch" aria-label="普通点击提示"></label><label class="mint-theme-switch"><span><b>人物与角落装饰</b><small>让工作台多一点小序的陪伴</small></span><input id="mint-decoration-toggle" type="checkbox" role="switch" aria-label="人物与角落装饰"></label><p class="mint-muted">生成中、成功和报错提示始终保留。提示窗位于底栏上方，可手动关闭。</p></div></details><details class="mint-settings-block"><summary>关于序白工坊</summary><div class="mint-settings-body"><div class="mint-decoration mint-settings-companion"><img src="${MINT_DECORATIONS.settings}" alt=""><p>工具已经摆好了。<br>你负责灵感，我负责把它们接起来。</p></div><p>原作：Claude<br>界面与功能改造：序白（ChatGPT）<br>与你一起制作。</p><p class="mint-muted">银白头发不是加班造成的，原装就是这样。</p><small>v3.8.5 · 薄荷手账与月光 · 手机优先</small></div></details></section>
           </main>
           <nav id="mint-tabs" role="tablist" aria-label="工作台页面">${[['create','创作'],['gallery','图库'],['history','历史'],['settings','设置']].map(([key,label])=>`<button id="mint-tab-${key}" role="tab" aria-controls="mint-page-${key}" data-page="${key}" aria-selected="${key === currentPage}">${mintIcon(key)}<span>${label}</span></button>`).join('')}</nav>`;
         const put = (id, ...nodes) => panel.querySelector('#' + id).append(...nodes);
@@ -1411,6 +1411,160 @@ try{
 <\/script></body></html>`;
     }
 
+    // Standalone reference functions: serialized into selected AI guidance, never run in the workbench.
+    function mintInteractionHost() {
+        let host = window;
+        try { if (window.top?.SillyTavern) host = window.top; } catch (_) {}
+        const helper={};
+        for(const name of ['getChatMessages','setChatMessages','createChatMessages','triggerSlash']) {
+            const owner=[window,window.TavernHelper,host.TavernHelper].find(value=>typeof value?.[name]==='function');
+            if(owner)helper[name]=owner[name].bind(owner);
+        }
+        return {host,helper,context:host.SillyTavern?.getContext?.()};
+    }
+    function mintOpeningMeta(content, index) {
+        const field = name => String(content).match(new RegExp('<!--\\s*' + name + ':\\s*([\\s\\S]*?)\\s*-->','i'))?.[1]?.trim() || '';
+        const plain = String(content).replace(/<!--[\s\S]*?-->/g,'').replace(/<[^>]*>/g,'').replace(/\s+/g,' ').trim();
+        return { title: field('title') || '开场白 ' + (index + 1), desc: field('desc') || plain.slice(0,100), tag: field('tag') };
+    }
+    async function mintReadOpenings() {
+        const {helper, context} = mintInteractionHost();
+        if (typeof helper.getChatMessages !== 'function') throw new Error('请启用酒馆助手；独立预览无法读取开场白');
+        if (context?.groupId) throw new Error('此开场白模板仅适用于单角色聊天');
+        const first = (await helper.getChatMessages('0', {include_swipes:true}))[0];
+        if (!first || first.role !== 'assistant') throw new Error('当前聊天的第0楼不是角色开场白');
+        const character = context?.characters?.[context.characterId];
+        const card = character?.data;
+        const currentCard = character ? [character.first_mes ?? card?.first_mes ?? '', ...(card?.alternate_greetings || [])] : null;
+        const source = currentCard || first.swipes || [];
+        const identity = JSON.stringify([context?.characterId, context?.chatId]);
+        const entries = source.map((content,index)=>({content:String(content), index, identity,
+            fromCard:!!currentCard, ...mintOpeningMeta(content,index)}))
+            .filter(e=>e.content.trim() && !e.content.includes('【开场白菜单】'));
+        return {entries, first, identity};
+    }
+    async function mintSwitchOpening(entry) {
+        const {helper,context} = mintInteractionHost();
+        if (typeof helper.setChatMessages !== 'function') throw new Error('缺少酒馆助手消息修改接口');
+        const fresh = await mintReadOpenings();
+        if (fresh.identity !== entry.identity) throw new Error('聊天已切换，请刷新菜单');
+        const latest = fresh.entries.find(e=>e.index===entry.index && e.fromCard===entry.fromCard);
+        if (!latest || latest.content !== entry.content) throw new Error('开场白已修改，请刷新后重新选择');
+        let text = latest.content;
+        if (latest.fromCard && typeof context?.substituteParams === 'function') text = context.substituteParams(text);
+        const swipes = [...(fresh.first.swipes || [])];
+        let index = latest.fromCard ? swipes.indexOf(text) : latest.index;
+        if (index < 0) { index = swipes.length; swipes.push(text); }
+        // Only commit on an explicit click; retain every old page and every later chat message.
+        await helper.setChatMessages([{message_id:0, swipes, swipe_id:index}]);
+    }
+    function mintMountOpeningMenu(root) {
+        let disposed=false, loading=false, signature='', timer;
+        const status = root.querySelector('[data-opening-status]');
+        const list = root.querySelector('[data-opening-list]');
+        if (!list) throw new Error('缺少 data-opening-list 容器');
+        const report = text => { if(status) status.textContent=text; };
+        async function refresh() {
+            if(disposed || loading || document.hidden) return;
+            if(!root.isConnected) { cleanup(); return; }
+            loading=true;
+            try {
+                const {entries,identity}=await mintReadOpenings();
+                if(disposed) return;
+                const next=JSON.stringify([identity,entries]);
+                if(next===signature) return;
+                signature=next; list.replaceChildren();
+                for(const entry of entries) {
+                    const button=document.createElement('button');button.type='button';
+                    const title=document.createElement('strong');title.textContent=entry.title;
+                    const desc=document.createElement('span');desc.textContent=entry.desc;
+                    button.append(title,desc);
+                    if(entry.tag){const tag=document.createElement('small');tag.textContent=entry.tag;button.append(tag);}
+                    button.addEventListener('click',async()=>{
+                        if(root.dataset.switching==='true')return;
+                        root.dataset.switching='true';button.disabled=true;
+                        try{await mintSwitchOpening(entry);report('已切换');}
+                        catch(e){report(e.message);signature='';}
+                        finally{delete root.dataset.switching;button.disabled=false;}
+                    });
+                    list.append(button);
+                }
+                report(entries.length?'':'没有可用的开场白');
+            } catch(e) { report(e.message); }
+            finally { loading=false; }
+        }
+        function cleanup(){disposed=true;clearInterval(timer);window.removeEventListener('pagehide',cleanup);}
+        timer=setInterval(refresh,2000);window.addEventListener('pagehide',cleanup,{once:true});refresh();
+        return cleanup;
+    }
+    function mintBindDirectSend(root, buildText) {
+        const button=root.querySelector('[data-send-confirm]');
+        const status=root.querySelector('[data-send-status]');
+        if(!button)throw new Error('缺少 data-send-confirm 按钮');
+        let busy=false, submitted=false;
+        const report=text=>{if(status)status.textContent=text;};
+        button.addEventListener('click',async()=>{
+            if(busy || submitted)return;
+            let text;
+            try { text=String(buildText()??'').trim(); } catch(e) { report(e.message); return; }
+            if(!text){report('请先填写内容');return;}
+            const {helper,context}=mintInteractionHost();
+            if(typeof helper.createChatMessages!=='function'||typeof helper.triggerSlash!=='function'){
+                report('请启用酒馆助手；预览中不会发送');return;
+            }
+            if(context?.streamingProcessor || context?.isGenerating?.()){report('请等待当前回复结束');return;}
+            busy=true;button.disabled=true;
+            try{
+                // Structured message API keeps pipes, braces, newlines and slash-like text out of the command parser.
+                await helper.createChatMessages([{role:'user',message:text}]);
+                submitted=true;report('消息已发送，正在请求回复');
+                await helper.triggerSlash('/trigger');
+                report('已发送并请求回复');
+            }catch(e){report(submitted?'消息已发送，但请求回复失败；请在酒馆手动继续，勿重复提交。'+e.message:'发送失败：'+e.message);}
+            finally{busy=false;button.disabled=submitted;}
+        });
+    }
+    function mintFillInput(text, append=true) {
+        text=String(text??'').trim();if(!text)throw new Error('请先选择内容');
+        const {host}=mintInteractionHost();
+        const input=host.document.querySelector('#send_textarea');
+        if(!input)throw new Error('未找到酒馆输入框；预览中不会写入');
+        const value=append && input.value.trim()?input.value+'\n'+text:text;
+        const setter=Object.getOwnPropertyDescriptor(host.HTMLTextAreaElement.prototype,'value')?.set;
+        if(setter)setter.call(input,value);else input.value=value;
+        input.dispatchEvent(new host.Event('input',{bubbles:true}));input.focus();
+        // Intentionally no send command, click, submit, or Enter event.
+    }
+    const MINT_INTERACTION_FEATURES = [
+        {id:'openings',label:'开场白跳转',guide:'自动读取当前角色卡开场白，显示标题、简介及可选tag。新增、编辑、排序后自动更新菜单，不写死标题/数量，不按裸编号存本地说明。优先读取每个开场白的 <!-- title: 标题 -->、<!-- desc: 简介 -->、<!-- tag: 标签 -->；没有说明时显示正文预览，不声称自动理解剧情。默认包含首个真实开场白，只排除含【开场白菜单】标记的菜单页。点击时重新核对角色、聊天与内容，再切换或追加到第0楼消息页；保留历史页与后续消息，不自动发送。用普通script启动一次，不使用eval/base64/onerror启动。',refs:[mintInteractionHost,mintOpeningMeta,mintReadOpenings,mintSwitchOpening,mintMountOpeningMenu],example:'HTML提供 data-opening-list 容器和 role="status" 的 data-opening-status；DOM就绪后 mintMountOpeningMenu(root)。将返回的清理函数绑定组件卸载。'},
+        {id:'direct-send',label:'填写后直接发送',guide:'收集表单填写与选择值，先校验必填项，点击明确的确认发送按钮后才提交。直接创建用户消息并触发AI回复，不经过输入框。使用结构化消息接口，禁止把用户文本拼进Slash命令。固定 /trigger 仅触发一次；加提交锁和失败提示，已创建消息但触发失败时不得重发消息。默认单次提交，发送成功后禁用按钮；如需再次提交必须由明确的重填操作复位。',refs:[mintInteractionHost,mintBindDirectSend],example:'HTML提供 data-send-confirm 按钮及 role="status" 的 data-send-status。DOM就绪后 mintBindDirectSend(root,()=>按表单字段拼成的完整字符串)。'},
+        {id:'fill-input',label:'选择后填入输入框',guide:'支持按需求单选/多选，用稳定选项ID保存选择，不能以显示文字去重。确认后把所选内容按显示顺序整理成文字，调用 mintFillInput。默认追加保留已有草稿；用户明确要求替换时传false。不选择则提示。只写入输入框并触发input事件，绝不发送、触发回复、模拟回车或点击发送。',refs:[mintInteractionHost,mintFillInput],example:'在选项确认按钮的click回调中调用 mintFillInput(选中项按显示顺序拼成的文字)，捕获错误并在本组件role="status"区域显示。'}
+    ];
+    let mintInteractionSelection=[];
+    function normalizeInteractionFeatures(ids) {
+        return MINT_INTERACTION_FEATURES.filter(f=>Array.isArray(ids)&&ids.includes(f.id)).map(f=>f.id);
+    }
+    function interactionFeaturePrompt(ids) {
+        const selected=MINT_INTERACTION_FEATURES.filter(f=>normalizeInteractionFeatures(ids).includes(f.id));
+        if(!selected.length)return '';
+        return '【用户勾选的交互功能】\n仅实现以下勾选功能，不擅自增加其他交互。下面代码是生成成品时应复制适配的参考，不是已存在的全局函数；必须把所需函数完整放入成品body内的script中。保持正则捕获组与原格式。功能在酒馆助手渲染的同层前端运行，隔离预览没有宿主接口时显示简短提示，不能伪造成功。所有不可信标题、简介、选项用textContent/value写入，禁止innerHTML插值。不同组件作用域隔离，脚本只初始化一次，卸载清理定时器。\n\n'+selected.map(f=>'### '+f.label+'\n'+f.guide+'\n'+f.example).join('\n\n')+'\n\n【参考JavaScript】\n```javascript\n'+[...new Set(selected.flatMap(f=>f.refs))].map(fn=>fn.toString()).join('\n\n')+'\n```\nFORMATGUIDE中另附所选交互的运行依赖与使用方式；仅在勾选开场白功能时附带title/desc/tag注释示例，不要求模型每轮重写整个开场白列表。';
+    }
+    function restoreInteractionChoices(panel,ids) {
+        mintInteractionSelection=normalizeInteractionFeatures(ids);
+        panel.querySelectorAll('[data-mint-interaction]').forEach(input=>{input.checked=mintInteractionSelection.includes(input.value);});
+    }
+    function installInteractionControls(panel) {
+        const box=targetDoc.createElement('fieldset');box.id='mint-interaction-options';
+        box.style.cssText='border:0;padding:0;margin:12px 0;min-width:0';
+        const legend=targetDoc.createElement('legend');legend.textContent='交互功能';box.append(legend);
+        for(const feature of MINT_INTERACTION_FEATURES){
+            const label=targetDoc.createElement('label');label.style.cssText='display:flex;align-items:center;gap:8px;margin:8px 0';
+            const input=targetDoc.createElement('input');input.type='checkbox';input.value=feature.id;input.dataset.mintInteraction='';
+            input.checked=mintInteractionSelection.includes(feature.id);label.append(input,targetDoc.createTextNode(feature.label));box.append(label);
+            on(input,'change',()=>{mintInteractionSelection=normalizeInteractionFeatures([...box.querySelectorAll('input:checked')].map(i=>i.value));});
+        }
+        panel.querySelector('#mint-request-card').append(box);
+    }
     async function fetchModelList(baseUrl, apiKey) {
         const url = apiEndpoint(baseUrl, 'models');
         const ctl = new AbortController(); const timeout = setTimeout(() => ctl.abort(), 20000);
@@ -1509,7 +1663,7 @@ try{
 ===FINDREGEX===
 （这里写用于匹配AI输出中需要替换部分的正则表达式，斜杠包裹格式，如 /<status>([\\s\\S]*?)<\\/status>/，一行）
 ===REPLACESTRING===
-（这里写替换成的完整HTML/CSS代码，要求：
+（这里写替换成的完整HTML/CSS代码（选中交互功能时包含完整JavaScript），要求：
 - 用 \`\`\`html 代码块包裹
 - 必须包含完整的 <body>...</body>，需要的话在 body 内写 <style>
 - 如果设计中需要用到图片（背景图、头像、图标等），不要编造图片链接，一律用占位符代替，格式固定为 {{IMG:标识名}}（标识名用简短英文或拼音，比如 bg1、avatar），比如 background:url('{{IMG:bg1}}') 或 <img src="{{IMG:avatar}}">，不同用途用不同标识名
@@ -1617,15 +1771,17 @@ try{
         await createWorldbookEntries(bookName, [newEntry]);
     }
 
-    async function generateBeautify({ skillPayload = '', plannedImages = [], description, refContent, existing, revisionPrompt, mode, sourceInfo, forceImage, refImageDataUris, extraContext, lockedFindRegex, lockStructure }) {
+    async function generateBeautify({ interactionFeatures = [], skillPayload = '', plannedImages = [], description, refContent, existing, revisionPrompt, mode, sourceInfo, forceImage, refImageDataUris, extraContext, lockedFindRegex, lockStructure }) {
         const sections = [`【需求描述】\n${description || '（无）'}`];
+        const interactionGuide = interactionFeaturePrompt(interactionFeatures);
+        if(interactionGuide) sections.push(interactionGuide);
         if(skillPayload)sections.push('【用户勾选的设计 Skill】\n'+skillPayload);
         if (extraContext) sections.push(`【故事背景参考（角色卡/用户人设/世界书）】\n${extraContext}`);
         if (refContent) sections.push(`【参考内容/预设条目原文】\n${refContent}`);
         if (refImageDataUris && refImageDataUris.length) sections.push(`【参考图片】用户附了 ${refImageDataUris.length} 张参考图，请综合分析它们的视觉风格并在设计中体现。`);
         if(plannedImages.length)sections.push(imagePlanPrompt(plannedImages));
         if (forceImage) sections.push('【硬性要求】必须至少设计一处使用图片的元素（背景图或图标均可），一定要用 {{IMG:标识名}} 占位符，不能省略这一步。');
-        if (lockedFindRegex) sections.push(`【硬性要求·标签格式锁定】必须原样使用下面这个标签结构，一个标签名、顺序、层级都不能改，只能改视觉样式（颜色/布局/字体/装饰）：\n${lockedFindRegex}\n输出的 FINDREGEX 必须和上面这行一模一样，一个字符都不能变。`);
+        if (lockedFindRegex) sections.push(`【硬性要求·标签格式锁定】必须原样使用下面这个标签结构，一个标签名、顺序、层级都不能改，保持字段与数据兼容；视觉样式和本次勾选的交互功能可以调整：\n${lockedFindRegex}\n输出的 FINDREGEX 必须和上面这行一模一样，一个字符都不能变。`);
         if (lockedFindRegex) sections.push('保留原始输入格式和捕获组含义，正确引用 $1、$2 等。允许根据用户要求重新设计显示布局，不得捏造或丢失字段。');
         if (lockStructure) sections.push('【硬性要求·功能结构锁定】这是"换皮肤不换骨架"的需求：参考正则里的 DOM 结构、CSS 布局方式（比如 flex/grid 这些决定排版逻辑的部分）、如果有 JS 交互逻辑也要原样保留，只能修改颜色、字体、圆角、阴影、装饰性图案、背景图这些纯视觉层面的东西，不能改变原有功能和结构骨架。');
         if (mode !== 'create' && existing) {
@@ -2142,6 +2298,7 @@ ${body}</html>`;
 
     async function showResult(panel, result) {
         session = { ...result, assignments: session?.assignments && session.scriptName === result.scriptName ? session.assignments : {} };
+        restoreInteractionChoices(panel, result.interactionFeatures || []);
         panel.querySelector('#ab-result').style.display = 'block';
         panel.querySelector('#ab-scriptname').textContent = session.scriptName;
         const fgWrap = panel.querySelector('#ab-formatguide-wrap');
@@ -2202,6 +2359,8 @@ ${body}</html>`;
         // 先把所有要用到的值同步读完，面板等下关掉也不影响
         const srcInfo = currentSourceInfo(panel);
         const variantCount = mode==='create' ? Math.max(1,Math.min(3,Number(panel.querySelector('#mint-variant-count')?.value)||1)) : 1;
+        const interactionFeatures=normalizeInteractionFeatures([...panel.querySelectorAll('[data-mint-interaction]:checked')].map(input=>input.value));
+        if (mode !== 'create' && session?.isPlainRegex && interactionFeatures.length) throw new Error('交互功能用于状态栏显示正则，请先创建状态栏或载入显示正则');
         const userDescription=panel.querySelector('#ab-desc').value.trim();
         const layout=panel.querySelector('#mint-design-layout')?.value.trim();
         const fields=panel.querySelector('#mint-design-fields')?.value.trim();
@@ -2224,6 +2383,7 @@ ${body}</html>`;
         const lockedFindRegex = lockFormat && !(mode !== 'create' && existingSnapshot?.isPlainRegex) ? (referenceRegex?.find_regex || selectedFindRegex) : '';
         if (lockFormat && !lockedFindRegex) toast('勾了锁定格式，但还没选参考正则，这次锁定不会生效', 'warning');
         const lockStructure = panel.querySelector('#ab-lock-structure')?.checked;
+        if(lockStructure && interactionFeatures.length) throw new Error('添加交互功能需要调整结构，请取消“保留参考正则的原有结构/功能”后生成');
 
         const btnMap = { create: '#ab-generate', revise: '#ab-revise-btn', variant: '#ab-variant-btn' };
         const btn = panel.querySelector(btnMap[mode]);
@@ -2256,7 +2416,7 @@ ${body}</html>`;
                     const variantDescription=variantCount>1?description+`\n【方案】第 ${i+1} 个独立方案，请尽量与其他方案在布局和风格上有所不同。`:description;
                     const result=await receiveGeneration(existingSnapshot?.isPlainRegex && mode !== 'create'
                         ? generatePlainRegexRevision(existingSnapshot, revisionPrompt || '根据原规则提供一个变体', resolvedSourceInfo)
-                        : generateBeautify({skillPayload,plannedImages,description:variantDescription,refContent,existing:existingSnapshot,revisionPrompt,mode,sourceInfo:resolvedSourceInfo,forceImage,refImageDataUris,extraContext,lockedFindRegex,lockStructure}),taskController.signal);
+                        : generateBeautify({interactionFeatures,skillPayload,plannedImages,description:variantDescription,refContent,existing:existingSnapshot,revisionPrompt,mode,sourceInfo:resolvedSourceInfo,forceImage,refImageDataUris,extraContext,lockedFindRegex,lockStructure}),taskController.signal);
                     if(destroyed||taskEpoch!==generationEpoch)return;
                     if (referenceRegex && lockedFindRegex && !existingSnapshot?.isPlainRegex) {
                         const oldRefs = new Set(String(referenceRegex.replace_string || '').match(/\$(?:[1-9][0-9]?|<[^>]+>)/g) || []);
@@ -2266,7 +2426,7 @@ ${body}</html>`;
                     }
                     const plannedAssignments=imagePlanAssignments(plannedImages,result.replaceStringRaw);
                     if(!existingSnapshot?.isPlainRegex && plannedImages.some(v=>!plannedAssignments[v.token]))throw new Error('模型遗漏了指定配图占位符，请重新生成；已完成方案保存在历史记录。');
-                    const histEntry={id:generateUUID(),ts:Date.now(),...result,referenceRegex,isPlainRegex: !!(mode !== "create" && existingSnapshot?.isPlainRegex),assignments:{...(mode==='create'?{}:(existingSnapshot?.assignments||{})),...plannedAssignments}};
+                    const histEntry={id:generateUUID(),ts:Date.now(),...result,interactionFeatures,referenceRegex,isPlainRegex: !!(mode !== "create" && existingSnapshot?.isPlainRegex),assignments:{...(mode==='create'?{}:(existingSnapshot?.assignments||{})),...plannedAssignments}};
                     await addHistory(histEntry);variants.push({...histEntry,historyId:histEntry.id,historyTs:histEntry.ts});
                 }
                 session=variants[0];toast(variantCount>1?`已生成 ${variants.length} 个方案`:('"'+session.scriptName+'" 生成完成'),'success');
@@ -2392,6 +2552,7 @@ ${body}</html>`;
         installMaterialLibrary(panel);
         bindOtomePanel(panel);
         installWorldbookBindingControls(panel);
+        installInteractionControls(panel);
         await refreshFontSelect(panel);
 
         on(panel.querySelector('#ab-close'), 'click', () => hideMintPanel(panel));

@@ -11,6 +11,7 @@
         installMaterialLibrary(panel);
         bindOtomePanel(panel);
         installWorldbookBindingControls(panel);
+        installInteractionControls(panel);
         await refreshFontSelect(panel);
 
         on(panel.querySelector('#ab-close'), 'click', () => hideMintPanel(panel));

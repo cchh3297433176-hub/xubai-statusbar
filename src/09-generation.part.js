@@ -96,7 +96,7 @@
 ===FINDREGEX===
 （这里写用于匹配AI输出中需要替换部分的正则表达式，斜杠包裹格式，如 /<status>([\\s\\S]*?)<\\/status>/，一行）
 ===REPLACESTRING===
-（这里写替换成的完整HTML/CSS代码，要求：
+（这里写替换成的完整HTML/CSS代码（选中交互功能时包含完整JavaScript），要求：
 - 用 \`\`\`html 代码块包裹
 - 必须包含完整的 <body>...</body>，需要的话在 body 内写 <style>
 - 如果设计中需要用到图片（背景图、头像、图标等），不要编造图片链接，一律用占位符代替，格式固定为 {{IMG:标识名}}（标识名用简短英文或拼音，比如 bg1、avatar），比如 background:url('{{IMG:bg1}}') 或 <img src="{{IMG:avatar}}">，不同用途用不同标识名
@@ -204,15 +204,17 @@
         await createWorldbookEntries(bookName, [newEntry]);
     }
 
-    async function generateBeautify({ skillPayload = '', plannedImages = [], description, refContent, existing, revisionPrompt, mode, sourceInfo, forceImage, refImageDataUris, extraContext, lockedFindRegex, lockStructure }) {
+    async function generateBeautify({ interactionFeatures = [], skillPayload = '', plannedImages = [], description, refContent, existing, revisionPrompt, mode, sourceInfo, forceImage, refImageDataUris, extraContext, lockedFindRegex, lockStructure }) {
         const sections = [`【需求描述】\n${description || '（无）'}`];
+        const interactionGuide = interactionFeaturePrompt(interactionFeatures);
+        if(interactionGuide) sections.push(interactionGuide);
         if(skillPayload)sections.push('【用户勾选的设计 Skill】\n'+skillPayload);
         if (extraContext) sections.push(`【故事背景参考（角色卡/用户人设/世界书）】\n${extraContext}`);
         if (refContent) sections.push(`【参考内容/预设条目原文】\n${refContent}`);
         if (refImageDataUris && refImageDataUris.length) sections.push(`【参考图片】用户附了 ${refImageDataUris.length} 张参考图，请综合分析它们的视觉风格并在设计中体现。`);
         if(plannedImages.length)sections.push(imagePlanPrompt(plannedImages));
         if (forceImage) sections.push('【硬性要求】必须至少设计一处使用图片的元素（背景图或图标均可），一定要用 {{IMG:标识名}} 占位符，不能省略这一步。');
-        if (lockedFindRegex) sections.push(`【硬性要求·标签格式锁定】必须原样使用下面这个标签结构，一个标签名、顺序、层级都不能改，只能改视觉样式（颜色/布局/字体/装饰）：\n${lockedFindRegex}\n输出的 FINDREGEX 必须和上面这行一模一样，一个字符都不能变。`);
+        if (lockedFindRegex) sections.push(`【硬性要求·标签格式锁定】必须原样使用下面这个标签结构，一个标签名、顺序、层级都不能改，保持字段与数据兼容；视觉样式和本次勾选的交互功能可以调整：\n${lockedFindRegex}\n输出的 FINDREGEX 必须和上面这行一模一样，一个字符都不能变。`);
         if (lockedFindRegex) sections.push('保留原始输入格式和捕获组含义，正确引用 $1、$2 等。允许根据用户要求重新设计显示布局，不得捏造或丢失字段。');
         if (lockStructure) sections.push('【硬性要求·功能结构锁定】这是"换皮肤不换骨架"的需求：参考正则里的 DOM 结构、CSS 布局方式（比如 flex/grid 这些决定排版逻辑的部分）、如果有 JS 交互逻辑也要原样保留，只能修改颜色、字体、圆角、阴影、装饰性图案、背景图这些纯视觉层面的东西，不能改变原有功能和结构骨架。');
         if (mode !== 'create' && existing) {

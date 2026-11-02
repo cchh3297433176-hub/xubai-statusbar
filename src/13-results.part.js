@@ -61,6 +61,7 @@
 
     async function showResult(panel, result) {
         session = { ...result, assignments: session?.assignments && session.scriptName === result.scriptName ? session.assignments : {} };
+        restoreInteractionChoices(panel, result.interactionFeatures || []);
         panel.querySelector('#ab-result').style.display = 'block';
         panel.querySelector('#ab-scriptname').textContent = session.scriptName;
         const fgWrap = panel.querySelector('#ab-formatguide-wrap');
