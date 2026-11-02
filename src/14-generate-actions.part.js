@@ -29,7 +29,7 @@
         const lockFormat = panel.querySelector('#ab-lock-format')?.checked;
         const selectedFindRegex = lockFormat ? (panel.querySelector('#ab-ref')?.dataset.lockedFindRegex || '') : '';
         const referenceRegex = (mode !== 'create' && existingSnapshot?.referenceRegex) || (selectedFindRegex ? JSON.parse(panel.querySelector('#ab-ref').dataset.referenceRegex || 'null') : null);
-        const lockedFindRegex = referenceRegex?.find_regex || selectedFindRegex;
+        const lockedFindRegex = lockFormat && !(mode !== 'create' && existingSnapshot?.isPlainRegex) ? (referenceRegex?.find_regex || selectedFindRegex) : '';
         if (lockFormat && !lockedFindRegex) toast('勾了锁定格式，但还没选参考正则，这次锁定不会生效', 'warning');
         const lockStructure = panel.querySelector('#ab-lock-structure')?.checked;
 
@@ -62,17 +62,19 @@
                 for(let i=0;i<variantCount;i++){
                     setStatusIfOpen(variantCount>1?`正在生成 ${i+1} / ${variantCount}`:funLine());
                     const variantDescription=variantCount>1?description+`\n【方案】第 ${i+1} 个独立方案，请尽量与其他方案在布局和风格上有所不同。`:description;
-                    const result=await receiveGeneration(generateBeautify({skillPayload,plannedImages,description:variantDescription,refContent,existing:existingSnapshot,revisionPrompt,mode,sourceInfo:resolvedSourceInfo,forceImage,refImageDataUris,extraContext,lockedFindRegex,lockStructure}),taskController.signal);
+                    const result=await receiveGeneration(existingSnapshot?.isPlainRegex && mode !== 'create'
+                        ? generatePlainRegexRevision(existingSnapshot, revisionPrompt || '根据原规则提供一个变体', resolvedSourceInfo)
+                        : generateBeautify({skillPayload,plannedImages,description:variantDescription,refContent,existing:existingSnapshot,revisionPrompt,mode,sourceInfo:resolvedSourceInfo,forceImage,refImageDataUris,extraContext,lockedFindRegex,lockStructure}),taskController.signal);
                     if(destroyed||taskEpoch!==generationEpoch)return;
-                    if (referenceRegex) {
+                    if (referenceRegex && lockedFindRegex && !existingSnapshot?.isPlainRegex) {
                         const oldRefs = new Set(String(referenceRegex.replace_string || '').match(/\$(?:[1-9][0-9]?|<[^>]+>)/g) || []);
                         const newRefs = new Set(String(result.replaceStringRaw || '').match(/\$(?:[1-9][0-9]?|<[^>]+>)/g) || []);
                         const missing = [...oldRefs].filter(ref => !newRefs.has(ref));
                         if (missing.length) throw new Error('新外观遗漏了原正则的数据引用：' + missing.join('、') + '，请重新生成');
                     }
                     const plannedAssignments=imagePlanAssignments(plannedImages,result.replaceStringRaw);
-                    if(plannedImages.some(v=>!plannedAssignments[v.token]))throw new Error('模型遗漏了指定配图占位符，请重新生成；已完成方案保存在历史记录。');
-                    const histEntry={id:generateUUID(),ts:Date.now(),...result,referenceRegex,assignments:{...(mode==='create'?{}:(existingSnapshot?.assignments||{})),...plannedAssignments}};
+                    if(!existingSnapshot?.isPlainRegex && plannedImages.some(v=>!plannedAssignments[v.token]))throw new Error('模型遗漏了指定配图占位符，请重新生成；已完成方案保存在历史记录。');
+                    const histEntry={id:generateUUID(),ts:Date.now(),...result,referenceRegex,isPlainRegex: !!(mode !== "create" && existingSnapshot?.isPlainRegex),assignments:{...(mode==='create'?{}:(existingSnapshot?.assignments||{})),...plannedAssignments}};
                     await addHistory(histEntry);variants.push({...histEntry,historyId:histEntry.id,historyTs:histEntry.ts});
                 }
                 session=variants[0];toast(variantCount>1?`已生成 ${variants.length} 个方案`:('"'+session.scriptName+'" 生成完成'),'success');

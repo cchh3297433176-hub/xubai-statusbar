@@ -70,8 +70,15 @@
         } else {
             fgWrap.style.display = 'none';
         }
+        const plain = !!session.isPlainRegex;
+        panel.querySelector('#ab-save-original').hidden = !session.referenceRegex?.id;
+        panel.querySelector('#ab-apply-depth-wrap').hidden = !(plain && session.referenceRegex?.destination?.prompt && !session.referenceRegex?.destination?.display);
+        panel.querySelector('#ab-apply-depth').checked = false;
+        panel.querySelector('#ab-plain-preview').hidden = !plain;
+        panel.querySelector('#ab-preview').style.display = plain ? 'none' : '';
+        panel.querySelector('#ab-plain-preview').textContent = plain ? '匹配：' + session.findRegex + '\n替换：' + session.replaceStringRaw : '';
         await renderPlaceholders(panel);
-        await updatePreview(panel);
+        if (!plain) await updatePreview(panel);
     }
 
     let historySelectMode = false;
@@ -93,7 +100,7 @@
         }
         wrap.querySelectorAll('.ab-hist-restore').forEach(button=>on(button,'click',async()=>{
             const h=list.find(item=>item.id===button.dataset.id);if(!h)throw new Error('找不到这条历史记录');
-            session={historyId:h.id,historyTs:h.ts,referenceRegex:h.referenceRegex,scriptName:h.scriptName,findRegex:h.findRegex,replaceStringRaw:h.replaceStringRaw,formatGuide:h.formatGuide||'',assignments:{...(h.assignments||{})}};
+            session={historyId:h.id,historyTs:h.ts,referenceRegex:h.referenceRegex,isPlainRegex:!!h.isPlainRegex,scriptName:h.scriptName,findRegex:h.findRegex,replaceStringRaw:h.replaceStringRaw,formatGuide:h.formatGuide||'',assignments:{...(h.assignments||{})}};
             await showResult(panel,session);switchMintPage(panel,'create');toast('已恢复这一版，继续做点喜欢的改动吧','success');
         }));
         wrap.querySelectorAll('.ab-hist-del').forEach(button=>on(button,'click',async()=>{

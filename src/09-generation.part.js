@@ -232,4 +232,13 @@
         };
     }
 
+    async function generatePlainRegexRevision(existing, instruction, sourceInfo) {
+        const system = '你是 SillyTavern 正则编辑助手。根据要求修改现有正则，保留未要求修改的行为。仅输出 JSON 对象，包含 scriptName、findRegex、replaceString 三个字符串；允许 replaceString 为空，不要输出 HTML 包装或 Markdown。不要修改运行范围、显示/提示词选项和深度。';
+        const raw = await callGenerateRaw(system, JSON.stringify({ current: { scriptName: existing.scriptName, findRegex: existing.findRegex, replaceString: existing.replaceStringRaw }, instruction }), sourceInfo, null);
+        let data;
+        try { data = JSON.parse(stripCodeFence(raw)); } catch { throw new Error('AI 没有返回有效的正则 JSON，请重试'); }
+        if (typeof data.findRegex !== 'string' || typeof data.replaceString !== 'string' || !parseRegexString(data.findRegex)) throw new Error('AI 返回的正则或替换内容无效');
+        return { scriptName: typeof data.scriptName === 'string' && data.scriptName ? data.scriptName : existing.scriptName, findRegex: data.findRegex, replaceStringRaw: data.replaceString, formatGuide: '' };
+    }
+
     // ================= 预览文档构建 =================

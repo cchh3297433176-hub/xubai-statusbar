@@ -977,7 +977,7 @@
             </section>
             <section id="mint-page-gallery" data-mint-page="gallery" role="tabpanel" aria-labelledby="mint-tab-gallery" hidden><div class="mint-page-heading"><div><div class="mint-eyebrow">YOUR LITTLE COLLECTION</div><h2>图片收藏室</h2><p>把喜欢的图片，留给下一次灵感。</p></div><img class="mint-decoration mint-heading-mascot" src="${MINT_DECORATIONS.gallery}" alt=""></div><div class="mint-card"><div id="mint-upload-slot"></div><p class="mint-muted">上传到服务器；状态栏只保存链接。</p><div class="mint-row"><button data-go="settings" class="mint-secondary">配置图库</button><button id="mint-gallery-refresh" class="mint-secondary">刷新图片</button></div></div><label class="mint-form-label" for="mint-gallery-search">查找图片</label><input id="mint-gallery-search" placeholder="按图片名称查找" style="width:100%"><p id="mint-gallery-count" class="mint-muted"></p><div id="mint-gallery-slot"></div><p class="mint-footnote">解绑会保留图片。删除服务器文件会让旧状态栏里的图片失效。</p></section>
             <section id="mint-page-history" data-mint-page="history" role="tabpanel" aria-labelledby="mint-tab-history" hidden><div class="mint-page-heading"><div><div class="mint-eyebrow">LITTLE MOMENTS</div><h2>灵感存档</h2><p>每一个版本，都可以再回来看看。</p></div><img class="mint-decoration mint-heading-mascot" src="${MINT_DECORATIONS.history}" alt=""></div><div class="mint-card mint-compact" id="mint-history-controls"></div><div id="mint-history-slot"></div></section>
-            <section id="mint-page-settings" data-mint-page="settings" role="tabpanel" aria-labelledby="mint-tab-settings" hidden><div class="mint-page-heading"><div><div class="mint-eyebrow">MAKE YOURSELF AT HOME</div><h2>设置</h2><p>连接、字体和偏好，都在这里。</p></div><img class="mint-decoration mint-heading-mascot" src="${MINT_DECORATIONS.settings}" alt=""></div><details class="mint-settings-block" open><summary>模型与 API 连接</summary><div id="mint-api-slot" class="mint-settings-body"></div></details><div id="mint-server-slot"></div><div id="mint-font-manager-slot"></div><details class="mint-settings-block"><summary>外观与小序</summary><div class="mint-settings-body"><label class="mint-theme-switch"><span><b>按时段自动切换</b><small>关闭后保持手动选择的主题</small></span><input id="mint-theme-auto" type="checkbox" role="switch" aria-label="按时段自动切换"></label><div class="mint-theme-times"><label for="mint-theme-start">日间开始<input id="mint-theme-start" type="time" required></label><label for="mint-theme-end">日间结束<input id="mint-theme-end" type="time" required></label></div><p class="mint-muted">结束时间选 00:00 表示晚上 24:00；也支持跨午夜的时段。使用手机本地时间。</p><button id="mint-theme-save" style="width:100%">保存切换时段</button><p id="mint-theme-status" class="mint-muted" role="status"></p><p class="mint-muted">顶部头像左边的太阳 / 月亮图标可随时切换；手动切换后自动模式会关闭，直到你重新开启。</p><div class="mint-row"><button id="mint-demo-success">看看成功提示</button><button id="mint-demo-error">看看哭哭提示</button></div></div></details><details class="mint-settings-block"><summary>提示与小装饰</summary><div class="mint-settings-body"><label class="mint-theme-switch"><span><b>页面切换提示</b><small>切换底栏页面时显示文字气泡</small></span><input id="mint-page-notices" type="checkbox" role="switch" aria-label="页面切换提示"></label><label class="mint-theme-switch"><span><b>普通点击提示</b><small>基础点击与展开气泡；关闭后仍有按压反馈</small></span><input id="mint-click-notices" type="checkbox" role="switch" aria-label="普通点击提示"></label><label class="mint-theme-switch"><span><b>人物与角落装饰</b><small>让工作台多一点小序的陪伴</small></span><input id="mint-decoration-toggle" type="checkbox" role="switch" aria-label="人物与角落装饰"></label><p class="mint-muted">生成中、成功和报错提示始终保留。提示窗位于底栏上方，可手动关闭。</p></div></details><details class="mint-settings-block"><summary>关于序白工坊</summary><div class="mint-settings-body"><div class="mint-decoration mint-settings-companion"><img src="${MINT_DECORATIONS.settings}" alt=""><p>工具已经摆好了。<br>你负责灵感，我负责把它们接起来。</p></div><p>原作：Claude<br>界面与功能改造：序白（ChatGPT）<br>与你一起制作。</p><p class="mint-muted">银白头发不是加班造成的，原装就是这样。</p><small>v3.8.2 · 薄荷手账与月光 · 手机优先</small></div></details></section>
+            <section id="mint-page-settings" data-mint-page="settings" role="tabpanel" aria-labelledby="mint-tab-settings" hidden><div class="mint-page-heading"><div><div class="mint-eyebrow">MAKE YOURSELF AT HOME</div><h2>设置</h2><p>连接、字体和偏好，都在这里。</p></div><img class="mint-decoration mint-heading-mascot" src="${MINT_DECORATIONS.settings}" alt=""></div><details class="mint-settings-block" open><summary>模型与 API 连接</summary><div id="mint-api-slot" class="mint-settings-body"></div></details><div id="mint-server-slot"></div><div id="mint-font-manager-slot"></div><details class="mint-settings-block"><summary>外观与小序</summary><div class="mint-settings-body"><label class="mint-theme-switch"><span><b>按时段自动切换</b><small>关闭后保持手动选择的主题</small></span><input id="mint-theme-auto" type="checkbox" role="switch" aria-label="按时段自动切换"></label><div class="mint-theme-times"><label for="mint-theme-start">日间开始<input id="mint-theme-start" type="time" required></label><label for="mint-theme-end">日间结束<input id="mint-theme-end" type="time" required></label></div><p class="mint-muted">结束时间选 00:00 表示晚上 24:00；也支持跨午夜的时段。使用手机本地时间。</p><button id="mint-theme-save" style="width:100%">保存切换时段</button><p id="mint-theme-status" class="mint-muted" role="status"></p><p class="mint-muted">顶部头像左边的太阳 / 月亮图标可随时切换；手动切换后自动模式会关闭，直到你重新开启。</p><div class="mint-row"><button id="mint-demo-success">看看成功提示</button><button id="mint-demo-error">看看哭哭提示</button></div></div></details><details class="mint-settings-block"><summary>提示与小装饰</summary><div class="mint-settings-body"><label class="mint-theme-switch"><span><b>页面切换提示</b><small>切换底栏页面时显示文字气泡</small></span><input id="mint-page-notices" type="checkbox" role="switch" aria-label="页面切换提示"></label><label class="mint-theme-switch"><span><b>普通点击提示</b><small>基础点击与展开气泡；关闭后仍有按压反馈</small></span><input id="mint-click-notices" type="checkbox" role="switch" aria-label="普通点击提示"></label><label class="mint-theme-switch"><span><b>人物与角落装饰</b><small>让工作台多一点小序的陪伴</small></span><input id="mint-decoration-toggle" type="checkbox" role="switch" aria-label="人物与角落装饰"></label><p class="mint-muted">生成中、成功和报错提示始终保留。提示窗位于底栏上方，可手动关闭。</p></div></details><details class="mint-settings-block"><summary>关于序白工坊</summary><div class="mint-settings-body"><div class="mint-decoration mint-settings-companion"><img src="${MINT_DECORATIONS.settings}" alt=""><p>工具已经摆好了。<br>你负责灵感，我负责把它们接起来。</p></div><p>原作：Claude<br>界面与功能改造：序白（ChatGPT）<br>与你一起制作。</p><p class="mint-muted">银白头发不是加班造成的，原装就是这样。</p><small>v3.8.3 · 薄荷手账与月光 · 手机优先</small></div></details></section>
           </main>
           <nav id="mint-tabs" role="tablist" aria-label="工作台页面">${[['create','创作'],['gallery','图库'],['history','历史'],['settings','设置']].map(([key,label])=>`<button id="mint-tab-${key}" role="tab" aria-controls="mint-page-${key}" data-page="${key}" aria-selected="${key === currentPage}">${mintIcon(key)}<span>${label}</span></button>`).join('')}</nav>`;
         const put = (id, ...nodes) => panel.querySelector('#' + id).append(...nodes);
@@ -1645,6 +1645,15 @@ try{
         };
     }
 
+    async function generatePlainRegexRevision(existing, instruction, sourceInfo) {
+        const system = '你是 SillyTavern 正则编辑助手。根据要求修改现有正则，保留未要求修改的行为。仅输出 JSON 对象，包含 scriptName、findRegex、replaceString 三个字符串；允许 replaceString 为空，不要输出 HTML 包装或 Markdown。不要修改运行范围、显示/提示词选项和深度。';
+        const raw = await callGenerateRaw(system, JSON.stringify({ current: { scriptName: existing.scriptName, findRegex: existing.findRegex, replaceString: existing.replaceStringRaw }, instruction }), sourceInfo, null);
+        let data;
+        try { data = JSON.parse(stripCodeFence(raw)); } catch { throw new Error('AI 没有返回有效的正则 JSON，请重试'); }
+        if (typeof data.findRegex !== 'string' || typeof data.replaceString !== 'string' || !parseRegexString(data.findRegex)) throw new Error('AI 返回的正则或替换内容无效');
+        return { scriptName: typeof data.scriptName === 'string' && data.scriptName ? data.scriptName : existing.scriptName, findRegex: data.findRegex, replaceStringRaw: data.replaceString, formatGuide: '' };
+    }
+
     // ================= 预览文档构建 =================
     function buildPreviewDoc(htmlFragment, fontSnippet) {
         const normalized = htmlFragment.trim();
@@ -1789,7 +1798,7 @@ ${body}</html>`;
                     <textarea id="ab-ref" rows="3" style="width:100%;box-sizing:border-box;padding:8px;background:#2a2a2a;color:#eee;border:1px solid #555;border-radius:6px;margin-top:6px;"></textarea>
                     <button id="ab-list-existing-regex" style="width:100%;padding:6px;margin-top:6px;">列出酒馆里已有的正则</button>
                     <select id="ab-existing-regex-select" style="width:100%;padding:6px;background:#2a2a2a;color:#eee;border:1px solid #555;border-radius:4px;font-size:12px;margin-top:6px;display:none;"></select>
-                    <button id="ab-use-existing-regex" style="width:100%;padding:6px;margin-top:6px;display:none;">把它的代码填进上面参考框（会覆盖）</button><button id="ab-filter-existing" type="button" style="width:100%;padding:6px;margin-top:6px;display:none;">为选中正则生成发送过滤</button>
+                    <button id="ab-use-existing-regex" style="width:100%;padding:6px;margin-top:6px;display:none;">把它的代码填进上面参考框（会覆盖）</button><button id="ab-edit-existing" type="button" style="width:100%;padding:6px;margin-top:6px;display:none;">载入后让 AI 修改</button><button id="ab-filter-existing" type="button" style="width:100%;padding:6px;margin-top:6px;display:none;">为选中正则生成发送过滤</button>
                     <label style="display:flex;align-items:center;gap:6px;font-size:12px;opacity:0.85;margin-top:8px;">
                         <input id="ab-lock-format" type="checkbox"> 锁定这条参考正则的标签格式（只换皮肤，标签结构一个不改）
                     </label>
@@ -1863,7 +1872,7 @@ ${body}</html>`;
                             <button id="ab-write-confirm" style="width:100%;padding:6px;background:#3a5a3a;">确认写入（只会用其中一个选择）</button>
                         </div>
                     </div>
-                    <iframe sandbox="allow-scripts" referrerpolicy="no-referrer" id="ab-preview" style="width:100%;height:260px;border:1px solid #444;border-radius:6px;background:#111;"></iframe>
+                    <pre id="ab-plain-preview" hidden style="white-space:pre-wrap;overflow-wrap:anywhere"></pre><iframe sandbox="allow-scripts" referrerpolicy="no-referrer" id="ab-preview" style="width:100%;height:260px;border:1px solid #444;border-radius:6px;background:#111;"></iframe>
                     <div id="ab-placeholders" style="margin-top:10px;"></div>
 
                     <hr style="border-color:#444;margin:10px 0;">
@@ -1878,7 +1887,7 @@ ${body}</html>`;
                         <button id="ab-revise-btn" style="flex:1;padding:6px;">根据意见修改</button>
                         <button id="ab-variant-btn" style="flex:1;padding:6px;">换一版</button>
                     </div>
-                    <button id="ab-save" style="width:100%;padding:8px;margin-top:8px;background:#3a5a3a;">保存为正则</button>
+                    <label id="ab-apply-depth-wrap" hidden style="display:flex;gap:8px;align-items:center;margin:8px 0"><input id="ab-apply-depth" type="checkbox"> 应用上方的状态栏楼层设置</label><button id="ab-save" style="width:100%;padding:8px;margin-top:8px;background:#3a5a3a;">保存为新正则</button><button id="ab-save-original" type="button" hidden style="width:100%;padding:8px;margin-top:8px;">更新原正则</button>
                 </div>
 
                 <hr style="border-color:#444;margin:14px 0;">
@@ -2063,8 +2072,15 @@ ${body}</html>`;
         } else {
             fgWrap.style.display = 'none';
         }
+        const plain = !!session.isPlainRegex;
+        panel.querySelector('#ab-save-original').hidden = !session.referenceRegex?.id;
+        panel.querySelector('#ab-apply-depth-wrap').hidden = !(plain && session.referenceRegex?.destination?.prompt && !session.referenceRegex?.destination?.display);
+        panel.querySelector('#ab-apply-depth').checked = false;
+        panel.querySelector('#ab-plain-preview').hidden = !plain;
+        panel.querySelector('#ab-preview').style.display = plain ? 'none' : '';
+        panel.querySelector('#ab-plain-preview').textContent = plain ? '匹配：' + session.findRegex + '\n替换：' + session.replaceStringRaw : '';
         await renderPlaceholders(panel);
-        await updatePreview(panel);
+        if (!plain) await updatePreview(panel);
     }
 
     let historySelectMode = false;
@@ -2086,7 +2102,7 @@ ${body}</html>`;
         }
         wrap.querySelectorAll('.ab-hist-restore').forEach(button=>on(button,'click',async()=>{
             const h=list.find(item=>item.id===button.dataset.id);if(!h)throw new Error('找不到这条历史记录');
-            session={historyId:h.id,historyTs:h.ts,referenceRegex:h.referenceRegex,scriptName:h.scriptName,findRegex:h.findRegex,replaceStringRaw:h.replaceStringRaw,formatGuide:h.formatGuide||'',assignments:{...(h.assignments||{})}};
+            session={historyId:h.id,historyTs:h.ts,referenceRegex:h.referenceRegex,isPlainRegex:!!h.isPlainRegex,scriptName:h.scriptName,findRegex:h.findRegex,replaceStringRaw:h.replaceStringRaw,formatGuide:h.formatGuide||'',assignments:{...(h.assignments||{})}};
             await showResult(panel,session);switchMintPage(panel,'create');toast('已恢复这一版，继续做点喜欢的改动吧','success');
         }));
         wrap.querySelectorAll('.ab-hist-del').forEach(button=>on(button,'click',async()=>{
@@ -2126,7 +2142,7 @@ ${body}</html>`;
         const lockFormat = panel.querySelector('#ab-lock-format')?.checked;
         const selectedFindRegex = lockFormat ? (panel.querySelector('#ab-ref')?.dataset.lockedFindRegex || '') : '';
         const referenceRegex = (mode !== 'create' && existingSnapshot?.referenceRegex) || (selectedFindRegex ? JSON.parse(panel.querySelector('#ab-ref').dataset.referenceRegex || 'null') : null);
-        const lockedFindRegex = referenceRegex?.find_regex || selectedFindRegex;
+        const lockedFindRegex = lockFormat && !(mode !== 'create' && existingSnapshot?.isPlainRegex) ? (referenceRegex?.find_regex || selectedFindRegex) : '';
         if (lockFormat && !lockedFindRegex) toast('勾了锁定格式，但还没选参考正则，这次锁定不会生效', 'warning');
         const lockStructure = panel.querySelector('#ab-lock-structure')?.checked;
 
@@ -2159,17 +2175,19 @@ ${body}</html>`;
                 for(let i=0;i<variantCount;i++){
                     setStatusIfOpen(variantCount>1?`正在生成 ${i+1} / ${variantCount}`:funLine());
                     const variantDescription=variantCount>1?description+`\n【方案】第 ${i+1} 个独立方案，请尽量与其他方案在布局和风格上有所不同。`:description;
-                    const result=await receiveGeneration(generateBeautify({skillPayload,plannedImages,description:variantDescription,refContent,existing:existingSnapshot,revisionPrompt,mode,sourceInfo:resolvedSourceInfo,forceImage,refImageDataUris,extraContext,lockedFindRegex,lockStructure}),taskController.signal);
+                    const result=await receiveGeneration(existingSnapshot?.isPlainRegex && mode !== 'create'
+                        ? generatePlainRegexRevision(existingSnapshot, revisionPrompt || '根据原规则提供一个变体', resolvedSourceInfo)
+                        : generateBeautify({skillPayload,plannedImages,description:variantDescription,refContent,existing:existingSnapshot,revisionPrompt,mode,sourceInfo:resolvedSourceInfo,forceImage,refImageDataUris,extraContext,lockedFindRegex,lockStructure}),taskController.signal);
                     if(destroyed||taskEpoch!==generationEpoch)return;
-                    if (referenceRegex) {
+                    if (referenceRegex && lockedFindRegex && !existingSnapshot?.isPlainRegex) {
                         const oldRefs = new Set(String(referenceRegex.replace_string || '').match(/\$(?:[1-9][0-9]?|<[^>]+>)/g) || []);
                         const newRefs = new Set(String(result.replaceStringRaw || '').match(/\$(?:[1-9][0-9]?|<[^>]+>)/g) || []);
                         const missing = [...oldRefs].filter(ref => !newRefs.has(ref));
                         if (missing.length) throw new Error('新外观遗漏了原正则的数据引用：' + missing.join('、') + '，请重新生成');
                     }
                     const plannedAssignments=imagePlanAssignments(plannedImages,result.replaceStringRaw);
-                    if(plannedImages.some(v=>!plannedAssignments[v.token]))throw new Error('模型遗漏了指定配图占位符，请重新生成；已完成方案保存在历史记录。');
-                    const histEntry={id:generateUUID(),ts:Date.now(),...result,referenceRegex,assignments:{...(mode==='create'?{}:(existingSnapshot?.assignments||{})),...plannedAssignments}};
+                    if(!existingSnapshot?.isPlainRegex && plannedImages.some(v=>!plannedAssignments[v.token]))throw new Error('模型遗漏了指定配图占位符，请重新生成；已完成方案保存在历史记录。');
+                    const histEntry={id:generateUUID(),ts:Date.now(),...result,referenceRegex,isPlainRegex: !!(mode !== "create" && existingSnapshot?.isPlainRegex),assignments:{...(mode==='create'?{}:(existingSnapshot?.assignments||{})),...plannedAssignments}};
                     await addHistory(histEntry);variants.push({...histEntry,historyId:histEntry.id,historyTs:histEntry.ts});
                 }
                 session=variants[0];toast(variantCount>1?`已生成 ${variants.length} 个方案`:('"'+session.scriptName+'" 生成完成'),'success');
@@ -2331,6 +2349,7 @@ ${body}</html>`;
                 sel.dataset.regexes = JSON.stringify(all.map(r => ({ name: r.script_name, replace: r.replace_string, find: r.find_regex, original: r })));
                 sel.style.display = 'block';
                 panel.querySelector('#ab-use-existing-regex').style.display = 'block';
+                panel.querySelector('#ab-edit-existing').style.display = 'block';
                 panel.querySelector('#ab-filter-existing').style.display = 'block';
                 toast(`列出了 ${all.length} 条`, 'success');
             } catch (e) {
@@ -2348,6 +2367,23 @@ ${body}</html>`;
             panel.querySelector('#ab-ref').dataset.referenceRegex = JSON.stringify(picked.original);
             panel.querySelector('#ab-lock-format').checked = true;
             toast('已填入参考框', 'success');
+        });
+        on(panel.querySelector('#ab-edit-existing'), 'click', async () => {
+            const sel = panel.querySelector('#ab-existing-regex-select');
+            const picked = JSON.parse(sel.dataset.regexes || '[]')[sel.value];
+            if (!picked?.original || typeof picked.find !== 'string') throw new Error('请先选择一条有效正则');
+            const plain = (picked.original.destination?.prompt === true && picked.original.destination?.display === false) || !/(?:^```html\b|<(?:body|style|div|span|details|section|table|iframe|script)\b)/i.test(String(picked.replace ?? '').trim());
+            session = { scriptName: picked.name, findRegex: picked.find,
+                replaceStringRaw: plain ? String(picked.replace ?? '') : stripCodeFence(picked.replace ?? ''),
+                referenceRegex: picked.original, isPlainRegex: plain, assignments: {}, formatGuide: '' };
+            panel.querySelector('#ab-ref').dataset.lockedFindRegex = picked.find;
+            panel.querySelector('#ab-ref').dataset.referenceRegex = JSON.stringify(picked.original);
+            panel.querySelector('#ab-lock-format').checked = !plain;
+            panel.querySelector('#ab-revise').value = '';
+            await showResult(panel, session);
+            panel.querySelector('#ab-revise').focus();
+            panel.querySelector('#ab-revise').scrollIntoView({ block: 'center', behavior: 'smooth' });
+            toast('已载入，请填写修改意见', 'success');
         });
         on(panel.querySelector('#ab-filter-existing'), 'click', async () => {
             const sel = panel.querySelector('#ab-existing-regex-select');
@@ -2492,9 +2528,10 @@ ${body}</html>`;
         });
         on(panel.querySelector('#ab-variant-btn'), 'click', () => doGenerate(panel, 'variant'));
 
-        on(panel.querySelector('#ab-save'), 'click', async () => {
+        async function saveRegexResult(overwrite) {
             if (!session) return;
-            if (!(await mintConfirm('保存为新的正则脚本吗？'))) return;
+            if (overwrite && !session.referenceRegex?.id) throw new Error('找不到原正则，请重新载入');
+            if (!(await mintConfirm(overwrite ? '更新原正则？原来的内容会被替换。' : '保存为新的正则脚本吗？'))) return;
             try {
                 let text = session.replaceStringRaw;
                 for (const [token, imgKey] of Object.entries(session.assignments)) {
@@ -2508,12 +2545,13 @@ ${body}</html>`;
                 const unresolved = extractPlaceholderKeys(text);
                 if (unresolved.length) throw new Error('以下图片位还未绑定：' + unresolved.join('、') + '。请先选择图片或移除占位符');
                 const fontName = panel.querySelector('#ab-font-select').value;
-                if (fontName) {
+                if (fontName && !session.isPlainRegex) {
                     const fontSnippet = await getFont(fontName);
                     if (fontSnippet) text = buildFontBlock(fontSnippet) + '\n' + text;
                 }
                 if (/data:[^\s"'<>)]*;base64,/i.test(text)) throw new Error('检测到内嵌 base64 素材，已阻止保存，避免总结插件再次过载。请改成图片或字体链接');
-                const scope = panel.querySelector('#ab-scope').value;
+                const scope = overwrite ? session.referenceRegex.scope : panel.querySelector('#ab-scope').value;
+                if (!['global','character','preset'].includes(scope)) throw new Error('无法确定原正则的保存范围');
                 const newEntry = {
                     ...(session.referenceRegex || {}),
                     source: { user_input: false, ai_output: true, slash_command: false, world_info: false, reasoning: false },
@@ -2522,29 +2560,48 @@ ${body}</html>`;
                     run_on_edit: true,
                     min_depth: null,
                     max_depth: null,
-                    id: generateUUID(),
+                    id: overwrite ? session.referenceRegex.id : generateUUID(),
                     script_name: session.scriptName,
                     find_regex: session.findRegex,
                     replace_string: `\`\`\`html\n${text}\n\`\`\``,
                     ...(scope === 'preset' ? {} : { scope }),
                     enabled: true,
                 };
+                if (session.isPlainRegex) newEntry.replace_string = text;
                 if (scope === 'preset') delete newEntry.scope;
                 if (session.referenceRegex) {
                     for (const key of ['source','destination','trim_strings','run_on_edit','min_depth','max_depth','enabled']) {
                         if (key in session.referenceRegex) newEntry[key] = session.referenceRegex[key];
                     }
                 }
-                const filter = panel.querySelector('#ab-add-filter').checked
+                if (session.isPlainRegex && !panel.querySelector('#ab-apply-depth-wrap').hidden && panel.querySelector('#ab-apply-depth').checked) {
+                    const n = Number(panel.querySelector('#ab-keep-floors').value);
+                    if (!Number.isInteger(n) || n < 0 || n > 100) throw new Error('保留楼层请输入 0 到 100 的整数');
+                    newEntry.min_depth = n === 0 ? 0 : n * 2 + 1;
+                    newEntry.max_depth = null;
+                }
+                const filter = !session.isPlainRegex && panel.querySelector('#ab-add-filter').checked
                     ? makeStatusFilter(session.findRegex, session.scriptName, panel.querySelector('#ab-keep-floors').value, scope) : null;
                 if (typeof updateTavernRegexesWith !== 'function') throw new Error('当前酒馆助手缺少 updateTavernRegexesWith，请更新酒馆助手后保存');
-                await updateTavernRegexesWith(list => [...list, newEntry, ...(filter ? [filter] : [])], { type: scope });
-                toast('已保存为新正则：' + session.scriptName, 'success');
+                await updateTavernRegexesWith(list => {
+                    if (!overwrite) return [...list, newEntry, ...(filter ? [filter] : [])];
+                    const index = list.findIndex(item => item.id === session.referenceRegex.id);
+                    if (index < 0) throw new Error('找不到原正则，可能已删除或切换范围');
+                    const current = list[index];
+                    const fields = ['find_regex','replace_string','script_name','source','destination','trim_strings','run_on_edit','min_depth','max_depth','enabled'];
+                    if (fields.some(key => JSON.stringify(current[key]) !== JSON.stringify(session.referenceRegex[key]))) throw new Error('原正则已被修改，请重新载入后再保存');
+                    const next = [...list]; next[index] = newEntry;
+                    return [...next, ...(filter ? [filter] : [])];
+                }, { type: scope });
+                if (overwrite) session.referenceRegex = { ...newEntry, scope };
+                toast((overwrite ? '已更新原正则：' : '已保存为新正则：') + session.scriptName, 'success');
             } catch (e) {
                 toast('保存失败：' + e.message, 'error');
                 console.error(e);
             }
-        });
+        }
+        on(panel.querySelector('#ab-save'), 'click', () => saveRegexResult(false));
+        on(panel.querySelector('#ab-save-original'), 'click', () => saveRegexResult(true));
 
         on(panel.querySelector('#ab-hist-trim'), 'click', async () => {
             const n = parseInt(panel.querySelector('#ab-hist-keep-n').value, 10) || 10;

@@ -55,7 +55,7 @@
                     <textarea id="ab-ref" rows="3" style="width:100%;box-sizing:border-box;padding:8px;background:#2a2a2a;color:#eee;border:1px solid #555;border-radius:6px;margin-top:6px;"></textarea>
                     <button id="ab-list-existing-regex" style="width:100%;padding:6px;margin-top:6px;">列出酒馆里已有的正则</button>
                     <select id="ab-existing-regex-select" style="width:100%;padding:6px;background:#2a2a2a;color:#eee;border:1px solid #555;border-radius:4px;font-size:12px;margin-top:6px;display:none;"></select>
-                    <button id="ab-use-existing-regex" style="width:100%;padding:6px;margin-top:6px;display:none;">把它的代码填进上面参考框（会覆盖）</button><button id="ab-filter-existing" type="button" style="width:100%;padding:6px;margin-top:6px;display:none;">为选中正则生成发送过滤</button>
+                    <button id="ab-use-existing-regex" style="width:100%;padding:6px;margin-top:6px;display:none;">把它的代码填进上面参考框（会覆盖）</button><button id="ab-edit-existing" type="button" style="width:100%;padding:6px;margin-top:6px;display:none;">载入后让 AI 修改</button><button id="ab-filter-existing" type="button" style="width:100%;padding:6px;margin-top:6px;display:none;">为选中正则生成发送过滤</button>
                     <label style="display:flex;align-items:center;gap:6px;font-size:12px;opacity:0.85;margin-top:8px;">
                         <input id="ab-lock-format" type="checkbox"> 锁定这条参考正则的标签格式（只换皮肤，标签结构一个不改）
                     </label>
@@ -129,7 +129,7 @@
                             <button id="ab-write-confirm" style="width:100%;padding:6px;background:#3a5a3a;">确认写入（只会用其中一个选择）</button>
                         </div>
                     </div>
-                    <iframe sandbox="allow-scripts" referrerpolicy="no-referrer" id="ab-preview" style="width:100%;height:260px;border:1px solid #444;border-radius:6px;background:#111;"></iframe>
+                    <pre id="ab-plain-preview" hidden style="white-space:pre-wrap;overflow-wrap:anywhere"></pre><iframe sandbox="allow-scripts" referrerpolicy="no-referrer" id="ab-preview" style="width:100%;height:260px;border:1px solid #444;border-radius:6px;background:#111;"></iframe>
                     <div id="ab-placeholders" style="margin-top:10px;"></div>
 
                     <hr style="border-color:#444;margin:10px 0;">
@@ -144,7 +144,7 @@
                         <button id="ab-revise-btn" style="flex:1;padding:6px;">根据意见修改</button>
                         <button id="ab-variant-btn" style="flex:1;padding:6px;">换一版</button>
                     </div>
-                    <button id="ab-save" style="width:100%;padding:8px;margin-top:8px;background:#3a5a3a;">保存为正则</button>
+                    <label id="ab-apply-depth-wrap" hidden style="display:flex;gap:8px;align-items:center;margin:8px 0"><input id="ab-apply-depth" type="checkbox"> 应用上方的状态栏楼层设置</label><button id="ab-save" style="width:100%;padding:8px;margin-top:8px;background:#3a5a3a;">保存为新正则</button><button id="ab-save-original" type="button" hidden style="width:100%;padding:8px;margin-top:8px;">更新原正则</button>
                 </div>
 
                 <hr style="border-color:#444;margin:14px 0;">

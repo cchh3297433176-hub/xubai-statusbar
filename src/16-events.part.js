@@ -47,6 +47,7 @@
                 sel.dataset.regexes = JSON.stringify(all.map(r => ({ name: r.script_name, replace: r.replace_string, find: r.find_regex, original: r })));
                 sel.style.display = 'block';
                 panel.querySelector('#ab-use-existing-regex').style.display = 'block';
+                panel.querySelector('#ab-edit-existing').style.display = 'block';
                 panel.querySelector('#ab-filter-existing').style.display = 'block';
                 toast(`列出了 ${all.length} 条`, 'success');
             } catch (e) {
@@ -64,6 +65,23 @@
             panel.querySelector('#ab-ref').dataset.referenceRegex = JSON.stringify(picked.original);
             panel.querySelector('#ab-lock-format').checked = true;
             toast('已填入参考框', 'success');
+        });
+        on(panel.querySelector('#ab-edit-existing'), 'click', async () => {
+            const sel = panel.querySelector('#ab-existing-regex-select');
+            const picked = JSON.parse(sel.dataset.regexes || '[]')[sel.value];
+            if (!picked?.original || typeof picked.find !== 'string') throw new Error('请先选择一条有效正则');
+            const plain = (picked.original.destination?.prompt === true && picked.original.destination?.display === false) || !/(?:^```html\b|<(?:body|style|div|span|details|section|table|iframe|script)\b)/i.test(String(picked.replace ?? '').trim());
+            session = { scriptName: picked.name, findRegex: picked.find,
+                replaceStringRaw: plain ? String(picked.replace ?? '') : stripCodeFence(picked.replace ?? ''),
+                referenceRegex: picked.original, isPlainRegex: plain, assignments: {}, formatGuide: '' };
+            panel.querySelector('#ab-ref').dataset.lockedFindRegex = picked.find;
+            panel.querySelector('#ab-ref').dataset.referenceRegex = JSON.stringify(picked.original);
+            panel.querySelector('#ab-lock-format').checked = !plain;
+            panel.querySelector('#ab-revise').value = '';
+            await showResult(panel, session);
+            panel.querySelector('#ab-revise').focus();
+            panel.querySelector('#ab-revise').scrollIntoView({ block: 'center', behavior: 'smooth' });
+            toast('已载入，请填写修改意见', 'success');
         });
         on(panel.querySelector('#ab-filter-existing'), 'click', async () => {
             const sel = panel.querySelector('#ab-existing-regex-select');
@@ -208,9 +226,10 @@
         });
         on(panel.querySelector('#ab-variant-btn'), 'click', () => doGenerate(panel, 'variant'));
 
-        on(panel.querySelector('#ab-save'), 'click', async () => {
+        async function saveRegexResult(overwrite) {
             if (!session) return;
-            if (!(await mintConfirm('保存为新的正则脚本吗？'))) return;
+            if (overwrite && !session.referenceRegex?.id) throw new Error('找不到原正则，请重新载入');
+            if (!(await mintConfirm(overwrite ? '更新原正则？原来的内容会被替换。' : '保存为新的正则脚本吗？'))) return;
             try {
                 let text = session.replaceStringRaw;
                 for (const [token, imgKey] of Object.entries(session.assignments)) {
@@ -224,12 +243,13 @@
                 const unresolved = extractPlaceholderKeys(text);
                 if (unresolved.length) throw new Error('以下图片位还未绑定：' + unresolved.join('、') + '。请先选择图片或移除占位符');
                 const fontName = panel.querySelector('#ab-font-select').value;
-                if (fontName) {
+                if (fontName && !session.isPlainRegex) {
                     const fontSnippet = await getFont(fontName);
                     if (fontSnippet) text = buildFontBlock(fontSnippet) + '\n' + text;
                 }
                 if (/data:[^\s"'<>)]*;base64,/i.test(text)) throw new Error('检测到内嵌 base64 素材，已阻止保存，避免总结插件再次过载。请改成图片或字体链接');
-                const scope = panel.querySelector('#ab-scope').value;
+                const scope = overwrite ? session.referenceRegex.scope : panel.querySelector('#ab-scope').value;
+                if (!['global','character','preset'].includes(scope)) throw new Error('无法确定原正则的保存范围');
                 const newEntry = {
                     ...(session.referenceRegex || {}),
                     source: { user_input: false, ai_output: true, slash_command: false, world_info: false, reasoning: false },
@@ -238,29 +258,48 @@
                     run_on_edit: true,
                     min_depth: null,
                     max_depth: null,
-                    id: generateUUID(),
+                    id: overwrite ? session.referenceRegex.id : generateUUID(),
                     script_name: session.scriptName,
                     find_regex: session.findRegex,
                     replace_string: `\`\`\`html\n${text}\n\`\`\``,
                     ...(scope === 'preset' ? {} : { scope }),
                     enabled: true,
                 };
+                if (session.isPlainRegex) newEntry.replace_string = text;
                 if (scope === 'preset') delete newEntry.scope;
                 if (session.referenceRegex) {
                     for (const key of ['source','destination','trim_strings','run_on_edit','min_depth','max_depth','enabled']) {
                         if (key in session.referenceRegex) newEntry[key] = session.referenceRegex[key];
                     }
                 }
-                const filter = panel.querySelector('#ab-add-filter').checked
+                if (session.isPlainRegex && !panel.querySelector('#ab-apply-depth-wrap').hidden && panel.querySelector('#ab-apply-depth').checked) {
+                    const n = Number(panel.querySelector('#ab-keep-floors').value);
+                    if (!Number.isInteger(n) || n < 0 || n > 100) throw new Error('保留楼层请输入 0 到 100 的整数');
+                    newEntry.min_depth = n === 0 ? 0 : n * 2 + 1;
+                    newEntry.max_depth = null;
+                }
+                const filter = !session.isPlainRegex && panel.querySelector('#ab-add-filter').checked
                     ? makeStatusFilter(session.findRegex, session.scriptName, panel.querySelector('#ab-keep-floors').value, scope) : null;
                 if (typeof updateTavernRegexesWith !== 'function') throw new Error('当前酒馆助手缺少 updateTavernRegexesWith，请更新酒馆助手后保存');
-                await updateTavernRegexesWith(list => [...list, newEntry, ...(filter ? [filter] : [])], { type: scope });
-                toast('已保存为新正则：' + session.scriptName, 'success');
+                await updateTavernRegexesWith(list => {
+                    if (!overwrite) return [...list, newEntry, ...(filter ? [filter] : [])];
+                    const index = list.findIndex(item => item.id === session.referenceRegex.id);
+                    if (index < 0) throw new Error('找不到原正则，可能已删除或切换范围');
+                    const current = list[index];
+                    const fields = ['find_regex','replace_string','script_name','source','destination','trim_strings','run_on_edit','min_depth','max_depth','enabled'];
+                    if (fields.some(key => JSON.stringify(current[key]) !== JSON.stringify(session.referenceRegex[key]))) throw new Error('原正则已被修改，请重新载入后再保存');
+                    const next = [...list]; next[index] = newEntry;
+                    return [...next, ...(filter ? [filter] : [])];
+                }, { type: scope });
+                if (overwrite) session.referenceRegex = { ...newEntry, scope };
+                toast((overwrite ? '已更新原正则：' : '已保存为新正则：') + session.scriptName, 'success');
             } catch (e) {
                 toast('保存失败：' + e.message, 'error');
                 console.error(e);
             }
-        });
+        }
+        on(panel.querySelector('#ab-save'), 'click', () => saveRegexResult(false));
+        on(panel.querySelector('#ab-save-original'), 'click', () => saveRegexResult(true));
 
         on(panel.querySelector('#ab-hist-trim'), 'click', async () => {
             const n = parseInt(panel.querySelector('#ab-hist-keep-n').value, 10) || 10;
