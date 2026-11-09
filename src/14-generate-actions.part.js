@@ -12,6 +12,9 @@
         const variantCount = mode==='create' ? Math.max(1,Math.min(3,Number(panel.querySelector('#mint-variant-count')?.value)||1)) : 1;
         const interactionFeatures=normalizeInteractionFeatures([...panel.querySelectorAll('[data-mint-interaction]:checked')].map(input=>input.value));
         if (mode !== 'create' && session?.isPlainRegex && interactionFeatures.length) throw new Error('交互功能用于状态栏显示正则，请先创建状态栏或载入显示正则');
+        const timeAppearance=readTimeAppearance(panel);
+        if (mode !== 'create' && session?.isPlainRegex && timeAppearance.enabled) throw new Error('按时间切换外观用于显示正则，请先创建状态栏或载入显示正则');
+        const timeSlots=validateTimeAppearance(timeAppearance);
         const filterRequested=panel.querySelector('#ab-add-filter')?.checked===true;
         const filterKeepFloors=Number(panel.querySelector('#ab-keep-floors')?.value ?? 1);
         if(filterRequested && (!Number.isInteger(filterKeepFloors)||filterKeepFloors<0||filterKeepFloors>100))throw new Error('保留楼层请输入0到100的整数');
@@ -38,6 +41,7 @@
         if (lockFormat && !lockedFindRegex) toast('勾了锁定格式，但还没选参考正则，这次锁定不会生效', 'warning');
         const lockStructure = panel.querySelector('#ab-lock-structure')?.checked;
         if(lockStructure && interactionFeatures.length) throw new Error('添加交互功能需要调整结构，请取消“保留参考正则的原有结构/功能”后生成');
+        if(lockStructure && timeAppearance.enabled) throw new Error('按时间切换外观需要添加脚本，请取消“保留参考正则的原有结构/功能”后生成');
 
         const btnMap = { create: '#ab-generate', revise: '#ab-revise-btn', variant: '#ab-variant-btn' };
         const btn = panel.querySelector(btnMap[mode]);
@@ -70,7 +74,7 @@
                     const variantDescription=variantCount>1?description+`\n【方案】第 ${i+1} 个独立方案，请尽量与其他方案在布局和风格上有所不同。`:description;
                     const result=await receiveGeneration(existingSnapshot?.isPlainRegex && mode !== 'create'
                         ? generatePlainRegexRevision(existingSnapshot, revisionPrompt || '根据原规则提供一个变体', resolvedSourceInfo)
-                        : generateBeautify({filterRequested,filterKeepFloors,interactionFeatures,skillPayload,plannedImages,description:variantDescription,refContent,existing:existingSnapshot,revisionPrompt,mode,sourceInfo:resolvedSourceInfo,forceImage,refImageDataUris,extraContext,lockedFindRegex,lockStructure}),taskController.signal);
+                        : generateBeautify({filterRequested,filterKeepFloors,interactionFeatures,timeSlots,skillPayload,plannedImages,description:variantDescription,refContent,existing:existingSnapshot,revisionPrompt,mode,sourceInfo:resolvedSourceInfo,forceImage,refImageDataUris,extraContext,lockedFindRegex,lockStructure}),taskController.signal);
                     if(destroyed||taskEpoch!==generationEpoch)return;
                     if (referenceRegex && lockedFindRegex && !existingSnapshot?.isPlainRegex) {
                         const oldRefs = new Set(String(referenceRegex.replace_string || '').match(/\$(?:[1-9][0-9]?|<[^>]+>)/g) || []);
@@ -80,7 +84,7 @@
                     }
                     const plannedAssignments=imagePlanAssignments(plannedImages,result.replaceStringRaw);
                     if(!existingSnapshot?.isPlainRegex && plannedImages.some(v=>!plannedAssignments[v.token]))throw new Error('模型遗漏了指定配图占位符，请重新生成；已完成方案保存在历史记录。');
-                    const histEntry={id:generateUUID(),ts:Date.now(),...result,interactionFeatures,referenceRegex,isPlainRegex: !!(mode !== "create" && existingSnapshot?.isPlainRegex),assignments:{...(mode==='create'?{}:(existingSnapshot?.assignments||{})),...plannedAssignments}};
+                    const histEntry={id:generateUUID(),ts:Date.now(),...result,interactionFeatures,timeAppearance,referenceRegex,isPlainRegex: !!(mode !== "create" && existingSnapshot?.isPlainRegex),assignments:{...(mode==='create'?{}:(existingSnapshot?.assignments||{})),...plannedAssignments}};
                     await addHistory(histEntry);variants.push({...histEntry,historyId:histEntry.id,historyTs:histEntry.ts});
                 }
                 session=variants[0];toast(variantCount>1?`已生成 ${variants.length} 个方案`:('"'+session.scriptName+'" 生成完成'),session.filterRequested && !session.filterPlan?.valid?'warning':'success');

@@ -151,4 +151,130 @@
             on(input,'change',()=>{mintInteractionSelection=normalizeInteractionFeatures([...box.querySelectorAll('input:checked')].map(i=>i.value));});
         }
         panel.querySelector('#mint-request-card').append(box);
+        installTimeAppearanceControls(panel);
+    }
+
+    const MINT_DEFAULT_APPEARANCE_SLOTS = [
+        {start:'06:00',end:'11:00',style:'晨间，暖白底和淡金边框'},
+        {start:'11:00',end:'18:00',style:'日间，清透底色和清晰文字'},
+        {start:'18:00',end:'22:00',style:'傍晚，琥珀色灯光'},
+        {start:'22:00',end:'06:00',style:'深夜，低亮度的蓝黑终端'},
+    ];
+    let mintTimeAppearance = {enabled:false,slots:MINT_DEFAULT_APPEARANCE_SLOTS};
+
+    function readTimeAppearance(panel) {
+        const box=panel.querySelector('#mint-time-appearance');
+        return {
+            enabled:box?.querySelector('[data-time-enable]').checked===true,
+            slots:[...(box?.querySelectorAll('[data-time-slot]') ?? [])].map(row=>({
+                start:row.querySelector('[data-time-start]').value,
+                end:row.querySelector('[data-time-end]').value,
+                style:row.querySelector('[data-time-style]').value.trim(),
+            })),
+        };
+    }
+
+    function validateTimeAppearance(config) {
+        if(!config?.enabled)return [];
+        if(!config.slots.length)throw new Error('请添加至少一个外观时段');
+        const occupied=new Uint8Array(1440);
+        return config.slots.map(({start,end,style},index)=>{
+            const a=timeToMinutes(start),b=timeToMinutes(end);
+            if(a===null||b===null||a===b)throw new Error('请检查第 '+(index+1)+' 段的起止时间，开始与结束不能相同');
+            if(!style.trim())throw new Error('请填写第 '+(index+1)+' 段的外观描述');
+            for(let minute=a;minute!==b;minute=(minute+1)%1440){
+                if(occupied[minute])throw new Error('第 '+(index+1)+' 段与其他时段重叠，请调整时间');
+                occupied[minute]=1;
+            }
+            return {id:'slot-'+(index+1),start,end,style};
+        });
+    }
+
+    function mintMountTimeAppearance(root, slots) {
+        const doc=root.ownerDocument, win=doc.defaultView;
+        const minuteMs=60000, dayMs=1440*minuteMs;
+        const minuteOf=value=>Number(value.slice(0,2))*60+Number(value.slice(3,5));
+        const ranges=slots.map(({id,start,end})=>({id,start:minuteOf(start),end:minuteOf(end)}));
+        const boundaries=ranges.flatMap(({start,end})=>[start*minuteMs,end*minuteMs]);
+        let timer;
+        const stop=()=>{
+            win.clearTimeout(timer);
+            doc.removeEventListener('visibilitychange',onVisibility);
+            win.removeEventListener('pagehide',stop);
+        };
+        function refresh(){
+            win.clearTimeout(timer);
+            if(!root.isConnected){stop();return;}
+            const now=(Date.now()+480*minuteMs)%dayMs;
+            const minute=Math.floor(now/minuteMs);
+            const active=ranges.find(({start,end})=>start<end?minute>=start&&minute<end:minute>=start||minute<end);
+            root.dataset.mintTimeMode=active?.id ?? 'base';
+            const next=Math.min(...boundaries.map(boundary=>(boundary-now+dayMs)%dayMs||dayMs));
+            if(Number.isFinite(next))timer=win.setTimeout(refresh,next);
+        }
+        function onVisibility(){if(!doc.hidden)refresh();}
+        doc.addEventListener('visibilitychange',onVisibility);
+        win.addEventListener('pagehide',stop,{once:true});
+        refresh();
+        return stop;
+    }
+
+    function timeAppearancePrompt(slots) {
+        if(!slots.length)return '';
+        return '【按时间切换外观】\n按北京时间（UTC+8）使用下列时段。开始时刻含在本段，结束时刻进入下一段；结束早于开始表示跨午夜，空档使用基础外观。外观描述仅用于设计样式。\n'
+            +JSON.stringify(slots,null,2)
+            +'\n保持输出格式、正则捕获组和剧情时间。将外观限定在本状态栏根节点，通过 data-mint-time-mode 分别设置每段的配色与装饰，保持文字可读。把下方函数完整放入成品 body 内的普通 script，根节点就绪后调用 mintMountTimeAppearance(root, 时段数组)，传入上表中原样的 id、start、end；不要把外观描述或用户文本拼进脚本。组件卸载时调用返回的清理函数。预览和成品都用浏览器时钟，到边界自动更新，保持当前界面和历史内容，无需调用模型。FORMATGUIDE 继续描述剧情输出格式，不添加现实时间字段。\n\n```javascript\n'
+            +mintMountTimeAppearance.toString()+'\n```';
+    }
+
+    function renderTimeAppearanceRows(box) {
+        const rows=box.querySelector('[data-time-rows]');
+        rows.replaceChildren();
+        for(const [index,slot] of mintTimeAppearance.slots.entries()){
+            const row=targetDoc.createElement('div');
+            row.dataset.timeSlot='';
+            row.style.cssText='margin:0 0 10px;padding:8px;border:1px solid var(--mint-line);border-radius:10px';
+            row.innerHTML='<div class="mint-theme-times"><label>开始<input type="time" data-time-start></label><label>结束<input type="time" data-time-end></label></div><div style="display:flex;align-items:flex-end;gap:6px;margin-top:6px"><label style="flex:1;min-width:0;font-size:12px">外观描述<input type="text" data-time-style style="display:block;width:100%;margin-top:5px"></label><button type="button" data-time-remove>移除</button></div>';
+            row.querySelector('[data-time-start]').value=slot.start;
+            row.querySelector('[data-time-end]').value=slot.end;
+            row.querySelector('[data-time-style]').value=slot.style;
+            const remove=row.querySelector('[data-time-remove]');
+            remove.setAttribute('aria-label','移除第 '+(index+1)+' 段');
+            remove.addEventListener('click',()=>{
+                mintTimeAppearance.slots.splice(index,1);
+                renderTimeAppearanceRows(box);
+            });
+            rows.append(row);
+        }
+    }
+
+    function restoreTimeAppearance(panel,config) {
+        mintTimeAppearance={
+            enabled:config?.enabled===true,
+            slots:(Array.isArray(config?.slots)?config.slots:MINT_DEFAULT_APPEARANCE_SLOTS).map(slot=>({...slot})),
+        };
+        const box=panel.querySelector('#mint-time-appearance');
+        if(!box)return;
+        box.querySelector('[data-time-enable]').checked=mintTimeAppearance.enabled;
+        box.querySelector('[data-time-editor]').hidden=!mintTimeAppearance.enabled;
+        renderTimeAppearanceRows(box);
+    }
+
+    function installTimeAppearanceControls(panel) {
+        const box=targetDoc.createElement('div');
+        box.id='mint-time-appearance';
+        box.style.cssText='margin:10px 0;min-width:0';
+        box.innerHTML='<label class="mint-theme-switch" style="padding-bottom:4px"><span><b>按时间切换外观</b></span><input type="checkbox" role="switch" data-time-enable></label><div data-time-editor hidden><p class="mint-muted" style="margin:2px 0 8px">北京时间 · 结束早于开始可跨午夜，空档使用基础外观。</p><div data-time-rows></div><button type="button" data-time-add>添加时段</button></div>';
+        panel.querySelector('#mint-request-card').append(box);
+        restoreTimeAppearance(panel,mintTimeAppearance);
+        box.addEventListener('input',()=>{mintTimeAppearance=readTimeAppearance(panel);});
+        box.querySelector('[data-time-enable]').addEventListener('change',event=>{
+            mintTimeAppearance.enabled=event.target.checked;
+            box.querySelector('[data-time-editor]').hidden=!event.target.checked;
+        });
+        box.querySelector('[data-time-add]').addEventListener('click',()=>{
+            mintTimeAppearance.slots.push({start:'',end:'',style:''});
+            renderTimeAppearanceRows(box);
+            box.querySelector('[data-time-slot]:last-child [data-time-start]').focus();
+        });
     }

@@ -96,7 +96,7 @@
 ===FINDREGEX===
 （这里写用于匹配AI输出中需要替换部分的正则表达式，斜杠包裹格式，如 /<status>([\\s\\S]*?)<\\/status>/，一行）
 ===REPLACESTRING===
-（这里写替换成的完整HTML/CSS代码（选中交互功能时包含完整JavaScript），要求：
+（这里写替换成的完整HTML/CSS代码（功能需要时包含完整JavaScript），要求：
 - 用 \`\`\`html 代码块包裹
 - 必须包含完整的 <body>...</body>，需要的话在 body 内写 <style>
 - 如果设计中需要用到图片（背景图、头像、图标等），不要编造图片链接，一律用占位符代替，格式固定为 {{IMG:标识名}}（标识名用简短英文或拼音，比如 bg1、avatar），比如 background:url('{{IMG:bg1}}') 或 <img src="{{IMG:avatar}}">，不同用途用不同标识名
@@ -205,11 +205,13 @@
         await createWorldbookEntries(bookName, [newEntry]);
     }
 
-    async function generateBeautify({ filterRequested = false, filterKeepFloors = 1, interactionFeatures = [], skillPayload = '', plannedImages = [], description, refContent, existing, revisionPrompt, mode, sourceInfo, forceImage, refImageDataUris, extraContext, lockedFindRegex, lockStructure }) {
+    async function generateBeautify({ filterRequested = false, filterKeepFloors = 1, interactionFeatures = [], timeSlots = [], skillPayload = '', plannedImages = [], description, refContent, existing, revisionPrompt, mode, sourceInfo, forceImage, refImageDataUris, extraContext, lockedFindRegex, lockStructure }) {
         const sections = [`【需求描述】\n${description || '（无）'}`];
         if(filterRequested) sections.push(GENERATED_FILTER_CHECK_PROMPT);
         const interactionGuide = interactionFeaturePrompt(interactionFeatures);
         if(interactionGuide) sections.push(interactionGuide);
+        const timeGuide = timeAppearancePrompt(timeSlots);
+        if(timeGuide) sections.push(timeGuide);
         if(skillPayload)sections.push('【用户勾选的设计 Skill】\n'+skillPayload);
         if (extraContext) sections.push(`【故事背景参考（角色卡/用户人设/世界书）】\n${extraContext}`);
         if (refContent) sections.push(`【参考内容/预设条目原文】\n${refContent}`);

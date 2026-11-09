@@ -62,6 +62,7 @@
     async function showResult(panel, result) {
         session = { ...result, assignments: session?.assignments && session.scriptName === result.scriptName ? session.assignments : {} };
         restoreInteractionChoices(panel, result.interactionFeatures || []);
+        restoreTimeAppearance(panel, result.timeAppearance);
         if(typeof result.filterRequested==='boolean'){
             panel.querySelector('#ab-add-filter').checked=result.filterRequested;
             panel.querySelector('#ab-keep-floors').value=result.filterKeepFloors ?? 1;
@@ -107,7 +108,7 @@
         }
         wrap.querySelectorAll('.ab-hist-restore').forEach(button=>on(button,'click',async()=>{
             const h=list.find(item=>item.id===button.dataset.id);if(!h)throw new Error('找不到这条历史记录');
-            session={historyId:h.id,historyTs:h.ts,referenceRegex:h.referenceRegex,isPlainRegex:!!h.isPlainRegex,scriptName:h.scriptName,findRegex:h.findRegex,replaceStringRaw:h.replaceStringRaw,formatGuide:h.formatGuide||'',assignments:{...(h.assignments||{})}};
+            session={...h,historyId:h.id,historyTs:h.ts,isPlainRegex:!!h.isPlainRegex,formatGuide:h.formatGuide||'',assignments:{...(h.assignments||{})}};
             await showResult(panel,session);switchMintPage(panel,'create');toast('已恢复这一版，继续做点喜欢的改动吧','success');
         }));
         wrap.querySelectorAll('.ab-hist-del').forEach(button=>on(button,'click',async()=>{

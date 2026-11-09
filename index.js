@@ -977,7 +977,7 @@
             </section>
             <section id="mint-page-gallery" data-mint-page="gallery" role="tabpanel" aria-labelledby="mint-tab-gallery" hidden><div class="mint-page-heading"><div><div class="mint-eyebrow">YOUR LITTLE COLLECTION</div><h2>图片收藏室</h2><p>把喜欢的图片，留给下一次灵感。</p></div><img class="mint-decoration mint-heading-mascot" src="${MINT_DECORATIONS.gallery}" alt=""></div><div class="mint-card"><div id="mint-upload-slot"></div><p class="mint-muted">上传到服务器；状态栏只保存链接。</p><div class="mint-row"><button data-go="settings" class="mint-secondary">配置图库</button><button id="mint-gallery-refresh" class="mint-secondary">刷新图片</button></div></div><label class="mint-form-label" for="mint-gallery-search">查找图片</label><input id="mint-gallery-search" placeholder="按图片名称查找" style="width:100%"><p id="mint-gallery-count" class="mint-muted"></p><div id="mint-gallery-slot"></div><p class="mint-footnote">解绑会保留图片。删除服务器文件会让旧状态栏里的图片失效。</p></section>
             <section id="mint-page-history" data-mint-page="history" role="tabpanel" aria-labelledby="mint-tab-history" hidden><div class="mint-page-heading"><div><div class="mint-eyebrow">LITTLE MOMENTS</div><h2>灵感存档</h2><p>每一个版本，都可以再回来看看。</p></div><img class="mint-decoration mint-heading-mascot" src="${MINT_DECORATIONS.history}" alt=""></div><div class="mint-card mint-compact" id="mint-history-controls"></div><div id="mint-history-slot"></div></section>
-            <section id="mint-page-settings" data-mint-page="settings" role="tabpanel" aria-labelledby="mint-tab-settings" hidden><div class="mint-page-heading"><div><div class="mint-eyebrow">MAKE YOURSELF AT HOME</div><h2>设置</h2><p>连接、字体和偏好，都在这里。</p></div><img class="mint-decoration mint-heading-mascot" src="${MINT_DECORATIONS.settings}" alt=""></div><details class="mint-settings-block" open><summary>模型与 API 连接</summary><div id="mint-api-slot" class="mint-settings-body"></div></details><div id="mint-server-slot"></div><div id="mint-font-manager-slot"></div><details class="mint-settings-block"><summary>外观与小序</summary><div class="mint-settings-body"><label class="mint-theme-switch"><span><b>按时段自动切换</b><small>关闭后保持手动选择的主题</small></span><input id="mint-theme-auto" type="checkbox" role="switch" aria-label="按时段自动切换"></label><div class="mint-theme-times"><label for="mint-theme-start">日间开始<input id="mint-theme-start" type="time" required></label><label for="mint-theme-end">日间结束<input id="mint-theme-end" type="time" required></label></div><p class="mint-muted">结束时间选 00:00 表示晚上 24:00；也支持跨午夜的时段。使用手机本地时间。</p><button id="mint-theme-save" style="width:100%">保存切换时段</button><p id="mint-theme-status" class="mint-muted" role="status"></p><p class="mint-muted">顶部头像左边的太阳 / 月亮图标可随时切换；手动切换后自动模式会关闭，直到你重新开启。</p><div class="mint-row"><button id="mint-demo-success">看看成功提示</button><button id="mint-demo-error">看看哭哭提示</button></div></div></details><details class="mint-settings-block"><summary>提示与小装饰</summary><div class="mint-settings-body"><label class="mint-theme-switch"><span><b>页面切换提示</b><small>切换底栏页面时显示文字气泡</small></span><input id="mint-page-notices" type="checkbox" role="switch" aria-label="页面切换提示"></label><label class="mint-theme-switch"><span><b>普通点击提示</b><small>基础点击与展开气泡；关闭后仍有按压反馈</small></span><input id="mint-click-notices" type="checkbox" role="switch" aria-label="普通点击提示"></label><label class="mint-theme-switch"><span><b>人物与角落装饰</b><small>让工作台多一点小序的陪伴</small></span><input id="mint-decoration-toggle" type="checkbox" role="switch" aria-label="人物与角落装饰"></label><p class="mint-muted">生成中、成功和报错提示始终保留。提示窗位于底栏上方，可手动关闭。</p></div></details><details class="mint-settings-block"><summary>关于序白工坊</summary><div class="mint-settings-body"><div class="mint-decoration mint-settings-companion"><img src="${MINT_DECORATIONS.settings}" alt=""><p>工具已经摆好了。<br>你负责灵感，我负责把它们接起来。</p></div><p>原作：Claude<br>界面与功能改造：序白（ChatGPT）<br>与你一起制作。</p><p class="mint-muted">银白头发不是加班造成的，原装就是这样。</p><small>v3.8.8 · 薄荷手账与月光 · 手机优先</small></div></details></section>
+            <section id="mint-page-settings" data-mint-page="settings" role="tabpanel" aria-labelledby="mint-tab-settings" hidden><div class="mint-page-heading"><div><div class="mint-eyebrow">MAKE YOURSELF AT HOME</div><h2>设置</h2><p>连接、字体和偏好，都在这里。</p></div><img class="mint-decoration mint-heading-mascot" src="${MINT_DECORATIONS.settings}" alt=""></div><details class="mint-settings-block" open><summary>模型与 API 连接</summary><div id="mint-api-slot" class="mint-settings-body"></div></details><div id="mint-server-slot"></div><div id="mint-font-manager-slot"></div><details class="mint-settings-block"><summary>外观与小序</summary><div class="mint-settings-body"><label class="mint-theme-switch"><span><b>按时段自动切换</b><small>关闭后保持手动选择的主题</small></span><input id="mint-theme-auto" type="checkbox" role="switch" aria-label="按时段自动切换"></label><div class="mint-theme-times"><label for="mint-theme-start">日间开始<input id="mint-theme-start" type="time" required></label><label for="mint-theme-end">日间结束<input id="mint-theme-end" type="time" required></label></div><p class="mint-muted">结束时间选 00:00 表示晚上 24:00；也支持跨午夜的时段。使用手机本地时间。</p><button id="mint-theme-save" style="width:100%">保存切换时段</button><p id="mint-theme-status" class="mint-muted" role="status"></p><p class="mint-muted">顶部头像左边的太阳 / 月亮图标可随时切换；手动切换后自动模式会关闭，直到你重新开启。</p><div class="mint-row"><button id="mint-demo-success">看看成功提示</button><button id="mint-demo-error">看看哭哭提示</button></div></div></details><details class="mint-settings-block"><summary>提示与小装饰</summary><div class="mint-settings-body"><label class="mint-theme-switch"><span><b>页面切换提示</b><small>切换底栏页面时显示文字气泡</small></span><input id="mint-page-notices" type="checkbox" role="switch" aria-label="页面切换提示"></label><label class="mint-theme-switch"><span><b>普通点击提示</b><small>基础点击与展开气泡；关闭后仍有按压反馈</small></span><input id="mint-click-notices" type="checkbox" role="switch" aria-label="普通点击提示"></label><label class="mint-theme-switch"><span><b>人物与角落装饰</b><small>让工作台多一点小序的陪伴</small></span><input id="mint-decoration-toggle" type="checkbox" role="switch" aria-label="人物与角落装饰"></label><p class="mint-muted">生成中、成功和报错提示始终保留。提示窗位于底栏上方，可手动关闭。</p></div></details><details class="mint-settings-block"><summary>关于序白工坊</summary><div class="mint-settings-body"><div class="mint-decoration mint-settings-companion"><img src="${MINT_DECORATIONS.settings}" alt=""><p>工具已经摆好了。<br>你负责灵感，我负责把它们接起来。</p></div><p>原作：Claude<br>界面与功能改造：序白（ChatGPT）<br>与你一起制作。</p><p class="mint-muted">银白头发不是加班造成的，原装就是这样。</p><small>v3.8.9 · 薄荷手账与月光 · 手机优先</small></div></details></section>
           </main>
           <nav id="mint-tabs" role="tablist" aria-label="工作台页面">${[['create','创作'],['gallery','图库'],['history','历史'],['settings','设置']].map(([key,label])=>`<button id="mint-tab-${key}" role="tab" aria-controls="mint-page-${key}" data-page="${key}" aria-selected="${key === currentPage}">${mintIcon(key)}<span>${label}</span></button>`).join('')}</nav>`;
         const put = (id, ...nodes) => panel.querySelector('#' + id).append(...nodes);
@@ -1564,6 +1564,132 @@ try{
             on(input,'change',()=>{mintInteractionSelection=normalizeInteractionFeatures([...box.querySelectorAll('input:checked')].map(i=>i.value));});
         }
         panel.querySelector('#mint-request-card').append(box);
+        installTimeAppearanceControls(panel);
+    }
+
+    const MINT_DEFAULT_APPEARANCE_SLOTS = [
+        {start:'06:00',end:'11:00',style:'晨间，暖白底和淡金边框'},
+        {start:'11:00',end:'18:00',style:'日间，清透底色和清晰文字'},
+        {start:'18:00',end:'22:00',style:'傍晚，琥珀色灯光'},
+        {start:'22:00',end:'06:00',style:'深夜，低亮度的蓝黑终端'},
+    ];
+    let mintTimeAppearance = {enabled:false,slots:MINT_DEFAULT_APPEARANCE_SLOTS};
+
+    function readTimeAppearance(panel) {
+        const box=panel.querySelector('#mint-time-appearance');
+        return {
+            enabled:box?.querySelector('[data-time-enable]').checked===true,
+            slots:[...(box?.querySelectorAll('[data-time-slot]') ?? [])].map(row=>({
+                start:row.querySelector('[data-time-start]').value,
+                end:row.querySelector('[data-time-end]').value,
+                style:row.querySelector('[data-time-style]').value.trim(),
+            })),
+        };
+    }
+
+    function validateTimeAppearance(config) {
+        if(!config?.enabled)return [];
+        if(!config.slots.length)throw new Error('请添加至少一个外观时段');
+        const occupied=new Uint8Array(1440);
+        return config.slots.map(({start,end,style},index)=>{
+            const a=timeToMinutes(start),b=timeToMinutes(end);
+            if(a===null||b===null||a===b)throw new Error('请检查第 '+(index+1)+' 段的起止时间，开始与结束不能相同');
+            if(!style.trim())throw new Error('请填写第 '+(index+1)+' 段的外观描述');
+            for(let minute=a;minute!==b;minute=(minute+1)%1440){
+                if(occupied[minute])throw new Error('第 '+(index+1)+' 段与其他时段重叠，请调整时间');
+                occupied[minute]=1;
+            }
+            return {id:'slot-'+(index+1),start,end,style};
+        });
+    }
+
+    function mintMountTimeAppearance(root, slots) {
+        const doc=root.ownerDocument, win=doc.defaultView;
+        const minuteMs=60000, dayMs=1440*minuteMs;
+        const minuteOf=value=>Number(value.slice(0,2))*60+Number(value.slice(3,5));
+        const ranges=slots.map(({id,start,end})=>({id,start:minuteOf(start),end:minuteOf(end)}));
+        const boundaries=ranges.flatMap(({start,end})=>[start*minuteMs,end*minuteMs]);
+        let timer;
+        const stop=()=>{
+            win.clearTimeout(timer);
+            doc.removeEventListener('visibilitychange',onVisibility);
+            win.removeEventListener('pagehide',stop);
+        };
+        function refresh(){
+            win.clearTimeout(timer);
+            if(!root.isConnected){stop();return;}
+            const now=(Date.now()+480*minuteMs)%dayMs;
+            const minute=Math.floor(now/minuteMs);
+            const active=ranges.find(({start,end})=>start<end?minute>=start&&minute<end:minute>=start||minute<end);
+            root.dataset.mintTimeMode=active?.id ?? 'base';
+            const next=Math.min(...boundaries.map(boundary=>(boundary-now+dayMs)%dayMs||dayMs));
+            if(Number.isFinite(next))timer=win.setTimeout(refresh,next);
+        }
+        function onVisibility(){if(!doc.hidden)refresh();}
+        doc.addEventListener('visibilitychange',onVisibility);
+        win.addEventListener('pagehide',stop,{once:true});
+        refresh();
+        return stop;
+    }
+
+    function timeAppearancePrompt(slots) {
+        if(!slots.length)return '';
+        return '【按时间切换外观】\n按北京时间（UTC+8）使用下列时段。开始时刻含在本段，结束时刻进入下一段；结束早于开始表示跨午夜，空档使用基础外观。外观描述仅用于设计样式。\n'
+            +JSON.stringify(slots,null,2)
+            +'\n保持输出格式、正则捕获组和剧情时间。将外观限定在本状态栏根节点，通过 data-mint-time-mode 分别设置每段的配色与装饰，保持文字可读。把下方函数完整放入成品 body 内的普通 script，根节点就绪后调用 mintMountTimeAppearance(root, 时段数组)，传入上表中原样的 id、start、end；不要把外观描述或用户文本拼进脚本。组件卸载时调用返回的清理函数。预览和成品都用浏览器时钟，到边界自动更新，保持当前界面和历史内容，无需调用模型。FORMATGUIDE 继续描述剧情输出格式，不添加现实时间字段。\n\n```javascript\n'
+            +mintMountTimeAppearance.toString()+'\n```';
+    }
+
+    function renderTimeAppearanceRows(box) {
+        const rows=box.querySelector('[data-time-rows]');
+        rows.replaceChildren();
+        for(const [index,slot] of mintTimeAppearance.slots.entries()){
+            const row=targetDoc.createElement('div');
+            row.dataset.timeSlot='';
+            row.style.cssText='margin:0 0 10px;padding:8px;border:1px solid var(--mint-line);border-radius:10px';
+            row.innerHTML='<div class="mint-theme-times"><label>开始<input type="time" data-time-start></label><label>结束<input type="time" data-time-end></label></div><div style="display:flex;align-items:flex-end;gap:6px;margin-top:6px"><label style="flex:1;min-width:0;font-size:12px">外观描述<input type="text" data-time-style style="display:block;width:100%;margin-top:5px"></label><button type="button" data-time-remove>移除</button></div>';
+            row.querySelector('[data-time-start]').value=slot.start;
+            row.querySelector('[data-time-end]').value=slot.end;
+            row.querySelector('[data-time-style]').value=slot.style;
+            const remove=row.querySelector('[data-time-remove]');
+            remove.setAttribute('aria-label','移除第 '+(index+1)+' 段');
+            remove.addEventListener('click',()=>{
+                mintTimeAppearance.slots.splice(index,1);
+                renderTimeAppearanceRows(box);
+            });
+            rows.append(row);
+        }
+    }
+
+    function restoreTimeAppearance(panel,config) {
+        mintTimeAppearance={
+            enabled:config?.enabled===true,
+            slots:(Array.isArray(config?.slots)?config.slots:MINT_DEFAULT_APPEARANCE_SLOTS).map(slot=>({...slot})),
+        };
+        const box=panel.querySelector('#mint-time-appearance');
+        if(!box)return;
+        box.querySelector('[data-time-enable]').checked=mintTimeAppearance.enabled;
+        box.querySelector('[data-time-editor]').hidden=!mintTimeAppearance.enabled;
+        renderTimeAppearanceRows(box);
+    }
+
+    function installTimeAppearanceControls(panel) {
+        const box=targetDoc.createElement('div');
+        box.id='mint-time-appearance';
+        box.style.cssText='margin:10px 0;min-width:0';
+        box.innerHTML='<label class="mint-theme-switch" style="padding-bottom:4px"><span><b>按时间切换外观</b></span><input type="checkbox" role="switch" data-time-enable></label><div data-time-editor hidden><p class="mint-muted" style="margin:2px 0 8px">北京时间 · 结束早于开始可跨午夜，空档使用基础外观。</p><div data-time-rows></div><button type="button" data-time-add>添加时段</button></div>';
+        panel.querySelector('#mint-request-card').append(box);
+        restoreTimeAppearance(panel,mintTimeAppearance);
+        box.addEventListener('input',()=>{mintTimeAppearance=readTimeAppearance(panel);});
+        box.querySelector('[data-time-enable]').addEventListener('change',event=>{
+            mintTimeAppearance.enabled=event.target.checked;
+            box.querySelector('[data-time-editor]').hidden=!event.target.checked;
+        });
+        box.querySelector('[data-time-add]').addEventListener('click',()=>{
+            mintTimeAppearance.slots.push({start:'',end:'',style:''});
+            renderTimeAppearanceRows(box);
+            box.querySelector('[data-time-slot]:last-child [data-time-start]').focus();
+        });
     }
     const GENERATED_FILTER_CHECK_PROMPT = `【配套发送过滤】用户已勾选生成配套发送过滤。美化与过滤必须使用同一条 FINDREGEX，过滤仅将匹配到的完整状态栏替换为空字符串，不得把正文包含在匹配范围内。不能依赖替换成HTML后再识别状态栏。不需要另写一条不同的过滤正则，插件会复用 FINDREGEX 并添加全局匹配。
 在 FORMATGUIDE 后、END 前增加独占一行的 ===FILTERCHECK===，下一行输出JSON对象：{"statusSamples":["完整的状态栏原文样例1","字段内容不同的状态栏原文样例2"],"proseSamples":["不包含状态栏的正常正文1","不包含状态栏的正常正文2"]}。
@@ -1702,7 +1828,7 @@ statusSamples必须是FINDREGEX能完整匹配的原始文本，不能填HTML成
 ===FINDREGEX===
 （这里写用于匹配AI输出中需要替换部分的正则表达式，斜杠包裹格式，如 /<status>([\\s\\S]*?)<\\/status>/，一行）
 ===REPLACESTRING===
-（这里写替换成的完整HTML/CSS代码（选中交互功能时包含完整JavaScript），要求：
+（这里写替换成的完整HTML/CSS代码（功能需要时包含完整JavaScript），要求：
 - 用 \`\`\`html 代码块包裹
 - 必须包含完整的 <body>...</body>，需要的话在 body 内写 <style>
 - 如果设计中需要用到图片（背景图、头像、图标等），不要编造图片链接，一律用占位符代替，格式固定为 {{IMG:标识名}}（标识名用简短英文或拼音，比如 bg1、avatar），比如 background:url('{{IMG:bg1}}') 或 <img src="{{IMG:avatar}}">，不同用途用不同标识名
@@ -1811,11 +1937,13 @@ statusSamples必须是FINDREGEX能完整匹配的原始文本，不能填HTML成
         await createWorldbookEntries(bookName, [newEntry]);
     }
 
-    async function generateBeautify({ filterRequested = false, filterKeepFloors = 1, interactionFeatures = [], skillPayload = '', plannedImages = [], description, refContent, existing, revisionPrompt, mode, sourceInfo, forceImage, refImageDataUris, extraContext, lockedFindRegex, lockStructure }) {
+    async function generateBeautify({ filterRequested = false, filterKeepFloors = 1, interactionFeatures = [], timeSlots = [], skillPayload = '', plannedImages = [], description, refContent, existing, revisionPrompt, mode, sourceInfo, forceImage, refImageDataUris, extraContext, lockedFindRegex, lockStructure }) {
         const sections = [`【需求描述】\n${description || '（无）'}`];
         if(filterRequested) sections.push(GENERATED_FILTER_CHECK_PROMPT);
         const interactionGuide = interactionFeaturePrompt(interactionFeatures);
         if(interactionGuide) sections.push(interactionGuide);
+        const timeGuide = timeAppearancePrompt(timeSlots);
+        if(timeGuide) sections.push(timeGuide);
         if(skillPayload)sections.push('【用户勾选的设计 Skill】\n'+skillPayload);
         if (extraContext) sections.push(`【故事背景参考（角色卡/用户人设/世界书）】\n${extraContext}`);
         if (refContent) sections.push(`【参考内容/预设条目原文】\n${refContent}`);
@@ -2355,6 +2483,7 @@ ${body}</html>`;
     async function showResult(panel, result) {
         session = { ...result, assignments: session?.assignments && session.scriptName === result.scriptName ? session.assignments : {} };
         restoreInteractionChoices(panel, result.interactionFeatures || []);
+        restoreTimeAppearance(panel, result.timeAppearance);
         if(typeof result.filterRequested==='boolean'){
             panel.querySelector('#ab-add-filter').checked=result.filterRequested;
             panel.querySelector('#ab-keep-floors').value=result.filterKeepFloors ?? 1;
@@ -2400,7 +2529,7 @@ ${body}</html>`;
         }
         wrap.querySelectorAll('.ab-hist-restore').forEach(button=>on(button,'click',async()=>{
             const h=list.find(item=>item.id===button.dataset.id);if(!h)throw new Error('找不到这条历史记录');
-            session={historyId:h.id,historyTs:h.ts,referenceRegex:h.referenceRegex,isPlainRegex:!!h.isPlainRegex,scriptName:h.scriptName,findRegex:h.findRegex,replaceStringRaw:h.replaceStringRaw,formatGuide:h.formatGuide||'',assignments:{...(h.assignments||{})}};
+            session={...h,historyId:h.id,historyTs:h.ts,isPlainRegex:!!h.isPlainRegex,formatGuide:h.formatGuide||'',assignments:{...(h.assignments||{})}};
             await showResult(panel,session);switchMintPage(panel,'create');toast('已恢复这一版，继续做点喜欢的改动吧','success');
         }));
         wrap.querySelectorAll('.ab-hist-del').forEach(button=>on(button,'click',async()=>{
@@ -2423,6 +2552,9 @@ ${body}</html>`;
         const variantCount = mode==='create' ? Math.max(1,Math.min(3,Number(panel.querySelector('#mint-variant-count')?.value)||1)) : 1;
         const interactionFeatures=normalizeInteractionFeatures([...panel.querySelectorAll('[data-mint-interaction]:checked')].map(input=>input.value));
         if (mode !== 'create' && session?.isPlainRegex && interactionFeatures.length) throw new Error('交互功能用于状态栏显示正则，请先创建状态栏或载入显示正则');
+        const timeAppearance=readTimeAppearance(panel);
+        if (mode !== 'create' && session?.isPlainRegex && timeAppearance.enabled) throw new Error('按时间切换外观用于显示正则，请先创建状态栏或载入显示正则');
+        const timeSlots=validateTimeAppearance(timeAppearance);
         const filterRequested=panel.querySelector('#ab-add-filter')?.checked===true;
         const filterKeepFloors=Number(panel.querySelector('#ab-keep-floors')?.value ?? 1);
         if(filterRequested && (!Number.isInteger(filterKeepFloors)||filterKeepFloors<0||filterKeepFloors>100))throw new Error('保留楼层请输入0到100的整数');
@@ -2449,6 +2581,7 @@ ${body}</html>`;
         if (lockFormat && !lockedFindRegex) toast('勾了锁定格式，但还没选参考正则，这次锁定不会生效', 'warning');
         const lockStructure = panel.querySelector('#ab-lock-structure')?.checked;
         if(lockStructure && interactionFeatures.length) throw new Error('添加交互功能需要调整结构，请取消“保留参考正则的原有结构/功能”后生成');
+        if(lockStructure && timeAppearance.enabled) throw new Error('按时间切换外观需要添加脚本，请取消“保留参考正则的原有结构/功能”后生成');
 
         const btnMap = { create: '#ab-generate', revise: '#ab-revise-btn', variant: '#ab-variant-btn' };
         const btn = panel.querySelector(btnMap[mode]);
@@ -2481,7 +2614,7 @@ ${body}</html>`;
                     const variantDescription=variantCount>1?description+`\n【方案】第 ${i+1} 个独立方案，请尽量与其他方案在布局和风格上有所不同。`:description;
                     const result=await receiveGeneration(existingSnapshot?.isPlainRegex && mode !== 'create'
                         ? generatePlainRegexRevision(existingSnapshot, revisionPrompt || '根据原规则提供一个变体', resolvedSourceInfo)
-                        : generateBeautify({filterRequested,filterKeepFloors,interactionFeatures,skillPayload,plannedImages,description:variantDescription,refContent,existing:existingSnapshot,revisionPrompt,mode,sourceInfo:resolvedSourceInfo,forceImage,refImageDataUris,extraContext,lockedFindRegex,lockStructure}),taskController.signal);
+                        : generateBeautify({filterRequested,filterKeepFloors,interactionFeatures,timeSlots,skillPayload,plannedImages,description:variantDescription,refContent,existing:existingSnapshot,revisionPrompt,mode,sourceInfo:resolvedSourceInfo,forceImage,refImageDataUris,extraContext,lockedFindRegex,lockStructure}),taskController.signal);
                     if(destroyed||taskEpoch!==generationEpoch)return;
                     if (referenceRegex && lockedFindRegex && !existingSnapshot?.isPlainRegex) {
                         const oldRefs = new Set(String(referenceRegex.replace_string || '').match(/\$(?:[1-9][0-9]?|<[^>]+>)/g) || []);
@@ -2491,7 +2624,7 @@ ${body}</html>`;
                     }
                     const plannedAssignments=imagePlanAssignments(plannedImages,result.replaceStringRaw);
                     if(!existingSnapshot?.isPlainRegex && plannedImages.some(v=>!plannedAssignments[v.token]))throw new Error('模型遗漏了指定配图占位符，请重新生成；已完成方案保存在历史记录。');
-                    const histEntry={id:generateUUID(),ts:Date.now(),...result,interactionFeatures,referenceRegex,isPlainRegex: !!(mode !== "create" && existingSnapshot?.isPlainRegex),assignments:{...(mode==='create'?{}:(existingSnapshot?.assignments||{})),...plannedAssignments}};
+                    const histEntry={id:generateUUID(),ts:Date.now(),...result,interactionFeatures,timeAppearance,referenceRegex,isPlainRegex: !!(mode !== "create" && existingSnapshot?.isPlainRegex),assignments:{...(mode==='create'?{}:(existingSnapshot?.assignments||{})),...plannedAssignments}};
                     await addHistory(histEntry);variants.push({...histEntry,historyId:histEntry.id,historyTs:histEntry.ts});
                 }
                 session=variants[0];toast(variantCount>1?`已生成 ${variants.length} 个方案`:('"'+session.scriptName+'" 生成完成'),session.filterRequested && !session.filterPlan?.valid?'warning':'success');
